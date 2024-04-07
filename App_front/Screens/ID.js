@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   idItem: {
     backgroundColor: Color.colorOrangered,
     left: 0,
-    top: 0,
+    // top: 0,
   },
   id4: {
     top: 13,

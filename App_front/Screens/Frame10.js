@@ -1,11 +1,52 @@
 import * as React from "react";
-import {Text, StyleSheet, View, TouchableOpacity} from "react-native";
+import {Text, StyleSheet, View, TouchableOpacity, Alert, TextInput} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, FontSize, Color } from "../GlobalStyles";
 import { useNavigation } from '@react-navigation/native';
+import {useState} from "react";
+import axios from "axios";
 
 const Frame10 = () => {
     const navigation = useNavigation();
+
+    const [email, setEmail] = useState('');
+    // const [userId, setUserId] = useState('');
+    const [password, setPassword] = useState('');
+    // const [passwordConfirm, setPasswordConfirm] = useState('');
+
+    // const handleSignUp = () => {
+        // 비밀번호와 비밀번호 확인이 일치하는지 확인
+        // if (password !== passwordConfirm) {
+        //     Alert.alert('비밀번호 오류', '비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+        //     return;
+        // }
+
+        // 사용자 정보를 서버로 전송
+    const handleSignUp = async () => {
+        try {
+            const response = await axios.post('http://10.0.2.2:8080/user/create', {
+                email: email,
+                password: password,
+            });
+
+            // 성공적으로 회원가입이 완료되면, 로그인 화면이나 메인 화면으로 이동
+            navigation.navigate('Frame7');
+        } catch (error) {
+            if (error.response) {
+                // 서버로부터 응답을 받았지만 응답 코드가 에러인 경우
+                console.error("HTTP Error:", error.response.status, error.response.data);
+                Alert.alert('HTTP 오류', `HTTP 오류가 발생했습니다: ${error.response.status}, 메시지: ${error.response.data}`);
+            } else if (error.request) {
+                // 요청을 보냈지만 응답을 받지 못한 경우
+                console.error("Request Error:", error.request);
+                Alert.alert('요청 오류', '서버로부터 응답을 받지 못했습니다.');
+            } else {
+                // 요청을 보내기 전에 발생한 오류
+                console.error("Axios Error:", error.message);
+                Alert.alert('네트워크 오류', '요청을 보내는 도중 오류가 발생했습니다.');
+            }
+        }
+    };
     return (
         <View style={styles.view}>
             <Text style={styles.appNupan}>App-nupan</Text>
@@ -15,7 +56,10 @@ const Frame10 = () => {
             <Text style={[styles.id, styles.idTypo]}>ID</Text>
             <View style={[styles.view1, styles.viewLayout1]}>
                 <View style={[styles.child, styles.childBorder]} />
-                <Text style={[styles.text3, styles.textLayout]}>비밀번호</Text>
+                <TextInput style={[styles.text3, styles.textLayout]}
+                           placeholder={"비밀번호"}
+                           value={password}
+                           onChangeText={setPassword}></TextInput>
             </View>
             <View style={[styles.view2, styles.viewLayout1]}>
                 <View style={[styles.child, styles.childBorder]} />
@@ -27,7 +71,13 @@ const Frame10 = () => {
             </View>
             <View style={[styles.id2, styles.id2Layout]}>
                 <View style={[styles.idItem, styles.id2Layout]} />
-                <Text style={[styles.id3, styles.textLayout]}>ID</Text>
+                <TextInput
+                    style={[styles.id3, styles.textLayout]}
+                    placeholder="ID"
+                value={email}               //value 지정해서 email ㅇㅣㅂㄹㅕㄱ ㅂㅏㄷㄱㅣ
+                onChangeText={setEmail}>
+
+                </TextInput>
             </View>
             <View style={[styles.view3, styles.id2Layout]}>
                 <View style={[styles.idItem, styles.id2Layout]} />
@@ -43,12 +93,14 @@ const Frame10 = () => {
                 />
                 <Text style={[styles.text8, styles.text8Position]}>이전화면</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('Frame11')}>
-                <View style={[styles.view5, styles.viewLayout]}>
+
+                <TouchableOpacity       //다음으로 버튼 누를 시 HandleSineup
+                    onPress={handleSignUp}
+                    style={[styles.view5, styles.viewLayout]}>
                     <View style={[styles.child1, styles.viewLayout]} />
                     <Text style={[styles.text9, styles.textTypo]}>다음으로</Text>
-                </View>
-            </TouchableOpacity>
+                </TouchableOpacity>
+
         </View>
     );
 };

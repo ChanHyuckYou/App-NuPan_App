@@ -1,51 +1,87 @@
 import * as React from "react";
-import {StyleSheet, View, Text, TextInput, TouchableOpacity} from "react-native";
+import {StyleSheet, View, Text, TextInput, TouchableOpacity, Alert} from "react-native";
 import { Color, FontSize, FontFamily } from "../GlobalStyles";
 import { useNavigation } from '@react-navigation/native';
+import {useState} from "react";
+import axios from "axios";
 
 const Frame7 = () => {
     const navigation = useNavigation();
-    return (
-        <View style={styles.view}>
-            <TouchableOpacity onPress={() => navigation.navigate('Frame8')}>
-                <View style={[styles.view1, styles.viewLayout]}>
-                    <View style={[styles.child, styles.childPosition]} />
-                    <Text style={[styles.text, styles.textTypo]}>로그인</Text>
+        const [email, setEmail] = useState("");
+        const [password, setPassword] = useState("");
+
+        function login() {
+            if (email.trim() === "") {
+                Alert.alert("아이디 입력 확인", "아이디가 입력되지 않았습니다.");
+            } else if (password.trim() === "") {
+                Alert.alert("비밀번호 입력 확인", "비밀번호가 입력되지 않았습니다.");
+            } else {
+                axios.post("http://192.0.0.2:8080/login",
+                    null,
+                    {params: {email: email, password: password}}
+                ).then(function (resp) {
+                    console.log(resp.data);
+                    if (resp.data !== null && resp.data !== "") {
+                        console.log("로그인 성공");
+                        navigation.navigate('Frame8')
+                    } else {
+                        Alert.alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
+                        setEmail("");
+                        setPassword("");
+                    }
+                }).catch(function (err) {
+                    console.log(`Error Message: ${err}`);
+                })
+            }
+        }
+
+
+        return (
+            <View style={styles.view}>
+                {/*<TouchableOpacity onPress={() => navigation.navigate('Frame8')}>*/}
+                    <TouchableOpacity
+                        onPress={() => login()}
+                        style={[styles.view1, styles.viewLayout]}>
+                        <View style={[styles.child, styles.childPosition]}/>
+                        <Text style={[styles.text, styles.textTypo]}>로그인</Text>
+                    </TouchableOpacity>
+                {/*</TouchableOpacity>*/}
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Frame10')}>
+                    <View style={[styles.view2, styles.viewLayout]}>
+                        <View style={[styles.child, styles.childPosition]}/>
+                        <Text style={[styles.text1, styles.textTypo]}>{`회원가입`}</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('Frame10')}>
+                    <View style={[styles.view3, styles.viewLayout]}>
+                        <View style={[styles.child, styles.childPosition]}/>
+                        <Text style={[styles.id, styles.textTypo]}>{`ID/비밀번호 찾기`}</Text>
+                    </View>
+                </TouchableOpacity>
+                <View style={[styles.password, styles.passwordLayout]}>
+                    <View style={[styles.passwordChild, styles.passwordLayout]}/>
+                    <TextInput style={styles.password1}
+                               placeholder="Password"
+                               onChangeText={(password) => setPassword(password)}
+                               secureTextEntry={true}></TextInput>
                 </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Frame10')}>
-                <View style={[styles.view2, styles.viewLayout]}>
-                    <View style={[styles.child, styles.childPosition]} />
-                    <Text style={[styles.text1, styles.textTypo]}>{`회원가입`}</Text>
+                <View style={[styles.id1, styles.passwordLayout]}>
+                    <View style={[styles.passwordChild, styles.passwordLayout]}/>
+                    <TextInput style={styles.password1}
+                               onChangeText={(email) => setEmail(email)}
+                               placeholder={"ID"}></TextInput>
                 </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Frame10')}>
-                <View style={[styles.view3, styles.viewLayout]}>
-                    <View style={[styles.child, styles.childPosition]} />
-                    <Text style={[styles.id, styles.textTypo]}>{`ID/비밀번호 찾기`}</Text>
-                </View>
-            </TouchableOpacity>
-            <View style={[styles.password, styles.passwordLayout]}>
-                <View style={[styles.passwordChild, styles.passwordLayout]} />
-                <TextInput style={styles.password1}
-                           placeholder="Password"
-                           secureTextEntry={true}></TextInput>
+                <Text style={[styles.appNupan, styles.text2Typo]}>
+                    App-nupan 계정이 없으신가요?
+                </Text>
+                <Text style={[styles.text2, styles.text2Typo]}>
+                    계정이 기억이 안나시나요?
+                </Text>
+                <Text style={[styles.appNupan1, styles.id3Typo]}>App-nupan</Text>
+                <Text style={[styles.id3, styles.id3Typo]}>ID/ 비밀번호 입력</Text>
             </View>
-            <View style={[styles.id1, styles.passwordLayout]}>
-                <View style={[styles.passwordChild, styles.passwordLayout]} />
-                <TextInput style={styles.password1}
-                           placeholder={"ID"}></TextInput>
-            </View>
-            <Text style={[styles.appNupan, styles.text2Typo]}>
-                App-nupan 계정이 없으신가요?
-            </Text>
-            <Text style={[styles.text2, styles.text2Typo]}>
-                계정이 기억이 안나시나요?
-            </Text>
-            <Text style={[styles.appNupan1, styles.id3Typo]}>App-nupan</Text>
-            <Text style={[styles.id3, styles.id3Typo]}>ID/ 비밀번호 입력</Text>
-        </View>
-    );
+        );
 };
 
 const styles = StyleSheet.create({

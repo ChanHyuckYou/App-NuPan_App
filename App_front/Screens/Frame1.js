@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
-import { FontSize, Color, FontFamily, Border } from "../GlobalStyles";
+import {FontSize, Color, Border, FontFamily} from "../GlobalStyles";
+
 
 const Frame1 = () => {
     return (
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
         height: 29,
         textAlign: "left",
         color: Color.colorBlack,
-        // fontFamily: FontFamily.interSemiBold,
+        fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
         fontStyle: "italic",
         position: "absolute",
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
         width: 125,
         height: 21,
         color: Color.colorWhite,
-        // fontFamily: FontFamily.interSemiBold,
+        fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
         fontStyle: "italic",
     },
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
         fontSize: FontSize.size_8xl,
         width: 159,
         color: Color.colorWhite,
-        // fontFamily: FontFamily.interSemiBold,
+        fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
         fontStyle: "italic",
         textAlign: "left",
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
         left: 55,
         fontSize: 12,
         fontWeight: "100",
-        // fontFamily: FontFamily.interThin,
+        fontFamily: FontFamily.interThin,
         width: 250,
         height: 23,
         color: Color.colorBlack,
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
         left: 32,
         fontSize: FontSize.size_mini,
         fontWeight: "500",
-        // fontFamily: FontFamily.interMedium,
+        fontFamily: FontFamily.interMedium,
         width: 296,
         height: 35,
         color: Color.colorBlack,
