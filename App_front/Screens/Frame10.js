@@ -66,7 +66,9 @@ const Frame10 = () => {
             </View>
             <View style={[styles.view2, styles.viewLayout1]}>
                 <View style={[styles.child, styles.childBorder]} />
-                <Text style={[styles.text4, styles.textLayout]}>비밀번호 확인</Text>
+                <TextInput
+                    style={[styles.text4, styles.textLayout]}
+                placeholder={"비밀번호 확인"}></TextInput>
             </View>
             <View style={[styles.id1, styles.id1Layout]}>
                 <View style={[styles.idChild, styles.childPosition]} />

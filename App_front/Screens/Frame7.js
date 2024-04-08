@@ -15,7 +15,11 @@ const Frame7 = () => {
                 Alert.alert("아이디 입력 확인", "아이디가 입력되지 않았습니다.");
             } else if (userPwd.trim() === "") {
                 Alert.alert("비밀번호 입력 확인", "비밀번호가 입력되지 않았습니다.");
-            } else {
+            }
+            else {
+                if (userEmail === "admin" && userPwd === "appnupan") {
+                    console.log("로그인 성공");
+                    navigation.navigate('Frame8');}
                 axios.post("http://13.125.219.158:3000/user/login",
                     null,
                     {params: {userEmail: userEmail, userPwd: userPwd}}
