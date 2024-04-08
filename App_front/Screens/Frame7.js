@@ -7,18 +7,18 @@ import axios from "axios";
 
 const Frame7 = () => {
     const navigation = useNavigation();
-        const [email, setEmail] = useState("");
-        const [password, setPassword] = useState("");
+        const [userEmail, setuserEmail] = useState("");
+        const [userPwd, setuserPwd] = useState("");
 
         function login() {
-            if (email.trim() === "") {
+            if (userEmail.trim() === "") {
                 Alert.alert("아이디 입력 확인", "아이디가 입력되지 않았습니다.");
-            } else if (password.trim() === "") {
+            } else if (userPwd.trim() === "") {
                 Alert.alert("비밀번호 입력 확인", "비밀번호가 입력되지 않았습니다.");
             } else {
-                axios.post("http://192.0.0.2:8080/login",
+                axios.post("http://13.125.219.158:3000/user/login",
                     null,
-                    {params: {email: email, password: password}}
+                    {params: {userEmail: userEmail, userPwd: userPwd}}
                 ).then(function (resp) {
                     console.log(resp.data);
                     if (resp.data !== null && resp.data !== "") {
@@ -63,13 +63,13 @@ const Frame7 = () => {
                     <View style={[styles.passwordChild, styles.passwordLayout]}/>
                     <TextInput style={styles.password1}
                                placeholder="Password"
-                               onChangeText={(password) => setPassword(password)}
+                               onChangeText={(userPwd) => setuserPwd(userPwd)}
                                secureTextEntry={true}></TextInput>
                 </View>
                 <View style={[styles.id1, styles.passwordLayout]}>
                     <View style={[styles.passwordChild, styles.passwordLayout]}/>
                     <TextInput style={styles.password1}
-                               onChangeText={(email) => setEmail(email)}
+                               onChangeText={(userEmail) => setuserEmail(userEmail)}
                                placeholder={"ID"}></TextInput>
                 </View>
                 <Text style={[styles.appNupan, styles.text2Typo]}>

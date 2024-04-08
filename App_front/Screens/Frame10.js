@@ -9,9 +9,10 @@ import axios from "axios";
 const Frame10 = () => {
     const navigation = useNavigation();
 
-    const [email, setEmail] = useState('');
+    const [userEmail, setuserEmail] = useState('');
     // const [userId, setUserId] = useState('');
-    const [password, setPassword] = useState('');
+    const [userPwd, setuserPwd] = useState('');
+    const [userName, setuserName] = useState('');
     // const [passwordConfirm, setPasswordConfirm] = useState('');
 
     // const handleSignUp = () => {
@@ -24,13 +25,15 @@ const Frame10 = () => {
         // 사용자 정보를 서버로 전송
     const handleSignUp = async () => {
         try {
-            const response = await axios.post('http://10.0.2.2:8080/user/create', {
-                email: email,
-                password: password,
+            const response = await axios.post('http://13.125.219.158:3000/user/join', {
+                userEmail: userEmail,
+                userPwd: userPwd,
+                userName: userName,
             });
 
             // 성공적으로 회원가입이 완료되면, 로그인 화면이나 메인 화면으로 이동
             navigation.navigate('Frame7');
+            Alert.alert("회원가입에 성공하였습니다.")
         } catch (error) {
             if (error.response) {
                 // 서버로부터 응답을 받았지만 응답 코드가 에러인 경우
@@ -58,8 +61,8 @@ const Frame10 = () => {
                 <View style={[styles.child, styles.childBorder]} />
                 <TextInput style={[styles.text3, styles.textLayout]}
                            placeholder={"비밀번호"}
-                           value={password}
-                           onChangeText={setPassword}></TextInput>
+                           value={userPwd}
+                           onChangeText={setuserPwd}></TextInput>
             </View>
             <View style={[styles.view2, styles.viewLayout1]}>
                 <View style={[styles.child, styles.childBorder]} />
@@ -74,14 +77,18 @@ const Frame10 = () => {
                 <TextInput
                     style={[styles.id3, styles.textLayout]}
                     placeholder="ID"
-                value={email}               //value 지정해서 email ㅇㅣㅂㄹㅕㄱ ㅂㅏㄷㄱㅣ
-                onChangeText={setEmail}>
+                value={userEmail}               //value 지정해서 email ㅇㅣㅂㄹㅕㄱ ㅂㅏㄷㄱㅣ
+                onChangeText={setuserEmail}>
 
                 </TextInput>
             </View>
             <View style={[styles.view3, styles.id2Layout]}>
                 <View style={[styles.idItem, styles.id2Layout]} />
-                <Text style={[styles.id3, styles.textLayout]}>이름</Text>
+                <TextInput
+                    style={[styles.id3, styles.textLayout]}
+                placeholder={"NickName"}
+                onChangeText={setuserName}>
+                </TextInput>
             </View>
             <Text style={styles.text7}>회원가입</Text>
             <View style={[styles.view4, styles.viewLayout]}>
