@@ -1,3 +1,4 @@
+// 로그인 페이지 Frame7.js
 import * as React from "react";
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, Alert} from "react-native";
 import { Color, FontSize, FontFamily } from "../GlobalStyles";
@@ -7,85 +8,112 @@ import axios from "axios";
 
 const Frame7 = () => {
     const navigation = useNavigation();
-        const [userEmail, setuserEmail] = useState("");
-        const [userPwd, setuserPwd] = useState("");
+    const [userEmail, setuserEmail] = useState("");
+    const [userPwd, setuserPwd] = useState("");
 
-        function login() {
-            if (userEmail.trim() === "") {
-                Alert.alert("아이디 입력 확인", "아이디가 입력되지 않았습니다.");
-            } else if (userPwd.trim() === "") {
-                Alert.alert("비밀번호 입력 확인", "비밀번호가 입력되지 않았습니다.");
-            }
-            else {
-                if (userEmail === "admin" && userPwd === "appnupan") {
-                    console.log("로그인 성공");
-                    navigation.navigate('Frame8');}
-                axios.post("http://13.125.219.158:3000/user/login",
-                    null,
-                    {params: {userEmail: userEmail, userPwd: userPwd}}
-                ).then(function (resp) {
+    function login() {
+        if (userEmail.trim() === "") {
+            Alert.alert("아이디 입력 확인", "아이디가 입력되지 않았습니다.");
+        } else if (userPwd.trim() === "") {
+            Alert.alert("비밀번호 입력 확인", "비밀번호가 입력되지 않았습니다.");
+        } else {
+            axios.post("http://43.201.92.62/user/login", {
+                userid: userEmail,
+                password: userPwd
+            })
+                .then(function (resp) {
                     console.log(resp.data);
+
                     if (resp.data !== null && resp.data !== "") {
                         console.log("로그인 성공");
-                        navigation.navigate('Frame8')
+                        navigation.navigate('Frame8');
                     } else {
                         Alert.alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
-                        setEmail("");
-                        setPassword("");
+                        setuserEmail("");
+                        setuserPwd("");
                     }
-                }).catch(function (err) {
-                    console.log(`Error Message: ${err}`);
                 })
-            }
+                .catch(function (err) {
+                    console.log(`Error Message: ${err}`);
+                    Alert.alert('로그인 실패', '로그인 처리 중 오류가 발생했습니다.');
+                });
         }
+    }
 
 
-        return (
-            <View style={styles.view}>
-                {/*<TouchableOpacity onPress={() => navigation.navigate('Frame8')}>*/}
-                    <TouchableOpacity
-                        onPress={() => login()}
-                        style={[styles.view1, styles.viewLayout]}>
-                        <View style={[styles.child, styles.childPosition]}/>
-                        <Text style={[styles.text, styles.textTypo]}>로그인</Text>
-                    </TouchableOpacity>
-                {/*</TouchableOpacity>*/}
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('Frame10')}>
-                    <View style={[styles.view2, styles.viewLayout]}>
-                        <View style={[styles.child, styles.childPosition]}/>
-                        <Text style={[styles.text1, styles.textTypo]}>{`회원가입`}</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Frame10')}>
-                    <View style={[styles.view3, styles.viewLayout]}>
-                        <View style={[styles.child, styles.childPosition]}/>
-                        <Text style={[styles.id, styles.textTypo]}>{`ID/비밀번호 찾기`}</Text>
-                    </View>
-                </TouchableOpacity>
-                <View style={[styles.password, styles.passwordLayout]}>
-                    <View style={[styles.passwordChild, styles.passwordLayout]}/>
-                    <TextInput style={styles.password1}
-                               placeholder="Password"
-                               onChangeText={(userPwd) => setuserPwd(userPwd)}
-                               secureTextEntry={true}></TextInput>
+    // function login() {
+    //     if (userEmail.trim() === "") {
+    //         Alert.alert("아이디 입력 확인", "아이디가 입력되지 않았습니다.");
+    //     } else if (userPwd.trim() === "") {
+    //         Alert.alert("비밀번호 입력 확인", "비밀번호가 입력되지 않았습니다.");
+    //     } else {
+    //         axios.post("http://43.201.92.62/user/login",
+    //             null,
+    //             {params: {userid: userEmail, password: userPwd}}
+    //         ).then(function (resp) {
+    //             console.log(resp.data);
+    //
+    //             if (resp.data !== null && resp.data !== "") {
+    //                 console.log("로그인 성공");
+    //                 navigation.navigate('Frame8')
+    //             } else {
+    //                 Alert.alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
+    //                 setEmail("");
+    //                 setPassword("");
+    //             }
+    //         }).catch(function (err) {
+    //             console.log(`Error Message: ${err}`);
+    //         })
+    //     }
+    // }
+
+
+    return (
+        <View style={styles.view}>
+            {/*<TouchableOpacity onPress={() => navigation.navigate('Frame8')}>*/}
+            <TouchableOpacity
+                onPress={() => login()}
+                style={[styles.view1, styles.viewLayout]}>
+                <View style={[styles.child, styles.childPosition]}/>
+                <Text style={[styles.text, styles.textTypo]}>로그인</Text>
+            </TouchableOpacity>
+            {/*</TouchableOpacity>*/}
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Frame10')}>
+                <View style={[styles.view2, styles.viewLayout]}>
+                    <View style={[styles.child, styles.childPosition]}/>
+                    <Text style={[styles.text1, styles.textTypo]}>{`회원가입`}</Text>
                 </View>
-                <View style={[styles.id1, styles.passwordLayout]}>
-                    <View style={[styles.passwordChild, styles.passwordLayout]}/>
-                    <TextInput style={styles.password1}
-                               onChangeText={(userEmail) => setuserEmail(userEmail)}
-                               placeholder={"ID"}></TextInput>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Frame10')}>
+                <View style={[styles.view3, styles.viewLayout]}>
+                    <View style={[styles.child, styles.childPosition]}/>
+                    <Text style={[styles.id, styles.textTypo]}>{`ID/비밀번호 찾기`}</Text>
                 </View>
-                <Text style={[styles.appNupan, styles.text2Typo]}>
-                    App-nupan 계정이 없으신가요?
-                </Text>
-                <Text style={[styles.text2, styles.text2Typo]}>
-                    계정이 기억이 안나시나요?
-                </Text>
-                <Text style={[styles.appNupan1, styles.id3Typo]}>App-nupan</Text>
-                <Text style={[styles.id3, styles.id3Typo]}>ID/ 비밀번호 입력</Text>
+            </TouchableOpacity>
+            <View style={[styles.password, styles.passwordLayout]}>
+                <View style={[styles.passwordChild, styles.passwordLayout]}/>
+                <TextInput style={styles.password1}
+                           placeholder="Password"
+                           onChangeText={(userPwd) => setuserPwd(userPwd)}
+                           secureTextEntry={true}></TextInput>
             </View>
-        );
+            <View style={[styles.id1, styles.passwordLayout]}>
+                <View style={[styles.passwordChild, styles.passwordLayout]}/>
+                <TextInput style={styles.password1}
+                           onChangeText={(userEmail) => setuserEmail(userEmail)}
+                           placeholder={"ID"}></TextInput>
+            </View>
+            <Text style={[styles.appNupan, styles.text2Typo]}>
+                App-nupan 계정이 없으신가요?
+            </Text>
+            <Text style={[styles.text2, styles.text2Typo]}>
+                계정이 기억이 안나시나요?
+            </Text>
+            <Text style={[styles.appNupan1, styles.id3Typo]}>App-nupan</Text>
+            <Text style={[styles.id3, styles.id3Typo]}>ID/ 비밀번호 입력</Text>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({

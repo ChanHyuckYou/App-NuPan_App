@@ -1,3 +1,4 @@
+// 회원가입 페이지 Frame10.js
 import * as React from "react";
 import {Text, StyleSheet, View, TouchableOpacity, Alert, TextInput} from "react-native";
 import { Image } from "expo-image";
@@ -13,22 +14,26 @@ const Frame10 = () => {
     // const [userId, setUserId] = useState('');
     const [userPwd, setuserPwd] = useState('');
     const [userName, setuserName] = useState('');
+    const [usercontact , setuserContact] = useState('');
+
     // const [passwordConfirm, setPasswordConfirm] = useState('');
 
     // const handleSignUp = () => {
-        // 비밀번호와 비밀번호 확인이 일치하는지 확인
-        // if (password !== passwordConfirm) {
-        //     Alert.alert('비밀번호 오류', '비밀번호와 비밀번호 확인이 일치하지 않습니다.');
-        //     return;
-        // }
+    // 비밀번호와 비밀번호 확인이 일치하는지 확인
+    // if (password !== passwordConfirm) {
+    //     Alert.alert('비밀번호 오류', '비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+    //     return;
+    // }
 
-        // 사용자 정보를 서버로 전송
+    // 사용자 정보를 서버로 전송
     const handleSignUp = async () => {
         try {
-            const response = await axios.post('http://13.125.219.158:3000/user/join', {
-                userEmail: userEmail,
-                userPwd: userPwd,
-                userName: userName,
+            const response = await axios.post('http://43.201.92.62/user/register', {
+                userid: userEmail,
+                password: userPwd,
+                username: userName,
+                usercontact: '1'
+
             });
 
             // 성공적으로 회원가입이 완료되면, 로그인 화면이나 메인 화면으로 이동
@@ -66,9 +71,9 @@ const Frame10 = () => {
             </View>
             <View style={[styles.view2, styles.viewLayout1]}>
                 <View style={[styles.child, styles.childBorder]} />
-                <TextInput
-                    style={[styles.text4, styles.textLayout]}
-                placeholder={"비밀번호 확인"}></TextInput>
+                <TextInput style={[styles.text4, styles.textLayout]}
+                           placeholder={"비밀번호 확인"}
+                ></TextInput>
             </View>
             <View style={[styles.id1, styles.id1Layout]}>
                 <View style={[styles.idChild, styles.childPosition]} />
@@ -79,8 +84,8 @@ const Frame10 = () => {
                 <TextInput
                     style={[styles.id3, styles.textLayout]}
                     placeholder="ID"
-                value={userEmail}               //value 지정해서 email ㅇㅣㅂㄹㅕㄱ ㅂㅏㄷㄱㅣ
-                onChangeText={setuserEmail}>
+                    value={userEmail}               //value 지정해서 email ㅇㅣㅂㄹㅕㄱ ㅂㅏㄷㄱㅣ
+                    onChangeText={setuserEmail}>
 
                 </TextInput>
             </View>
@@ -88,8 +93,8 @@ const Frame10 = () => {
                 <View style={[styles.idItem, styles.id2Layout]} />
                 <TextInput
                     style={[styles.id3, styles.textLayout]}
-                placeholder={"NickName"}
-                onChangeText={setuserName}>
+                    placeholder={"NickName"}
+                    onChangeText={setuserName}>
                 </TextInput>
             </View>
             <Text style={styles.text7}>회원가입</Text>
@@ -103,12 +108,12 @@ const Frame10 = () => {
                 <Text style={[styles.text8, styles.text8Position]}>이전화면</Text>
             </View>
 
-                <TouchableOpacity       //다음으로 버튼 누를 시 HandleSineup
-                    onPress={handleSignUp}
-                    style={[styles.view5, styles.viewLayout]}>
-                    <View style={[styles.child1, styles.viewLayout]} />
-                    <Text style={[styles.text9, styles.textTypo]}>다음으로</Text>
-                </TouchableOpacity>
+            <TouchableOpacity       //다음으로 버튼 누를 시 HandleSineup
+                onPress={handleSignUp}
+                style={[styles.view5, styles.viewLayout]}>
+                <View style={[styles.child1, styles.viewLayout]} />
+                <Text style={[styles.text9, styles.textTypo]}>다음으로</Text>
+            </TouchableOpacity>
 
         </View>
     );
