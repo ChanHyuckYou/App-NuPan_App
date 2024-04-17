@@ -1,9 +1,11 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, FontSize, Color } from "../GlobalStyles";
+import {useNavigation} from "@react-navigation/native";
 
 const Frame2 = () => {
+    const navigation = useNavigation();
     return (
         <View style={styles.view}>
             <View style={[styles.view1, styles.viewLayout1]}>
@@ -18,24 +20,21 @@ const Frame2 = () => {
             <Text style={[styles.text1, styles.textTypo1]}>선택한 메뉴</Text>
             <View style={[styles.view2, styles.viewLayout]}>
                 <View style={[styles.item, styles.viewLayout]} />
-                <View style={[styles.inner, styles.innerBg]} />
-                <Text style={[styles.text2, styles.textLayout]}>메뉴1 이름</Text>
+                <Image style={[styles.inner, styles.innerBg]}
+                       source={require("../assets/coffeeeeeee.png")}/>
+                <Text style={[styles.text2, styles.textLayout]}>아이스 아메리카노</Text>
                 <Text style={[styles.text3, styles.textTypo2]}>8,000₩</Text>
             </View>
-            <View style={[styles.view3, styles.viewLayout]}>
-                <View style={[styles.item, styles.viewLayout]} />
-                <View style={[styles.inner, styles.innerBg]} />
-                <Text style={[styles.text2, styles.textLayout]}>메뉴2 이름</Text>
-                <Text style={[styles.text3, styles.textTypo2]}>7,000₩</Text>
-            </View>
+
             <View style={[styles.view4, styles.viewLayout1]}>
                 <Text style={styles.text6}>총 결제금액</Text>
-                <Text style={[styles.text7, styles.textTypo]}>15,000₩</Text>
+                <Text style={[styles.text7, styles.textTypo]}>8,000₩</Text>
             </View>
-            <View style={[styles.view5, styles.view5Layout]}>
+            <TouchableOpacity style={[styles.view5, styles.view5Layout]}
+                              onPress={() => navigation.navigate('PAY')}>
                 <View style={[styles.child2, styles.view5Layout]} />
                 <Text style={[styles.text8, styles.textTypo]}>즉시 결제</Text>
-            </View>
+            </TouchableOpacity>
             <View style={[styles.child3, styles.innerBg]} />
             <Text style={[styles.text9, styles.textTypo2]}>추후 결제</Text>
         </View>

@@ -17,28 +17,35 @@ const Frame7 = () => {
         } else if (userPwd.trim() === "") {
             Alert.alert("비밀번호 입력 확인", "비밀번호가 입력되지 않았습니다.");
         } else {
-            axios.post("http://43.201.92.62/user/login", {
-                userid: userEmail,
-                password: userPwd
-            })
-                .then(function (resp) {
-                    console.log(resp.data);
-
-                    if (resp.data !== null && resp.data !== "") {
-                        console.log("로그인 성공");
-                        navigation.navigate('Frame8');
-                    } else {
-                        Alert.alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
-                        setuserEmail("");
-                        setuserPwd("");
-                    }
+            // admin과 1234로 바로 로그인 처리
+            if (userEmail === "admin" && userPwd === "1234") {
+                console.log("관리자로 로그인 성공");
+                navigation.navigate('Frame8'); // 성공 시 이동할 페이지
+            } else {
+                axios.post("http://43.201.92.62/user/login", {
+                    userid: userEmail,
+                    password: userPwd
                 })
-                .catch(function (err) {
-                    console.log(`Error Message: ${err}`);
-                    Alert.alert('로그인 실패', '로그인 처리 중 오류가 발생했습니다.');
-                });
+                    .then(function (resp) {
+                        console.log(resp.data);
+
+                        if (resp.data !== null && resp.data !== "") {
+                            console.log("로그인 성공");
+                            navigation.navigate('Frame8');
+                        } else {
+                            Alert.alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
+                            setuserEmail("");
+                            setuserPwd("");
+                        }
+                    })
+                    .catch(function (err) {
+                        console.log(`Error Message: ${err}`);
+                        Alert.alert('로그인 실패', '로그인 처리 중 오류가 발생했습니다.');
+                    });
+            }
         }
     }
+
 
 
     // function login() {

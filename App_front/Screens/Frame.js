@@ -13,8 +13,7 @@ const Frame = () => {
             <View style={[styles.view2, styles.view2Layout]}>
                 <TouchableOpacity
                     style={[styles.child, styles.childPosition]}
-                    onPress={() => navigation.navigate('Frame7')}
-                >
+                    onPress={() => navigation.navigate('Frame7')}>
                     {/* TouchableOpacity 내부에 View를 넣어도 되지만, 예시의 간결성을 위해 생략합니다. */}
                     <Text style={[styles.appNupan1, styles.appFlexBox]}>
                         App-nupan 로그인
@@ -101,7 +100,7 @@ const styles = StyleSheet.create({
     appNupan1: {
         top: 9,
         left: 16,
-        fontSize: FontSize.size_sm,
+        fontSize: 12,
         width: 125,
         height: 21,
         color: Color.colorWhite,
@@ -160,10 +159,18 @@ const styles = StyleSheet.create({
     view: {
         backgroundColor: Color.colorWhite,
         flex: 1,
-        width: "100%",
-        height: 800,
+        position: 'center',
+        justifyContent: 'center', // 수직 방향으로 가운데 정렬
+        alignItems: 'center', // 수평 방향으로 가운데 정렬
         overflow: "hidden",
     },
+
+    container: {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: Color.colorWhite,
+        },
 });
 
 export default Frame;

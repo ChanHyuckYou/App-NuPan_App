@@ -1,9 +1,11 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
 import { Image } from "expo-image";
 import { Color, FontSize, FontFamily } from "../GlobalStyles";
+import {useNavigation} from "@react-navigation/native";
 
 const Frame9 = () => {
+    const navigation = useNavigation();
     return (
         <View style={styles.view}>
             <View style={styles.view1Position}>
@@ -17,33 +19,19 @@ const Frame9 = () => {
             </View>
             <Text style={styles.text1}>정렬기준은 최근 순입니다.</Text>
             <View style={styles.view2}>
-                <View style={[styles.view3, styles.viewLayout]}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Frame13')}>
+                <View
+                    style={[styles.view3, styles.viewLayout]}>
                     <View style={[styles.item, styles.viewLayout]} />
                     <View style={styles.view4} />
-                    <Text style={[styles.text2, styles.textPosition]}>가게이름-1</Text>
-                    <Text style={[styles.text3, styles.textPosition]}>00지점</Text>
+                    <Text style={[styles.text2, styles.textPosition]}>경동대학교</Text>
+                    <Text style={[styles.text3, styles.textPosition]}>양주지점</Text>
                     <Text
                         style={[styles.text4, styles.textPosition]}
-                    >{`가게주소 - 00시 00동... `}</Text>
+                    >{`가게주소 - 양주시 고압동... `}</Text>
                 </View>
-                <View style={[styles.view5, styles.viewLayout]}>
-                    <View style={[styles.item, styles.viewLayout]} />
-                    <View style={styles.view4} />
-                    <Text style={[styles.text2, styles.textPosition]}>가게이름-2</Text>
-                    <Text style={[styles.text3, styles.textPosition]}>00지점</Text>
-                    <Text
-                        style={[styles.text4, styles.textPosition]}
-                    >{`가게주소 - 00시 00동... `}</Text>
-                </View>
-                <View style={[styles.view7, styles.viewLayout]}>
-                    <View style={[styles.item, styles.viewLayout]} />
-                    <View style={styles.view4} />
-                    <Text style={[styles.text2, styles.textPosition]}>가게이름-3</Text>
-                    <Text style={[styles.text3, styles.textPosition]}>00지점</Text>
-                    <Text
-                        style={[styles.text4, styles.textPosition]}
-                    >{`가게주소 - 00시 00동... `}</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     );
