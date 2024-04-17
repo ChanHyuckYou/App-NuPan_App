@@ -19,6 +19,7 @@ import Frame10 from "./Screens/Frame10";
 import Frame11 from "./Screens/Frame11";
 import Frame12 from "./Screens/Frame12";
 import Frame13 from "./Screens/Frame13";
+import SelectPayment from "./Screens/SelectPayment";
 import PAY from "./Screens/pay";
 import ID from "./Screens/ID";
 
@@ -95,6 +96,10 @@ const App = () => {
                                 <RootStack.Screen
                                     name="Frame13"
                                     component={Frame13}
+                                />
+                                <RootStack.Screen
+                                    name="SelectPayment"
+                                    component={SelectPayment}
                                 />
                                 <RootStack.Screen
                                     name="ID"
