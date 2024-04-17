@@ -22,6 +22,9 @@ import MenuPage from "./Screens/MenuPage";
 import SelectPayment from "./Screens/Payment/SelectPayment";
 import PAY from "./Screens/Payment/pay";
 import ID from "./Screens/ID";
+import Certification from "./Screens/Certification";
+import TestConfig from "./Screens/testConfig";
+import firebaseConfig from "./Screens/firebaseConfig";
 
 
 
@@ -37,9 +40,22 @@ const App = () => {
                             initialRouteName={"Frame"}
                                 screenOptions={{ headerShown: false}}
                                     >
+
                                 <RootStack.Screen
                                     name="Frame"
                                     component={AppMain}
+                                />
+                                {/*<RootStack.Screen*/}
+                                {/*    name="firebaseConfig"*/}
+                                {/*    component={firebaseConfig}*/}
+                                {/*/>*/}
+                                <RootStack.Screen
+                                    name="Certification"
+                                    component={Certification}
+                                />
+                                <RootStack.Screen
+                                    name="TestConfig"
+                                    component={TestConfig}
                                 />
                                 <RootStack.Screen
                                     name="QR"

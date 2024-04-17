@@ -37,7 +37,7 @@ const Sign_In = () => {
             });
 
             // 성공적으로 회원가입이 완료되면, 로그인 화면이나 메인 화면으로 이동
-            navigation.navigate('Frame7');
+            navigation.navigate('TestConfig');
             Alert.alert("회원가입에 성공하였습니다.")
         } catch (error) {
             if (error.response) {
