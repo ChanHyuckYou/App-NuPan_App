@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     childPosition: {
-        left: 0,
+        // left: 0,
+        alignSelf: "center",
         top: 0,
     },
     appFlexBox: {
@@ -78,7 +79,8 @@ const styles = StyleSheet.create({
     },
     appNupan: {
         top: 35,
-        left: 112,
+        // left: 112,
+        alignSelf: 'center',
         fontSize: FontSize.size_5xl,
         width: 150,
         height: 29,
@@ -91,22 +93,27 @@ const styles = StyleSheet.create({
     },
     view1: {
         top: 155,
-        left: 57,
+        // left: 57,
         borderRadius: 33,
         backgroundColor: Color.colorGainsboro,
         width: 246,
+        // width: width * 0.5,
+        alignSelf: 'center',
         height: 216,
         position: "absolute",
+        // justifyContent: "center", // 수직 방향으로 가운데 정렬
     },
     child: {
         backgroundColor: Color.colorOrangered,
         height: 40,
         width: 156,
+        alignSelf: "center",
         position: "absolute",
     },
     appNupan1: {
         top: 9,
-        left: 16,
+        // left: 16,
+        alignSelf: "center",
         fontSize: 12,
         width: 125,
         height: 21,
@@ -117,11 +124,13 @@ const styles = StyleSheet.create({
     },
     view2: {
         top: 640,
-        left: 102,
+        // left: 102,
+        alignSelf: "center",
     },
     qrChild: {
         borderRadius: Border.br_4xl,
-        left: 0,
+        // left: 0,
+        alignSelf: "center",
         top: 0,
     },
     riqrScan2LineIcon: {
@@ -141,11 +150,13 @@ const styles = StyleSheet.create({
     },
     qr: {
         top: 430,
-        left: 49,
+        // left: 49,
+        alignSelf: "center",
     },
     text: {
         top: 611,
-        left: 55,
+        // left: 55,
+        alignSelf: "center",
         fontSize: 12,
         fontWeight: "100",
         fontFamily: FontFamily.interThin,
@@ -155,11 +166,12 @@ const styles = StyleSheet.create({
     },
     appNupan2: {
         top: 420,
-        left: 32,
+        // left: 32,
+        alignSelf: "center",
         fontSize: FontSize.size_mini,
         fontWeight: "500",
         fontFamily: FontFamily.interMedium,
-        width: 296,
+        width: 315,
         height: 35,
         color: Color.colorBlack,
     },
@@ -170,9 +182,6 @@ const styles = StyleSheet.create({
         // justifyContent: 'center', // 수직 방향으로 가운데 정렬
         // alignItems: 'center', // 수평 방향으로 가운데 정렬
         // overflow: "hidden",
-        width: "100%",
-        height: height,
-        marginHorizontal: 0,
     },
 
     container: {
