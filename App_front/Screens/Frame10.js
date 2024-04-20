@@ -67,12 +67,14 @@ const Frame10 = () => {
                 <TextInput style={[styles.text3, styles.textLayoutpwd]}
                            placeholder={"비밀번호"}
                            value={userPwd}
+                           secureTextEntry={true}
                            onChangeText={setuserPwd}></TextInput>
             </View>
             <View style={[styles.view2, styles.viewLayout1]}>
                 <View style={[styles.child, styles.childBorder]} />
                 <TextInput style={[styles.text4, styles.textLayoutpwd]}
                            placeholder={"비밀번호 확인"}
+                           secureTextEntry={true}
                 ></TextInput>
             </View>
             <View style={[styles.id1, styles.id1Layout]}>
