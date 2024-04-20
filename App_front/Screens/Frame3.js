@@ -1,11 +1,11 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import {StyleSheet, View, Text, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { Color, FontSize, FontFamily } from "../GlobalStyles";
 
 const Frame3 = () => {
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <View style={styles.view1}>
                 <View style={[styles.child, styles.itemBorder]} />
                 <Text style={[styles.text, styles.textTypo4]}>합계</Text>
@@ -50,7 +50,7 @@ const Frame3 = () => {
             </View>
             <Text style={[styles.text13, styles.textTypo]}>결제완료</Text>
             <Text style={[styles.text14, styles.textTypo]}>추후결제</Text>
-        </View>
+        </SafeAreaView>
     );
 };
 

@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import { FontSize, FontFamily, Color } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
 
 const Frame12 = () => {
     const navigation = useNavigation();
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <Image
                 style={styles.bipersonCheckIcon}
                 contentFit="cover"
@@ -22,7 +22,7 @@ const Frame12 = () => {
                 <Text style={[styles.text1, styles.text1Typo]}>{`로그인 화면으로`}</Text>
             </View>
             </TouchableOpacity>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     appNupan: {
         top: 35,
         left: 112,
-        width: 136,
+        width: 150,
         color: Color.colorBlack,
         fontStyle: "italic",
         textAlign: "left",

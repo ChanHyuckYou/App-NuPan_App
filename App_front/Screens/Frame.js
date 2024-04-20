@@ -1,13 +1,19 @@
 import * as React from "react";
-import {Text, StyleSheet, View, TouchableOpacity} from "react-native";
+import {Text, StyleSheet, View, TouchableOpacity, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontSize, Color, FontFamily, Border } from "../GlobalStyles";
 import { useNavigation } from '@react-navigation/native';
+import {Dimensions} from "react-native";
 
+// 기기의 너비와 높이를 가져옵니다.
+
+const {width, height} = Dimensions.get("window");
 const Frame = () => {
     const navigation = useNavigation();
+
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
+        {/*<View style={styles.view}>*/}
             <Text style={styles.appNupan}>App-nupan</Text>
             <View style={styles.view1} />
             <View style={[styles.view2, styles.view2Layout]}>
@@ -41,7 +47,8 @@ const Frame = () => {
             <Text style={[styles.appNupan2, styles.appFlexBox]}>
                 App-nupan으로 손쉽게 메뉴를 주문해보세요!
             </Text>
-        </View>
+        {/*</View>*/}
+        </SafeAreaView>
     );
 };
 
@@ -73,7 +80,7 @@ const styles = StyleSheet.create({
         top: 35,
         left: 112,
         fontSize: FontSize.size_5xl,
-        width: 136,
+        width: 150,
         height: 29,
         textAlign: "left",
         color: Color.colorBlack,
@@ -133,7 +140,7 @@ const styles = StyleSheet.create({
         textAlign: "left",
     },
     qr: {
-        top: 486,
+        top: 430,
         left: 49,
     },
     text: {
@@ -159,10 +166,13 @@ const styles = StyleSheet.create({
     view: {
         backgroundColor: Color.colorWhite,
         flex: 1,
-        position: 'center',
-        justifyContent: 'center', // 수직 방향으로 가운데 정렬
-        alignItems: 'center', // 수평 방향으로 가운데 정렬
-        overflow: "hidden",
+        // position: 'center',
+        // justifyContent: 'center', // 수직 방향으로 가운데 정렬
+        // alignItems: 'center', // 수평 방향으로 가운데 정렬
+        // overflow: "hidden",
+        width: "100%",
+        height: height,
+        marginHorizontal: 0,
     },
 
     container: {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Text, StyleSheet, View, TouchableOpacity} from "react-native";
+import {Text, StyleSheet, View, TouchableOpacity, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
@@ -7,7 +7,7 @@ import {useNavigation} from "@react-navigation/native";
 const Frame8 = () => {
     const navigation = useNavigation();
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <Text style={styles.appNupan}>App-nupan</Text>
             <TouchableOpacity onPress={() => navigation.navigate('QR')}>
                 <View style={[styles.qr, styles.qrLayout]}>
@@ -47,7 +47,7 @@ const Frame8 = () => {
                 <Text style={[styles.text2, styles.textTypo]}>님</Text>
                 <Text style={[styles.text3, styles.text3Position]}>환영합니다.</Text>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         top: 35,
         left: 112,
         fontSize: FontSize.size_5xl,
-        width: 136,
+        width: 150,
         height: 29,
         textAlign: "left",
         color: Color.colorBlack,

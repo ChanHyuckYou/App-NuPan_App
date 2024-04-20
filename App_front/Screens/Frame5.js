@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import {Text, StyleSheet, View, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, Color, FontSize } from "../GlobalStyles";
 
 const Frame5 = () => {
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <Text style={[styles.appNupan, styles.appTypo]}>App-nupan</Text>
             <Text style={[styles.appNupan, styles.appTypo]}>App-nupan</Text>
             <Text style={[styles.text, styles.textFlexBox]}>
@@ -32,7 +32,7 @@ const Frame5 = () => {
                 <View style={[styles.item, styles.itemLayout]} />
                 <Text style={[styles.text3, styles.textFlexBox]}>메뉴화면으로</Text>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     appNupan: {
         top: 35,
         left: 112,
-        width: 136,
+        width: 150,
         textAlign: "left",
         color: Color.colorBlack,
         fontSize: FontSize.size_5xl,

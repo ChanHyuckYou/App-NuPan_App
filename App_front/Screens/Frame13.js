@@ -1,5 +1,5 @@
 import * as React from "react";
-import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import {useState} from "react";
@@ -9,7 +9,7 @@ const Frame13 = () => {
     const navigation = useNavigation();
     const [showDetails, setShowDetails] = useState(false); // 상세 정보 표시 여부를 관리하는 상태
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <View style={[styles.view1, styles.viewLayout3]}>
                 <View style={[styles.child, styles.itemBorder]} />
                 <Text style={[styles.text, styles.textTypo5]}>직원호출</Text>
@@ -98,7 +98,7 @@ const Frame13 = () => {
                     <Text style={styles.text21}>8,000₩</Text>
                 </View>
             )}
-        </View>
+        </SafeAreaView>
     );
 };
 

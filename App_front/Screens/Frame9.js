@@ -1,5 +1,5 @@
 import * as React from "react";
-import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { Color, FontSize, FontFamily } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
@@ -7,7 +7,7 @@ import {useNavigation} from "@react-navigation/native";
 const Frame9 = () => {
     const navigation = useNavigation();
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <View style={styles.view1Position}>
                 <View style={[styles.child, styles.view1Position]} />
                 <Text style={styles.text}>내가 들렀던 가게</Text>
@@ -33,7 +33,7 @@ const Frame9 = () => {
                 </View>
                 </TouchableOpacity>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 

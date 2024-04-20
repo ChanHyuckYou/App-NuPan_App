@@ -1,5 +1,5 @@
 import * as React from "react";
-import {StyleSheet, View, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, FontSize, Color } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
@@ -7,7 +7,7 @@ import {useNavigation} from "@react-navigation/native";
 const Frame2 = () => {
     const navigation = useNavigation();
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <View style={[styles.view1, styles.viewLayout1]}>
                 <View style={[styles.child, styles.viewLayout1]} />
                 <Text style={styles.text}>주문확정</Text>
@@ -30,14 +30,13 @@ const Frame2 = () => {
                 <Text style={styles.text6}>총 결제금액</Text>
                 <Text style={[styles.text7, styles.textTypo]}>8,000₩</Text>
             </View>
-            <TouchableOpacity style={[styles.view5, styles.view5Layout]}
-                              onPress={() => navigation.navigate('PAY')}>
+            <TouchableOpacity style={[styles.view5, styles.view5Layout]} onPress={() => navigation.navigate('SelectPayment')}>
                 <View style={[styles.child2, styles.view5Layout]} />
                 <Text style={[styles.text8, styles.textTypo]}>즉시 결제</Text>
             </TouchableOpacity>
             <View style={[styles.child3, styles.innerBg]} />
             <Text style={[styles.text9, styles.textTypo2]}>추후 결제</Text>
-        </View>
+        </SafeAreaView>
     );
 };
 

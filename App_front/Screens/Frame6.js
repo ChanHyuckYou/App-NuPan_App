@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import {Text, StyleSheet, View, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, Color, FontSize } from "../GlobalStyles";
 
 const Frame6 = () => {
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <Text style={[styles.appNupan, styles.appTypo]}>App-nupan</Text>
             <Text style={[styles.text, styles.textFlexBox]}>
                 나가기 전 꼭 결제해 주세요.
@@ -31,7 +31,7 @@ const Frame6 = () => {
                 <View style={[styles.item, styles.itemLayout]} />
                 <Text style={[styles.text3, styles.textFlexBox]}>메뉴화면으로</Text>
             </View>
-        </View>
+        </SafeAreaView>
     );
 };
 

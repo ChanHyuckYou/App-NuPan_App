@@ -19,14 +19,14 @@ import Frame10 from "./Screens/Frame10";
 import Frame11 from "./Screens/Frame11";
 import Frame12 from "./Screens/Frame12";
 import Frame13 from "./Screens/Frame13";
-import SelectPayment from "./Screens/SelectPayment";
-import PAY from "./Screens/pay";
+import SelectPayment from "./Screens/Payment/SelectPayment";
+import PAY from "./Screens/Payment/pay";
 import ID from "./Screens/ID";
 
 
 
 const App = () => {
-    const RootStack = createStackNavigator();
+    const RootStack = createNativeStackNavigator();
     const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
     return (
@@ -35,7 +35,7 @@ const App = () => {
                     <NavigationContainer>
                             <RootStack.Navigator
                             initialRouteName={"Frame"}
-                                // screenOptions={{ headerShown: false}
+                                screenOptions={{ headerShown: false}}
                                     >
                                 <RootStack.Screen
                                     name="Frame"
@@ -109,6 +109,7 @@ const App = () => {
                                     name="PAY"
                                     component={PAY}
                                 />
+
                             </RootStack.Navigator>
                     </NavigationContainer>
             </SafeAreaProvider>

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Text, StyleSheet, View, TouchableOpacity} from "react-native";
+import {Text, StyleSheet, View, TouchableOpacity, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontSize, Color, FontFamily } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
@@ -7,7 +7,7 @@ import {useNavigation} from "@react-navigation/native";
 const Frame11 = () => {
     const navigation = useNavigation();
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <Text style={[styles.appNupan, styles.text5Typo]}>App-nupan</Text>
             <Text style={[styles.text, styles.textLayout]}>이메일</Text>
             <Text style={[styles.text1, styles.textLayout]}>인증번호 입력</Text>
@@ -46,7 +46,7 @@ const Frame11 = () => {
             <Text style={[styles.text8, styles.textTypo1]}>
                 이메일이 오지 않을경우 스팸함을 확인해주세요!
             </Text>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     appNupan: {
         top: 35,
         left: 112,
-        width: 136,
+        width: 150,
     },
     text: {
         top: 179,

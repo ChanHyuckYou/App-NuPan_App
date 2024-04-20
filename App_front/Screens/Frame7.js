@@ -1,6 +1,6 @@
 // 로그인 페이지 Frame7.js
 import * as React from "react";
-import {StyleSheet, View, Text, TextInput, TouchableOpacity, Alert} from "react-native";
+import {StyleSheet, View, Text, TextInput, TouchableOpacity, Alert, SafeAreaView} from "react-native";
 import { Color, FontSize, FontFamily } from "../GlobalStyles";
 import { useNavigation } from '@react-navigation/native';
 import {useState} from "react";
@@ -76,7 +76,7 @@ const Frame7 = () => {
 
 
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             {/*<TouchableOpacity onPress={() => navigation.navigate('Frame8')}>*/}
             <TouchableOpacity
                 onPress={() => login()}
@@ -119,7 +119,7 @@ const Frame7 = () => {
             </Text>
             <Text style={[styles.appNupan1, styles.id3Typo]}>App-nupan</Text>
             <Text style={[styles.id3, styles.id3Typo]}>ID/ 비밀번호 입력</Text>
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -224,16 +224,16 @@ const styles = StyleSheet.create({
         left: 47,
     },
     appNupan: {
-        top: 572,
+        top: 630,
     },
     text2: {
-        top: 479,
+        top: 530,
     },
     appNupan1: {
         top: 35,
         left: 112,
         fontSize: FontSize.size_5xl,
-        width: 136,
+        width: 150,
         height: 29,
         fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",

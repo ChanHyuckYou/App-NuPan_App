@@ -1,11 +1,11 @@
 import * as React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import {StyleSheet, View, Text, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, Color, FontSize, Border } from "../GlobalStyles";
 
 const Frame4 = () => {
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <View style={styles.view1Position}>
                 <View style={[styles.child, styles.view1Position]} />
                 <Text style={styles.text}>직원호출</Text>
@@ -40,7 +40,7 @@ const Frame4 = () => {
             <Text style={[styles.text6, styles.textTypo]}>
                 간편 호출에 원하시는 옵션이 없다면?
             </Text>
-        </View>
+        </SafeAreaView>
     );
 };
 

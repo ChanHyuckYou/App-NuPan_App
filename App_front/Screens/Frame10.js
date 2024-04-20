@@ -1,6 +1,6 @@
 // 회원가입 페이지 Frame10.js
 import * as React from "react";
-import {Text, StyleSheet, View, TouchableOpacity, Alert, TextInput} from "react-native";
+import {Text, StyleSheet, View, TouchableOpacity, Alert, TextInput, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, FontSize, Color } from "../GlobalStyles";
 import { useNavigation } from '@react-navigation/native';
@@ -56,7 +56,7 @@ const Frame10 = () => {
         }
     };
     return (
-        <View style={styles.view}>
+        <SafeAreaView style={styles.view}>
             <Text style={styles.appNupan}>App-nupan</Text>
             <Text style={[styles.text, styles.idTypo]}>이름</Text>
             <Text style={[styles.text1, styles.textTypo3]}>비밀번호</Text>
@@ -64,14 +64,14 @@ const Frame10 = () => {
             <Text style={[styles.id, styles.idTypo]}>ID</Text>
             <View style={[styles.view1, styles.viewLayout1]}>
                 <View style={[styles.child, styles.childBorder]} />
-                <TextInput style={[styles.text3, styles.textLayout]}
+                <TextInput style={[styles.text3, styles.textLayoutpwd]}
                            placeholder={"비밀번호"}
                            value={userPwd}
                            onChangeText={setuserPwd}></TextInput>
             </View>
             <View style={[styles.view2, styles.viewLayout1]}>
                 <View style={[styles.child, styles.childBorder]} />
-                <TextInput style={[styles.text4, styles.textLayout]}
+                <TextInput style={[styles.text4, styles.textLayoutpwd]}
                            placeholder={"비밀번호 확인"}
                 ></TextInput>
             </View>
@@ -98,7 +98,7 @@ const Frame10 = () => {
                 </TextInput>
             </View>
             <Text style={styles.text7}>회원가입</Text>
-            <View style={[styles.view4, styles.viewLayout]}>
+            <TouchableOpacity style={[styles.view4, styles.viewLayout]} onPress={() => navigation.goBack()}>
                 <View style={[styles.rectangleView, styles.viewLayout]} />
                 <Image
                     style={[styles.epbackIcon, styles.text8Position]}
@@ -106,7 +106,7 @@ const Frame10 = () => {
                     source={require("../assets/ep_back.png")}
                 />
                 <Text style={[styles.text8, styles.text8Position]}>이전화면</Text>
-            </View>
+            </TouchableOpacity>
 
             <TouchableOpacity       //다음으로 버튼 누를 시 HandleSineup
                 onPress={handleSignUp}
@@ -115,7 +115,7 @@ const Frame10 = () => {
                 <Text style={[styles.text9, styles.textTypo]}>다음으로</Text>
             </TouchableOpacity>
 
-        </View>
+        </SafeAreaView>
     );
 };
 
@@ -154,6 +154,12 @@ const styles = StyleSheet.create({
         backgroundColor: Color.colorWhite,
     },
     textLayout: {
+        width: 200,
+        height: 23,
+        top: 10,
+    },
+    textLayoutpwd: {
+        width: 400,
         height: 23,
         top: 10,
     },
@@ -193,7 +199,7 @@ const styles = StyleSheet.create({
     appNupan: {
         top: 35,
         left: 112,
-        width: 136,
+        width: 150,
         height: 29,
         textAlign: "left",
         color: Color.colorBlack,

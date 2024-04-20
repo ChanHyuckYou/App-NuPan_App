@@ -1,9 +1,18 @@
 import * as React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import {Text, StyleSheet, View, TouchableOpacity} from "react-native";
 import { Image } from "expo-image";
-import { FontSize, Color, FontFamily } from "../GlobalStyles";
+import { FontSize, Color, FontFamily } from "../../GlobalStyles";
+import {useState} from "react";
+import {useNavigation} from "@react-navigation/native";
 
-const Frame1 = () => {
+const SelectPayment  = ({}) => {
+    const [PaymentType, setPaymentType] = useState('');
+    const navigation = useNavigation();
+    const handlePaymentType = (type) => {
+        setPaymentType(type);
+        console.log(PaymentType);
+        navigation.navigate("PAY",  {payType: type}, {usercode: type});
+    };
     return (
         <View style={styles.view}>
             <Text style={styles.appNupan}>App-nupan</Text>
@@ -13,27 +22,33 @@ const Frame1 = () => {
                 <Image
                     style={styles.epbackIcon}
                     contentFit="cover"
-                    source={require("../assets/ep_back.png")}
+                    source={require("../../assets/ep_back.png")}
                 />
             </View>
             <Text style={[styles.text, styles.textTypo]}>
                 결제수단을 선택해 주세요
             </Text>
-            <Image
-                style={[styles.tosspayBtIcon, styles.iconLayout]}
-                contentFit="cover"
-                source={require("../assets/tosspay-bt.png")}
-            />
-            <Image
-                style={[styles.naverpayBtIcon, styles.iconLayout]}
-                contentFit="cover"
-                source={require("../assets/naverpay-bt.png")}
-            />
-            <Image
-                style={[styles.kakaopayBtIcon, styles.iconLayout]}
-                contentFit="cover"
-                source={require("../assets/kakaopay-bt.png")}
-            />
+            <TouchableOpacity onPress={() => handlePaymentType("tosspay")}>
+                <Image
+                    style={[styles.tosspayBtIcon, styles.iconLayout]}
+                    contentFit="cover"
+                    source={require("../../assets/TossPay-bt.png")}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handlePaymentType("naverpay")}>
+                <Image
+                    style={[styles.naverpayBtIcon, styles.iconLayout]}
+                    contentFit="cover"
+                    source={require("../../assets/NaverPay-bt.png")}
+                />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handlePaymentType("kakaopay")}>
+                <Image
+                    style={[styles.kakaopayBtIcon, styles.iconLayout]}
+                    contentFit="cover"
+                    source={require("../../assets/KakaoPay-bt.png")}
+                />
+            </TouchableOpacity>
         </View>
     );
 };
@@ -119,4 +134,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame1;
+export default SelectPayment;
