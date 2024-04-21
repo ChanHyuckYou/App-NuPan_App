@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         left: 49,
     },
     text: {
-        top: 512,
+        top: 570,
         left: 50,
         fontWeight: "300",
         fontFamily: FontFamily.interLight,
