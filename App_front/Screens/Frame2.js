@@ -42,7 +42,7 @@ const Frame2 = () => {
 
 const styles = StyleSheet.create({
     viewLayout1: {
-        width: 360,
+        width: "100%",
         position: "absolute",
     },
     textTypo1: {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     },
     viewLayout: {
         height: 100,
-        width: 360,
+        width: "100%",
         left: 0,
         position: "absolute",
     },

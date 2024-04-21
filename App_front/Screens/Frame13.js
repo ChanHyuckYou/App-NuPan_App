@@ -143,13 +143,13 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     viewPosition: {
-        width: 360,
+        width: "100%",
         left: 0,
         position: "absolute",
     },
     viewLayout2: {
         height: 142,
-        width: 360,
+        width: "100%",
         left: 0,
         position: "absolute",
     },
@@ -206,14 +206,15 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     groupLayout: {
-        height: 40,
-        width: 270,
-        left: 0,
+        height: 39,
+        width: 260,
+        alignSelf: "center",
         position: "absolute",
     },
     textTypo: {
         fontSize: FontSize.size_5xl,
         left: 119,
+        top: 5,
         textAlign: "left",
         fontFamily: FontFamily.interRegular,
         color: Color.colorBlack,
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
         left: 45,
     },
     view1: {
-        left: 242,
+        alignSelf: "flex-end",
         top: 727,
         height: 73,
         position: "absolute",
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
     },
     view2: {
         top: 713,
-        left: 122,
+        alignSelf: "center",
     },
     ionreceiptIcon: {
         top: 4,
@@ -274,7 +275,7 @@ const styles = StyleSheet.create({
         left: 18,
     },
     view3: {
-        left: 0,
+        alignSelf: "flex-start",
         top: 727,
         height: 73,
         position: "absolute",
@@ -373,11 +374,11 @@ const styles = StyleSheet.create({
         fontFamily: FontFamily.interSemiBold,
         width: 270,
         height: 56,
-        left: 38,
+        alignSelf: "center",
     },
     text16: {
         top: 15,
-        left: 260,
+        alignSelf: "flex-end",
         fontWeight: "500",
         fontFamily: FontFamily.interMedium,
         height: 56,
@@ -390,6 +391,9 @@ const styles = StyleSheet.create({
     groupChild: {
         left: 0,
         top: 0,
+        borderWidth: 1,
+        borderColor: Color.colorBlack,
+        borderStyle: "solid",
         backgroundColor: Color.colorWhite,
     },
     text17: {
