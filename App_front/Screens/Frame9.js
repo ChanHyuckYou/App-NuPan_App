@@ -29,7 +29,7 @@ const Frame9 = () => {
                     <Text style={[styles.text3, styles.textPosition]}>양주지점</Text>
                     <Text
                         style={[styles.text4, styles.textPosition]}
-                    >{`가게주소 - 양주시 고압동... `}</Text>
+                    >{`가게주소 - 양주시 고암동... `}</Text>
                 </View>
                 </TouchableOpacity>
             </View>
@@ -40,14 +40,14 @@ const Frame9 = () => {
 const styles = StyleSheet.create({
     view1Position: {
         height: 70,
-        width: 360,
+        width: "100%",
         left: 0,
         top: 0,
         position: "absolute",
     },
     viewLayout: {
         height: 141,
-        width: 360,
+        width: "100%",
         left: 0,
         position: "absolute",
     },
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
         height: 141,
         backgroundColor: Color.colorWhite,
     },
+
     view4: {
         backgroundColor: Color.colorGainsboro,
         width: 143,
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
         left: 180,
     },
     view3: {
-        top: 0,
+        top: 10,
         height: 141,
     },
     view5: {
@@ -143,8 +144,8 @@ const styles = StyleSheet.create({
     },
     view2: {
         top: 185,
-        height: 423,
-        width: 360,
+        height: 141,
+        width: "100%",
         left: 0,
         position: "absolute",
     },

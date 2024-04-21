@@ -14,7 +14,7 @@ const Frame8 = () => {
                     <Image
                         style={[styles.qrChild, styles.childPosition]}
                         contentFit="cover"
-                        source={require("../assets/Rectangle_11.png")}
+                        source={require("../assets/qrback.png")}
                     />
                     <Image
                         style={[styles.riqrScan2LineIcon, styles.iconLayout1]}
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     appNupan: {
         top: 35,
-        left: 112,
+        alignSelf: "center",
         fontSize: FontSize.size_5xl,
         width: 150,
         height: 29,
@@ -130,11 +130,11 @@ const styles = StyleSheet.create({
     },
     qr: {
         top: 400,
-        left: 49,
+        alignSelf: "center"
     },
     text: {
-        top: 570,
-        left: 50,
+        top: 650,
+        alignSelf: "center",
         fontWeight: "300",
         fontFamily: FontFamily.interLight,
         width: 260,
@@ -165,8 +165,8 @@ const styles = StyleSheet.create({
         color: Color.colorWhite,
     },
     view1: {
-        top: 551,
-        left: 80,
+        top: 650,
+        alignSelf: "center"
     },
     icon: {
         width: 100,
