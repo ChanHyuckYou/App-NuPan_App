@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
     iconLayout: {
         height: 91,
         width: 256,
-        left: 52,
+        alignSelf: "center",
         position: "absolute",
     },
     appNupan: {
         top: 35,
-        left: 112,
+        alignSelf: "center",
         fontSize: 24,
         width: 136,
         height: 29,
@@ -108,16 +108,17 @@ const styles = StyleSheet.create({
     },
     gobackBt: {
         top: 637,
-        left: 124,
+        alignSelf: "center",
     },
     text: {
         top: 189,
-        left: 84,
+        alignSelf: "center",
         fontWeight: "500",
         fontFamily: FontFamily.interMedium,
     },
     tosspayBtIcon: {
         top: 464,
+
     },
     naverpayBtIcon: {
         top: 353,

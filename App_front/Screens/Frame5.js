@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     },
     appNupan: {
         top: 35,
-        left: 112,
+        alignSelf: "center",
         width: 150,
         textAlign: "left",
         color: Color.colorBlack,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     },
     text: {
         top: 527,
-        left: 65,
+        alignSelf: "center",
         fontSize: FontSize.size_lg,
         fontWeight: "500",
         fontFamily: FontFamily.interMedium,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     text1: {
         top: 647,
-        left: 105,
+        alignSelf: "center",
         fontSize: FontSize.size_mid,
         fontFamily: FontFamily.interLight,
         width: 149,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         top: 221,
         fontSize: FontSize.size_11xl,
         height: 36,
-        left: 0,
+        left: 14,
         textAlign: "left",
         color: Color.colorBlack,
         fontFamily: FontFamily.interSemiBold,
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
         fontStyle: "italic",
     },
     view1: {
-        top: 200,
-        left: 33,
+        top: 180,
+        alignSelf: "center",
         height: 257,
     },
     child: {
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
     view2: {
         top: 559,
-        left: 53,
+        alignSelf: "center",
     },
     item: {
         backgroundColor: Color.colorGainsboro,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     },
     view3: {
         top: 682,
-        left: 81,
+        alignSelf: "center",
     },
     view: {
         backgroundColor: Color.colorWhite,

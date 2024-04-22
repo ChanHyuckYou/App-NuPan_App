@@ -34,8 +34,10 @@ const Frame2 = () => {
                 <View style={[styles.child2, styles.view5Layout]} />
                 <Text style={[styles.text8, styles.textTypo]}>즉시 결제</Text>
             </TouchableOpacity>
-            <View style={[styles.child3, styles.innerBg]} />
-            <Text style={[styles.text9, styles.textTypo2]}>추후 결제</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('Frame6')}>
+                <View style={[styles.child3, styles.innerBg]} />
+                <Text style={[styles.text9, styles.textTypo2]}>추후 결제</Text>
+            </TouchableOpacity>
         </SafeAreaView>
     );
 };
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
     },
     text: {
         top: 16,
-        left: 45,
+        alignSelf: "center",
         fontSize: FontSize.size_11xl,
         width: 270,
         height: 56,
@@ -118,8 +120,8 @@ const styles = StyleSheet.create({
         top: 0,
     },
     text1: {
-        top: 112,
-        left: -15,
+        top: 148,
+        left: -26,
         width: 173,
         height: 30,
     },
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
         height: 80,
     },
     text2: {
-        left: 164,
+        left: 140,
         width: 158,
         fontFamily: FontFamily.interRegular,
         fontSize: FontSize.size_xl,
@@ -147,8 +149,8 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     text3: {
-        top: 59,
-        left: 259,
+        top: 63,
+        alignSelf: "flex-end",
         width: 98,
         height: 31,
     },
@@ -167,11 +169,11 @@ const styles = StyleSheet.create({
         color: Color.colorBlack,
         fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
-        left: 0,
+        alignSelf: "flex-start",
         position: "absolute",
     },
     text7: {
-        left: 204,
+        alignSelf: "flex-end",
         width: 156,
         height: 51,
         color: Color.colorBlack,
@@ -189,7 +191,7 @@ const styles = StyleSheet.create({
         top: 0,
     },
     text8: {
-        left: 41,
+        alignSelf: "center",
         color: Color.colorWhite,
         width: 224,
         height: 29,
@@ -197,17 +199,17 @@ const styles = StyleSheet.create({
     },
     view5: {
         top: 663,
-        left: 27,
+        alignSelf: "center",
     },
     child3: {
-        top: 732,
-        left: 59,
+        top: 690,
+        alignSelf: "center",
         width: 241,
         height: 40,
     },
     text9: {
-        top: 740,
-        left: 123,
+        top: 698,
+        alignSelf: "center",
         width: 113,
         height: 24,
     },
