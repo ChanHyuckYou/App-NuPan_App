@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         top: 0,
     },
     text3: {
-        top: 8,
+        top: 11,
         left: 27,
         width: 144,
         height: 32,
