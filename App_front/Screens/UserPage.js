@@ -4,7 +4,7 @@ import { Image } from "expo-image";
 import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
 
-const Frame8 = () => {
+const UserPage = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.view}>
@@ -213,4 +213,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame8;
+export default UserPage;

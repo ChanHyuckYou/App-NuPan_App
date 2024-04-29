@@ -5,20 +5,20 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeBaseProvider } from "native-base";
 import QR from "./Screens/Qr";
-import Frame from "./Screens/Frame";
+import AppMain from "./Screens/AppMain";
 import Frame1 from "./Screens/Frame1";
-import Frame2 from "./Screens/Frame2";
-import Frame3 from "./Screens/Frame3";
-import Frame4 from "./Screens/Frame4";
-import Frame5 from "./Screens/Frame5";
-import Frame6 from "./Screens/Frame6";
-import Frame7 from "./Screens/Frame7";
-import Frame8 from "./Screens/Frame8";
-import Frame9 from "./Screens/Frame9";
-import Frame10 from "./Screens/Frame10";
-import Frame11 from "./Screens/Frame11";
-import Frame12 from "./Screens/Frame12";
-import Frame13 from "./Screens/Frame13";
+import OrderCheck from "./Screens/OrderCheck";
+import OrderList from "./Screens/OrderList";
+import StaffCall from "./Screens/StaffCall";
+import OrderConfirm_pay from "./Screens/OrderConfirm_pay";
+import OrderConfirm_cash from "./Screens/OrderConfirm_cash";
+import AppLogin from "./Screens/AppLogin";
+import UserPage from "./Screens/UserPage";
+import UsedStore from "./Screens/UsedStore";
+import Sign_In from "./Screens/Sign_In";
+import EmailCheck from "./Screens/EmailCheck";
+import Sign_InConfirm from "./Screens/Sign_InConfirm";
+import MenuPage from "./Screens/MenuPage";
 import SelectPayment from "./Screens/Payment/SelectPayment";
 import PAY from "./Screens/Payment/pay";
 import ID from "./Screens/ID";
@@ -39,7 +39,7 @@ const App = () => {
                                     >
                                 <RootStack.Screen
                                     name="Frame"
-                                    component={Frame}
+                                    component={AppMain}
                                 />
                                 <RootStack.Screen
                                     name="QR"
@@ -51,51 +51,51 @@ const App = () => {
                                 />
                                 <RootStack.Screen
                                     name="Frame2"
-                                    component={Frame2}
+                                    component={OrderCheck}
                                 />
                                 <RootStack.Screen
                                     name="Frame3"
-                                    component={Frame3}
+                                    component={OrderList}
                                 />
                                 <RootStack.Screen
-                                    name="Frame4"
-                                    component={Frame4}
+                                    name="StaffCall"
+                                    component={StaffCall}
                                 />
                                 <RootStack.Screen
                                     name="Frame5"
-                                    component={Frame5}
+                                    component={OrderConfirm_pay}
                                 />
                                 <RootStack.Screen
                                     name="Frame6"
-                                    component={Frame6}
+                                    component={OrderConfirm_cash}
                                 />
                                 <RootStack.Screen
                                     name="Frame7"
-                                    component={Frame7}
+                                    component={AppLogin}
                                 />
                                 <RootStack.Screen
                                     name="Frame8"
-                                    component={Frame8}
+                                    component={UserPage}
                                 />
                                 <RootStack.Screen
                                     name="Frame9"
-                                    component={Frame9}
+                                    component={UsedStore}
                                 />
                                 <RootStack.Screen
                                     name="Frame10"
-                                    component={Frame10}
+                                    component={Sign_In}
                                 />
                                 <RootStack.Screen
                                     name="Frame11"
-                                    component={Frame11}
+                                    component={EmailCheck}
                                 />
                                 <RootStack.Screen
                                     name="Frame12"
-                                    component={Frame12}
+                                    component={Sign_InConfirm}
                                 />
                                 <RootStack.Screen
                                     name="Frame13"
-                                    component={Frame13}
+                                    component={MenuPage}
                                 />
                                 <RootStack.Screen
                                     name="SelectPayment"

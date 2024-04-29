@@ -1,26 +1,28 @@
 import * as React from "react";
 import {StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from "react-native";
-import { Image } from "expo-image";
-import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import {Image} from "expo-image";
+import {Color, FontFamily, FontSize, Border} from "../GlobalStyles";
 import {useState} from "react";
 import {useNavigation} from "@react-navigation/native";
 
-const Frame13 = () => {
+const MenuPage = () => {
     const navigation = useNavigation();
     const [showDetails, setShowDetails] = useState(false); // 상세 정보 표시 여부를 관리하는 상태
     return (
         <SafeAreaView style={styles.view}>
             <View style={[styles.view1, styles.viewLayout3]}>
-                <View style={[styles.child, styles.itemBorder]} />
-                <Text style={[styles.text, styles.textTypo5]}>직원호출</Text>
-                <Image
-                    style={[styles.fa6SolidbellConciergeIcon, styles.iconLayout]}
-                    contentFit="cover"
-                    source={require("../assets/fa6-solid_bell-concierge.png")}
-                />
+                <TouchableOpacity onPress={() => navigation.navigate('StaffCall')}>
+                    <View style={[styles.child, styles.itemBorder]}/>
+                    <Text style={[styles.text, styles.textTypo5]}>직원호출</Text>
+                    <Image
+                        style={[styles.fa6SolidbellConciergeIcon, styles.iconLayout]}
+                        contentFit="cover"
+                        source={require("../assets/fa6-solid_bell-concierge.png")}
+                    />
+                </TouchableOpacity>
             </View>
             <View style={[styles.view2, styles.itemLayout]}>
-                <View style={[styles.item, styles.itemLayout]} />
+                <View style={[styles.item, styles.itemLayout]}/>
                 <Text style={[styles.text1, styles.textTypo6]}>주문확정</Text>
                 <Image
                     style={[styles.solarbag5BoldIcon, styles.iconLayout]}
@@ -29,61 +31,66 @@ const Frame13 = () => {
                 />
             </View>
             <View style={[styles.view3, styles.viewLayout3]}>
-                <View style={[styles.child, styles.itemBorder]} />
-                <Image
-                    style={[styles.ionreceiptIcon, styles.iconLayout]}
-                    contentFit="cover"
-                    source={require("../assets/jumoon.png")}
-                />
-                <Text style={[styles.text2, styles.textTypo5]}>주문현황</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Frame3')}>
+                    <View style={[styles.child, styles.itemBorder]}/>
+                    <Image
+                        style={[styles.ionreceiptIcon, styles.iconLayout]}
+                        contentFit="cover"
+                        source={require("../assets/jumoon.png")}
+                    />
+                    <Text style={[styles.text2, styles.textTypo5]}>주문현황</Text>
+                </TouchableOpacity>
             </View>
+
             {/* 메뉴 클릭 시 상세 정보 표시를 위한 TouchableOpacity 추가 */}
             <View style={[styles.view4, styles.viewPosition]}>
                 <TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
-                <View style={[styles.view9, styles.viewLayout2]}>
-                    <View style={[styles.rectangleView, styles.viewLayout2]} />
-                    <Text style={[styles.text3, styles.textTypo4]}>아메리카노</Text>
-                    <Text style={[styles.text4, styles.textTypo4]}>더보기..</Text>
-                    <Text style={[styles.text5, styles.textTypo6]}>8,000 ₩</Text>
+                    <View style={[styles.view9, styles.viewLayout2]}>
+                        <View style={[styles.rectangleView, styles.viewLayout2]}/>
+                        <Text style={[styles.text3, styles.textTypo4]}>아메리카노</Text>
+                        <Text style={[styles.text4, styles.textTypo4]}>더보기..</Text>
+                        <Text style={[styles.text5, styles.textTypo6]}>8,000 ₩</Text>
 
-                    <Image source={require("../assets/cofffefe.png")}
-                           style={[styles.view6, styles.view6Layout]}/>
+                        <Image source={require("../assets/cofffefe.png")}
+                               style={[styles.view6, styles.view6Layout]}/>
 
-                </View>
+                    </View>
                 </TouchableOpacity>
             </View>
             <View style={[styles.view11, styles.viewLayout1]}>
                 <View style={[styles.view12, styles.viewLayout1]}>
-                    <View style={styles.viewLayout} />
+                    <View style={styles.viewLayout}/>
                     <Text style={[styles.text12, styles.textTypo3]}>사이드</Text>
                 </View>
                 <View style={[styles.view14, styles.viewLayout1]}>
-                    <View style={styles.viewLayout} />
+                    <View style={styles.viewLayout}/>
                     <Text style={[styles.text12, styles.textTypo3]}>주메뉴</Text>
                 </View>
                 <View style={[styles.view16, styles.viewLayout1]}>
-                    <View style={[styles.view17, styles.viewLayout]} />
+                    <View style={[styles.view17, styles.viewLayout]}/>
                     <Text style={[styles.text14, styles.textTypo3]}>추천메뉴</Text>
                 </View>
             </View>
             <View style={[styles.view18, styles.viewPosition]}>
-                <View style={[styles.child3, styles.viewPosition]} />
+                <View style={[styles.child3, styles.viewPosition]}/>
                 <Text style={[styles.text15, styles.textTypo2]}>매장이름</Text>
                 <Text style={[styles.text16, styles.textTypo2]}>(번호)</Text>
             </View>
             {showDetails && (
                 <View style={[styles.rectangleParent, styles.groupChildLayout]}>
-                    <View style={[styles.groupChild, styles.groupChildLayout]} />
+                    <View style={[styles.groupChild, styles.groupChildLayout]}/>
                     <Text style={[styles.text17, styles.textTypo1]}>아이스 아메리카노</Text>
 
-                        <TouchableOpacity style={[styles.groupItem, styles.groupLayout]} onPress={() => setShowDetails(false)}>
+                    <TouchableOpacity style={[styles.groupItem, styles.groupLayout]}
+                                      onPress={() => setShowDetails(false)}>
                         <Text style={[styles.textTypo]}>취소</Text>
-                        </TouchableOpacity>
+                    </TouchableOpacity>
 
 
-                        <TouchableOpacity style={[styles.groupInner, styles.groupLayout]} onPress={() => navigation.navigate('Frame2')}>
-                            <Text style={[ styles.textTypo]}>담기</Text>
-                        </TouchableOpacity>
+                    <TouchableOpacity style={[styles.groupInner, styles.groupLayout]}
+                                      onPress={() => navigation.navigate('Frame2')}>
+                        <Text style={[styles.textTypo]}>담기</Text>
+                    </TouchableOpacity>
 
                     <Image
                         style={[styles.image1Icon, styles.view6Layout]}
@@ -452,4 +459,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame13;
+export default MenuPage;

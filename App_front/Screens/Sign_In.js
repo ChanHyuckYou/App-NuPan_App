@@ -1,4 +1,4 @@
-// 회원가입 페이지 Frame10.js
+// 회원가입 페이지 Sign_In.js
 import * as React from "react";
 import {Text, StyleSheet, View, TouchableOpacity, Alert, TextInput, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import {useState} from "react";
 import axios from "axios";
 
-const Frame10 = () => {
+const Sign_In = () => {
     const navigation = useNavigation();
 
     const [userEmail, setuserEmail] = useState('');
@@ -375,4 +375,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame10;
+export default Sign_In;

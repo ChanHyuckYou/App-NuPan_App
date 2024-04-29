@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, Color, FontSize, Border } from "../GlobalStyles";
 
-const Frame4 = () => {
+const StaffCall = () => {
     return (
         <SafeAreaView style={styles.view}>
             <View style={styles.view1Position}>
@@ -47,7 +47,7 @@ const Frame4 = () => {
 const styles = StyleSheet.create({
     view1Position: {
         height: 70,
-        width: 360,
+        width: "100%",
         position: "absolute",
         left: 0,
         top: 0,
@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
         overflow: "hidden",
     },
     viewLayout: {
-        height: 60,
-        width: 360,
+        height: 65,
+        width: "100%",
         left: 0,
         position: "absolute",
     },
     textTypo1: {
-        height: 23,
+        height: 30,
         textAlign: "left",
         fontFamily: FontFamily.interRegular,
         color: Color.colorBlack,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     },
     text: {
         top: 14,
-        left: 45,
+        alignSelf: "center",
         fontSize: FontSize.size_11xl,
         fontWeight: "600",
         fontFamily: FontFamily.interSemiBold,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         fontFamily: FontFamily.interRegular,
     },
     view3: {
-        top: 308,
+        top: 254,
     },
     text3: {
         width: 174,
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         fontFamily: FontFamily.interRegular,
     },
     view4: {
-        top: 249,
+        top: 318,
     },
     text4: {
         top: 147,
@@ -171,11 +171,11 @@ const styles = StyleSheet.create({
     },
     view5: {
         top: 649,
-        left: 117,
+        alignSelf: "center",
     },
     text6: {
         top: 608,
-        left: 49,
+        alignSelf: "center",
         fontWeight: "500",
         fontFamily: FontFamily.interMedium,
     },
@@ -188,4 +188,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame4;
+export default StaffCall;

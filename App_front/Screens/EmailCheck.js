@@ -4,7 +4,7 @@ import { Image } from "expo-image";
 import { FontSize, Color, FontFamily } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
 
-const Frame11 = () => {
+const EmailCheck = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.view}>
@@ -243,4 +243,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame11;
+export default EmailCheck;

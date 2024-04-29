@@ -1,4 +1,4 @@
-// 로그인 페이지 Frame7.js
+// 로그인 페이지 AppLogin.js
 import * as React from "react";
 import {StyleSheet, View, Text, TextInput, TouchableOpacity, Alert, SafeAreaView} from "react-native";
 import { Color, FontSize, FontFamily } from "../GlobalStyles";
@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import {useState} from "react";
 import axios from "axios";
 
-const Frame7 = () => {
+const AppLogin = () => {
     const navigation = useNavigation();
     const [userEmail, setuserEmail] = useState("");
     const [userPwd, setuserPwd] = useState("");
@@ -62,7 +62,7 @@ const Frame7 = () => {
     //
     //             if (resp.data !== null && resp.data !== "") {
     //                 console.log("로그인 성공");
-    //                 navigation.navigate('Frame8')
+    //                 navigation.navigate('UserPage')
     //             } else {
     //                 Alert.alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
     //                 setEmail("");
@@ -77,7 +77,7 @@ const Frame7 = () => {
 
     return (
         <SafeAreaView style={styles.view}>
-            {/*<TouchableOpacity onPress={() => navigation.navigate('Frame8')}>*/}
+            {/*<TouchableOpacity onPress={() => navigation.navigate('UserPage')}>*/}
             <TouchableOpacity
                 onPress={() => login()}
                 style={[styles.view1, styles.viewLayout]}>
@@ -256,4 +256,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame7;
+export default AppLogin;

@@ -4,7 +4,7 @@ import { Image } from "expo-image";
 import { FontFamily, FontSize, Color } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
 
-const Frame2 = () => {
+const OrderCheck = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.view}>
@@ -222,4 +222,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame2;
+export default OrderCheck;

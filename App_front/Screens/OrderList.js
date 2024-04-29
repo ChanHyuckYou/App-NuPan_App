@@ -3,7 +3,7 @@ import {StyleSheet, View, Text, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { Color, FontSize, FontFamily } from "../GlobalStyles";
 
-const Frame3 = () => {
+const OrderList = () => {
     return (
         <SafeAreaView style={styles.view}>
             <View style={styles.view1}>
@@ -286,4 +286,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame3;
+export default OrderList;

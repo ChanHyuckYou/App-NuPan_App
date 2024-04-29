@@ -4,7 +4,7 @@ import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from "react-nati
 import { FontSize, FontFamily, Color } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
 
-const Frame12 = () => {
+const Sign_InConfirm = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.view}>
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame12;
+export default Sign_InConfirm;

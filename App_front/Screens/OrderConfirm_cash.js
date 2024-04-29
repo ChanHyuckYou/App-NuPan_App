@@ -3,7 +3,7 @@ import {Text, StyleSheet, View, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, Color, FontSize } from "../GlobalStyles";
 
-const Frame6 = () => {
+const OrderConfirm_cash = () => {
     return (
         <SafeAreaView style={styles.view}>
             <Text style={[styles.appNupan, styles.appTypo]}>App-nupan</Text>
@@ -165,4 +165,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Frame6;
+export default OrderConfirm_cash;

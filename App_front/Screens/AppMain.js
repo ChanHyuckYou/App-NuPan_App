@@ -8,7 +8,7 @@ import {Dimensions} from "react-native";
 // 기기의 너비와 높이를 가져옵니다.
 
 const {width, height} = Dimensions.get("window");
-const Frame = () => {
+const AppMain = () => {
     const navigation = useNavigation();
 
     return (
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     appNupan1: {
-        top: 9,
+        top: 11,
         left: 16,
         fontSize: 12,
         width: 125,
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         overflow: "hidden",
     },
     qr1: {
-        left: 69,
+        left: 80,
         fontSize: FontSize.size_8xl,
         width: 159,
         color: Color.colorWhite,
@@ -183,4 +183,4 @@ const styles = StyleSheet.create({
         },
 });
 
-export default Frame;
+export default AppMain;
