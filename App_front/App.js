@@ -90,7 +90,7 @@ const App = () => {
                                     component={AppLogin}
                                 />
                                 <RootStack.Screen
-                                    name="Frame8"
+                                    name="UserPage"
                                     component={UserPage}
                                 />
                                 <RootStack.Screen
@@ -98,7 +98,7 @@ const App = () => {
                                     component={UsedStore}
                                 />
                                 <RootStack.Screen
-                                    name="Frame10"
+                                    name="Sign_In"
                                     component={Sign_In}
                                 />
                                 <RootStack.Screen

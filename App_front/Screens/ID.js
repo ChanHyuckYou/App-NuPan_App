@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   appNupan: {
     top: 35,
-    left: 112,
+    alignSelf: "center",
     width: 136,
     height: 29,
     textAlign: "left",

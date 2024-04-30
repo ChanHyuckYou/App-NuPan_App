@@ -1,11 +1,12 @@
 // 회원가입 페이지 Sign_In.js
 import * as React from "react";
 import {Text, StyleSheet, View, TouchableOpacity, Alert, TextInput, SafeAreaView} from "react-native";
-import { Image } from "expo-image";
-import { FontFamily, FontSize, Color } from "../GlobalStyles";
-import { useNavigation } from '@react-navigation/native';
+import {Image} from "expo-image";
+import {FontFamily, FontSize, Color} from "../GlobalStyles";
+import {useNavigation} from '@react-navigation/native';
 import {useState} from "react";
 import axios from "axios";
+import checkboxWeb from "native-base/src/components/primitives/Checkbox/Checkbox.web";
 
 const Sign_In = () => {
     const navigation = useNavigation();
@@ -14,7 +15,7 @@ const Sign_In = () => {
     // const [userId, setUserId] = useState('');
     const [userPwd, setuserPwd] = useState('');
     const [userName, setuserName] = useState('');
-    const [usercontact , setuserContact] = useState('');
+    const [usercontact, setuserContact] = useState('');
 
     // const [passwordConfirm, setPasswordConfirm] = useState('');
 
@@ -58,64 +59,74 @@ const Sign_In = () => {
     return (
         <SafeAreaView style={styles.view}>
             <Text style={styles.appNupan}>App-nupan</Text>
-            <Text style={[styles.text, styles.idTypo]}>이름</Text>
-            <Text style={[styles.text1, styles.textTypo3]}>비밀번호</Text>
-            <Text style={[styles.text2, styles.textTypo3]}>비밀번호 확인</Text>
-            <Text style={[styles.id, styles.idTypo]}>ID</Text>
-            <View style={[styles.view1, styles.viewLayout1]}>
-                <View style={[styles.child, styles.childBorder]} />
-                <TextInput style={[styles.text3, styles.textLayoutpwd]}
-                           placeholder={"비밀번호"}
-                           value={userPwd}
-                           secureTextEntry={true}
-                           onChangeText={setuserPwd}></TextInput>
-            </View>
-            <View style={[styles.view2, styles.viewLayout1]}>
-                <View style={[styles.child, styles.childBorder]} />
-                <TextInput style={[styles.text4, styles.textLayoutpwd]}
-                           placeholder={"비밀번호 확인"}
-                           secureTextEntry={true}
-                ></TextInput>
-            </View>
-            <View style={[styles.id1, styles.id1Layout]}>
-                <View style={[styles.idChild, styles.childPosition]} />
-                <Text style={[styles.text5, styles.textTypo]}>중복확인</Text>
-            </View>
-            <View style={[styles.id2, styles.id2Layout]}>
-                <View style={[styles.idItem, styles.id2Layout]} />
-                <TextInput
-                    style={[styles.id3, styles.textLayout]}
-                    placeholder="ID"
-                    value={userEmail}               //value 지정해서 email ㅇㅣㅂㄹㅕㄱ ㅂㅏㄷㄱㅣ
-                    onChangeText={setuserEmail}>
-
-                </TextInput>
-            </View>
-            <View style={[styles.view3, styles.id2Layout]}>
-                <View style={[styles.idItem, styles.id2Layout]} />
-                <TextInput
-                    style={[styles.id3, styles.textLayout]}
-                    placeholder={"NickName"}
-                    onChangeText={setuserName}>
-                </TextInput>
-            </View>
             <Text style={styles.text7}>회원가입</Text>
-            <TouchableOpacity style={[styles.view4, styles.viewLayout]} onPress={() => navigation.goBack()}>
-                <View style={[styles.rectangleView, styles.viewLayout]} />
-                <Image
-                    style={[styles.epbackIcon, styles.text8Position]}
-                    contentFit="cover"
-                    source={require("../assets/ep_back.png")}
-                />
-                <Text style={[styles.text8, styles.text8Position]}>이전화면</Text>
-            </TouchableOpacity>
+            <View style={styles.passwdView}>
+                <Text style={[styles.text1, styles.textTypo3]}>비밀번호</Text>
+                <View style={[styles.view1, styles.viewLayout1]}>
+                    <View style={[styles.child, styles.childBorder]}/>
+                    <TextInput style={[styles.text3, styles.textLayoutpwd]}
+                               placeholder={"비밀번호"}
+                               value={userPwd}
+                               secureTextEntry={true}
+                               onChangeText={setuserPwd}></TextInput>
+                </View>
+            </View>
+            <View style={styles.passCheckView}>
+                <Text style={[styles.text2, styles.textTypo3]}>비밀번호 확인</Text>
+                <View style={[styles.view2, styles.viewLayout1]}>
+                    <View style={[styles.child, styles.childBorder]}/>
+                    <TextInput style={[styles.text4, styles.textLayoutpwd]}
+                               placeholder={"비밀번호 확인"}
+                               secureTextEntry={true}
+                    ></TextInput>
+                </View>
+            </View>
+            <View style={styles.idView}>
+                <Text style={[styles.id, styles.idTypo]}>ID</Text>
+                <View style={[styles.id2, styles.id2Layout]}>
+                    <View style={[styles.idItem, styles.id2Layout]}/>
+                    <TextInput
+                        style={[styles.id3, styles.textLayout]}
+                        placeholder="ID"
+                        value={userEmail}               //value 지정해서 email ㅇㅣㅂㄹㅕㄱ ㅂㅏㄷㄱㅣ
+                        onChangeText={setuserEmail}>
+                    </TextInput>
+                </View>
+                <View style={[styles.id1, styles.id1Layout]}>
+                    <View style={[styles.idChild, styles.childPosition]}/>
+                    <Text style={[styles.text5, styles.textTypo]}>중복확인</Text>
+                </View>
+            </View>
+            <View style={styles.nicknameView}>
+                <Text style={[styles.text, styles.idTypo]}>이름</Text>
+                <View style={[styles.view3, styles.id2Layout]}>
+                    <View style={[styles.idItem, styles.id2Layout]}/>
+                    <TextInput
+                        style={[styles.id3, styles.textLayout]}
+                        placeholder={"NickName"}
+                        onChangeText={setuserName}>
+                    </TextInput>
+                </View>
+            </View>
 
-            <TouchableOpacity       //다음으로 버튼 누를 시 HandleSineup
-                onPress={handleSignUp}
-                style={[styles.view5, styles.viewLayout]}>
-                <View style={[styles.child1, styles.viewLayout]} />
-                <Text style={[styles.text9, styles.textTypo]}>다음으로</Text>
-            </TouchableOpacity>
+            <View style={styles.nextBack}>
+                <TouchableOpacity style={[styles.view4, styles.viewLayout]} onPress={() => navigation.goBack()}>
+                    <View style={[styles.rectangleView, styles.viewLayout]}/>
+                    <Image
+                        style={[styles.epbackIcon, styles.text8Position]}
+                        contentFit="cover"
+                        source={require("../assets/ep_back.png")}
+                    />
+                    <Text style={[styles.text8, styles.text8Position]}>이전화면</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity       //다음으로 버튼 누를 시 HandleSineup
+                    onPress={handleSignUp}
+                    style={[styles.view5, styles.viewLayout]}>
+                    <View style={[styles.child1, styles.viewLayout]}/>
+                    <Text style={[styles.text9, styles.textTypo]}>다음으로</Text>
+                </TouchableOpacity>
+            </View>
 
         </SafeAreaView>
     );
@@ -133,7 +144,6 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     textTypo3: {
-        left: 48,
         height: 21,
         fontFamily: FontFamily.interLight,
         fontSize: FontSize.size_mid,
@@ -195,12 +205,12 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     text8Position: {
-        top: 8,
+        top: 10,
         position: "absolute",
     },
     appNupan: {
         top: 35,
-        left: 112,
+        alignSelf: "center",
         width: 150,
         height: 29,
         textAlign: "left",
@@ -212,21 +222,22 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     text: {
-        top: 179,
-        left: 50,
+        top: 0,
+        left: 0,
         height: 21,
     },
     text1: {
-        top: 332,
+        top: 0,
+        left: 0,
         width: 66,
     },
     text2: {
-        top: 417,
+        top: 0,
         width: 102,
     },
     id: {
-        top: 247,
-        left: 49,
+        top: 0,
+        left: 1,
         height: 21,
     },
     child: {
@@ -247,8 +258,8 @@ const styles = StyleSheet.create({
         left: 13,
     },
     view1: {
-        top: 353,
-        left: 47,
+        top: 20,
+        left: 0,
     },
     text4: {
         width: 117,
@@ -263,8 +274,8 @@ const styles = StyleSheet.create({
         left: 13,
     },
     view2: {
-        top: 438,
-        left: 47,
+        top: 20,
+        left: 0,
     },
     idChild: {
         width: 73,
@@ -272,15 +283,15 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     text5: {
-        left: 5,
+        left: 7,
         height: 23,
-        top: 10,
+        top: 12,
         width: 65,
         color: Color.colorWhite,
     },
     id1: {
-        left: 245,
-        top: 268,
+        alignSelf: "flex-end",
+        top: 20,
     },
     idItem: {
         borderWidth: 3,
@@ -303,16 +314,16 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     id2: {
-        top: 268,
-        left: 49,
+        top: 20,
+        alignSelf: "flex-start",
     },
     view3: {
-        top: 200,
-        left: 47,
+        top: 20,
+        left: 0,
     },
     text7: {
-        top: 107,
-        left: 32,
+        top: 130,
+        left: 60,
         width: 98,
         height: 29,
         textAlign: "left",
@@ -330,13 +341,13 @@ const styles = StyleSheet.create({
         height: 36,
     },
     epbackIcon: {
-        width: 20,
-        height: 20,
+        width: 21,
+        height: 15,
         left: 5,
         overflow: "hidden",
     },
     text8: {
-        left: 25,
+        left: 28,
         textAlign: "center",
         width: 64,
         height: 21,
@@ -347,8 +358,7 @@ const styles = StyleSheet.create({
         fontWeight: "600",
     },
     view4: {
-        left: 64,
-        top: 632,
+        alignSelf: "flex-start",
         height: 36,
     },
     child1: {
@@ -357,13 +367,12 @@ const styles = StyleSheet.create({
         top: 0,
     },
     text9: {
-        top: 6,
-        left: 17,
+        top: 8,
+        left: 20,
         height: 21,
     },
     view5: {
-        left: 198,
-        top: 632,
+        alignSelf: "flex-end",
         height: 36,
     },
     view: {
@@ -373,6 +382,28 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         backgroundColor: Color.colorWhite,
     },
+    nicknameView: {
+        top: 140,
+        left: 60,
+    },
+    idView: {
+        top: 210,
+        left: 60,
+        width: 270
+    },
+    passwdView: {
+        left: 60,
+        top: 285,
+    },
+    passCheckView: {
+        left: 60,
+        top: 360,
+    },
+    nextBack: {
+        alignSelf: "center",
+        top: 570,
+        width: 250,
+    }
 });
 
 export default Sign_In;

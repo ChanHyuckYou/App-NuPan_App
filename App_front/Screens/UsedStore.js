@@ -11,11 +11,14 @@ const UsedStore = () => {
             <View style={styles.view1Position}>
                 <View style={[styles.child, styles.view1Position]} />
                 <Text style={styles.text}>내가 들렀던 가게</Text>
+                <TouchableOpacity style={styles.backBtLayout}
+                onPress={() => navigation.goBack()}>
                 <Image
                     style={styles.epbackIcon}
                     contentFit="cover"
                     source={require("../assets/ep_back.png")}
                 />
+                </TouchableOpacity>
             </View>
             <Text style={styles.text1}>정렬기준은 최근 순입니다.</Text>
             <View style={styles.view2}>
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     epbackIcon: {
-        top: 20,
+        top: 24,
         left: 23,
         width: 30,
         height: 30,
@@ -155,6 +158,10 @@ const styles = StyleSheet.create({
         height: 800,
         overflow: "hidden",
         backgroundColor: Color.colorWhite,
+    },
+    backBtLayout: {
+        width: 40,
+        height: 80,
     },
 });
 
