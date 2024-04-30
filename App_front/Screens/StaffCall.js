@@ -170,11 +170,11 @@ const styles = StyleSheet.create({
         fontFamily: FontFamily.interBold,
     },
     view5: {
-        top: 649,
+        top: 690,
         alignSelf: "center",
     },
     text6: {
-        top: 608,
+        top: 656,
         alignSelf: "center",
         fontWeight: "500",
         fontFamily: FontFamily.interMedium,

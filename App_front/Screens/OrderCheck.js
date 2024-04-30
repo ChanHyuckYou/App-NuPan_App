@@ -1,7 +1,7 @@
 import * as React from "react";
 import {StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from "react-native";
-import { Image } from "expo-image";
-import { FontFamily, FontSize, Color } from "../GlobalStyles";
+import {Image} from "expo-image";
+import {FontFamily, FontSize, Color} from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
 
 const OrderCheck = () => {
@@ -9,17 +9,20 @@ const OrderCheck = () => {
     return (
         <SafeAreaView style={styles.view}>
             <View style={[styles.view1, styles.viewLayout1]}>
-                <View style={[styles.child, styles.viewLayout1]} />
+                <View style={[styles.child, styles.viewLayout1]}/>
                 <Text style={styles.text}>주문확정</Text>
-                <Image
-                    style={styles.epbackIcon}
-                    contentFit="cover"
-                    source={require("../assets/ep_back.png")}
-                />
+                <TouchableOpacity style={styles.backBtLayout}
+                onPress={() => navigation.goBack()}>
+                    <Image
+                        style={styles.epbackIcon}
+                        contentFit="cover"
+                        source={require("../assets/ep_back.png")}
+                    />
+                </TouchableOpacity>
             </View>
             <Text style={[styles.text1, styles.textTypo1]}>선택한 메뉴</Text>
             <View style={[styles.view2, styles.viewLayout]}>
-                <View style={[styles.item, styles.viewLayout]} />
+                <View style={[styles.item, styles.viewLayout]}/>
                 <Image style={[styles.inner, styles.innerBg]}
                        source={require("../assets/coffeeeeeee.png")}/>
                 <Text style={[styles.text2, styles.textLayout]}>아이스 아메리카노</Text>
@@ -30,12 +33,13 @@ const OrderCheck = () => {
                 <Text style={styles.text6}>총 결제금액</Text>
                 <Text style={[styles.text7, styles.textTypo]}>8,000₩</Text>
             </View>
-            <TouchableOpacity style={[styles.view5, styles.view5Layout]} onPress={() => navigation.navigate('SelectPayment')}>
-                <View style={[styles.child2, styles.view5Layout]} />
+            <TouchableOpacity style={[styles.view5, styles.view5Layout]}
+                              onPress={() => navigation.navigate('SelectPayment')}>
+                <View style={[styles.child2, styles.view5Layout]}/>
                 <Text style={[styles.text8, styles.textTypo]}>즉시 결제</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Frame6')}>
-                <View style={[styles.child3, styles.innerBg]} />
+                <View style={[styles.child3, styles.innerBg]}/>
                 <Text style={[styles.text9, styles.textTypo2]}>추후 결제</Text>
             </TouchableOpacity>
         </SafeAreaView>
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     epbackIcon: {
-        top: 20,
+        top: 24,
         left: 23,
         width: 30,
         height: 30,
@@ -219,6 +223,10 @@ const styles = StyleSheet.create({
         height: 800,
         overflow: "hidden",
         backgroundColor: Color.colorWhite,
+    },
+    backBtLayout: {
+        width: 40,
+        height: 80,
     },
 });
 

@@ -20,7 +20,7 @@ const AppLogin = () => {
             // admin과 1234로 바로 로그인 처리
             if (userEmail === "admin" && userPwd === "1234") {
                 console.log("관리자로 로그인 성공");
-                navigation.navigate('Frame8'); // 성공 시 이동할 페이지
+                navigation.navigate('UserPage'); // 성공 시 이동할 페이지
             } else {
                 axios.post("http://43.201.92.62/user/login", {
                     userid: userEmail,
@@ -31,7 +31,7 @@ const AppLogin = () => {
 
                         if (resp.data !== null && resp.data !== "") {
                             console.log("로그인 성공");
-                            navigation.navigate('Frame8');
+                            navigation.navigate('UserPage');
                         } else {
                             Alert.alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
                             setuserEmail("");
@@ -86,13 +86,13 @@ const AppLogin = () => {
             </TouchableOpacity>
             {/*</TouchableOpacity>*/}
             <TouchableOpacity
-                onPress={() => navigation.navigate('Frame10')}>
+                onPress={() => navigation.navigate('Sign_In')}>
                 <View style={[styles.view2, styles.viewLayout]}>
                     <View style={[styles.child, styles.childPosition]}/>
                     <Text style={[styles.text1, styles.textTypo]}>{`회원가입`}</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Frame10')}>
+            <TouchableOpacity onPress={() => navigation.navigate('ID')}>
                 <View style={[styles.view3, styles.viewLayout]}>
                     <View style={[styles.child, styles.childPosition]}/>
                     <Text style={[styles.id, styles.textTypo]}>{`ID/비밀번호 찾기`}</Text>
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         textAlign: "left",
         color: Color.colorWhite,
         fontSize: FontSize.size_xl,
-        top: 6,
+        top: 8,
         fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
         position: "absolute",
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         height: 18,
         width: 248,
         fontSize: FontSize.size_mini,
-        left: 42,
+        alignSelf: "center",
         color: Color.colorBlack,
         fontFamily: FontFamily.interLight,
         fontStyle: "italic",
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     },
     view1: {
         top: 425,
-        left: 47,
+        alignSelf: "center",
     },
     text1: {
         left: 96,
@@ -185,15 +185,15 @@ const styles = StyleSheet.create({
     },
     view2: {
         top: 605,
-        left: 47,
+        alignSelf: "center",
     },
     id: {
-        left: 60,
+        left: 65,
         width: 147,
     },
     view3: {
         top: 507,
-        left: 47,
+        alignSelf: "center",
     },
     passwordChild: {
         borderStyle: "solid",
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
         top: 10,
         left: 13,
         color: Color.colorGray,
-        width: 106,
+        width: 245,
         fontFamily: FontFamily.interLight,
         fontStyle: "italic",
         height: 23,
@@ -217,11 +217,11 @@ const styles = StyleSheet.create({
     },
     password: {
         top: 311,
-        left: 47,
+        alignSelf: "center",
     },
     id1: {
         top: 239,
-        left: 47,
+        alignSelf: "center",
     },
     appNupan: {
         top: 630,
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     },
     appNupan1: {
         top: 35,
-        left: 112,
+        alignSelf: "center",
         fontSize: FontSize.size_5xl,
         width: 150,
         height: 29,
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
         width: 130,
         height: 21,
         fontFamily: FontFamily.interLight,
-        left: 47,
+        left: 60,
     },
     view: {
         flex: 1,
