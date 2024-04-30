@@ -4,31 +4,31 @@ import { Color, FontSize, FontFamily } from "../GlobalStyles";
 
 const ID = () => {
   return (
-    <View style={styles.id}>
-      <Text style={styles.appNupan}>App-nupan</Text>
-      <View style={[styles.id1, styles.childLayout]}>
-        <View style={[styles.idChild, styles.idItemPosition]} />
-        <Text style={styles.id2}>ID 찾기</Text>
+      <View style={styles.id}>
+        <Text style={styles.appNupan}>App-nupan</Text>
+        <View style={[styles.id1, styles.childLayout]}>
+          <View style={[styles.idChild, styles.idItemPosition]} />
+          <Text style={styles.id2}>ID 찾기</Text>
+        </View>
+        <View style={[styles.view, styles.childLayout]}>
+          <View style={[styles.child, styles.itemBorder]} />
+          <Text style={styles.text}>비밀번호 찾기</Text>
+        </View>
+        <View style={[styles.view1, styles.viewLayout]}>
+          <View style={[styles.item, styles.viewLayout]} />
+          <Text style={[styles.text1, styles.id4Typo]}>이름</Text>
+        </View>
+        <View style={[styles.view2, styles.viewLayout]}>
+          <View style={[styles.item, styles.viewLayout]} />
+          <Text style={[styles.text1, styles.id4Typo]}>E-mail</Text>
+        </View>
+        <Text style={[styles.text2, styles.textTypo]}>이름</Text>
+        <Text style={[styles.text3, styles.textTypo]}>이메일</Text>
+        <View style={[styles.id3, styles.id3Layout]}>
+          <View style={[styles.idItem, styles.id3Layout]} />
+          <Text style={[styles.id4, styles.id4Typo]}>내 ID 찾기</Text>
+        </View>
       </View>
-      <View style={[styles.view, styles.childLayout]}>
-        <View style={[styles.child, styles.itemBorder]} />
-        <Text style={styles.text}>비밀번호 찾기</Text>
-      </View>
-      <View style={[styles.view1, styles.viewLayout]}>
-        <View style={[styles.item, styles.viewLayout]} />
-        <Text style={[styles.text1, styles.id4Typo]}>이름</Text>
-      </View>
-      <View style={[styles.view2, styles.viewLayout]}>
-        <View style={[styles.item, styles.viewLayout]} />
-        <Text style={[styles.text1, styles.id4Typo]}>E-mail</Text>
-      </View>
-      <Text style={[styles.text2, styles.textTypo]}>이름</Text>
-      <Text style={[styles.text3, styles.textTypo]}>이메일</Text>
-      <View style={[styles.id3, styles.id3Layout]}>
-        <View style={[styles.idItem, styles.id3Layout]} />
-        <Text style={[styles.id4, styles.id4Typo]}>내 ID 찾기</Text>
-      </View>
-    </View>
   );
 };
 

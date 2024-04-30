@@ -92,7 +92,7 @@ const AppLogin = () => {
                     <Text style={[styles.text1, styles.textTypo]}>{`회원가입`}</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('ID')}>
+            <TouchableOpacity onPress={() => navigation.navigate('FindID')}>
                 <View style={[styles.view3, styles.viewLayout]}>
                     <View style={[styles.child, styles.childPosition]}/>
                     <Text style={[styles.id, styles.textTypo]}>{`ID/비밀번호 찾기`}</Text>

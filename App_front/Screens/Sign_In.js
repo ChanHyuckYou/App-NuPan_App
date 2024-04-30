@@ -92,10 +92,10 @@ const Sign_In = () => {
                         onChangeText={setuserEmail}>
                     </TextInput>
                 </View>
-                <View style={[styles.id1, styles.id1Layout]}>
+                <TouchableOpacity style={[styles.id1, styles.id1Layout]}>
                     <View style={[styles.idChild, styles.childPosition]}/>
                     <Text style={[styles.text5, styles.textTypo]}>중복확인</Text>
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.nicknameView}>
                 <Text style={[styles.text, styles.idTypo]}>이름</Text>
