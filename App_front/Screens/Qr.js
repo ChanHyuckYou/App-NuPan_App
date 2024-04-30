@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {StyleSheet, Text, View, Image, Button} from "react-native";
 import { FontSize, FontFamily, Color } from "../GlobalStyles";
 import { Camera } from 'expo-camera';
@@ -12,7 +11,7 @@ const QR = () => {
 
     useEffect(() => {
         (async () => {
-            const { status } = await Camera.requestPermissionsAsync();
+            const { status } = await Camera.requestCameraPermissionsAsync(); // 변경된 부분
             setHasPermission(status === 'granted');
         })();
     }, []);
@@ -46,37 +45,6 @@ const QR = () => {
         </Camera>
     );
 };
-
-// const QR = () => {
-//     const [hasPermission, setHasPermission] = useState(null); // 추가: 카메라 권한 상태 관리를 위한 state
-//
-//     // 추가: 컴포넌트가 마운트될 때 카메라 접근 권한을 요청하는 useEffect
-//     useEffect(() => {
-//         (async () => {
-//             const { status } = await Camera.requestPermissionsAsync(); // 카메라 접근 권한 요청
-//             setHasPermission(status === 'granted');
-//         })();
-//     }, []);
-//
-//     if (hasPermission === null) {
-//         return <View />; // 권한 요청 대기 중이면 아무것도 렌더링하지 않음
-//     }
-//     if (hasPermission === false) {
-//         return <Text>카메라 접근 권한이 없습니다.</Text>; // 권한 거부됨
-//     }
-//
-//     return (
-//         <View style={styles.qr}>
-//             <Camera style={styles.camera} type={Camera.Constants.Type.back} />
-//             <Image
-//                 style={styles.biqrCodeScanIcon}
-//                 contentFit="cover"
-//                 source={require('../assets/bi_qr-code-scan.png')}
-//             />
-//             <Text style={styles.qr1}>QR코드 스캔중..</Text>
-//         </View>
-//     );
-// };
 
 const styles = StyleSheet.create({
     biqrCodeScanIcon: {
