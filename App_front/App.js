@@ -24,8 +24,6 @@ import PAY from "./Screens/Payment/pay";
 import ID from "./Screens/ID";
 import Certification from "./Screens/Certification";
 
-import FindID from "./Screens/FindID"
-
 
 
 
@@ -122,11 +120,6 @@ const App = () => {
                                     name="PAY"
                                     component={PAY}
                                 />
-                                <RootStack.Screen
-                                    name="FindID"
-                                    component={FindID}
-                                    />
-
                             </RootStack.Navigator>
                     </NavigationContainer>
             </SafeAreaProvider>

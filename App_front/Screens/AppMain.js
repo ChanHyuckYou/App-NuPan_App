@@ -19,7 +19,7 @@ const AppMain = () => {
             <View style={[styles.view2, styles.view2Layout]}>
                 <TouchableOpacity
                     style={[styles.child, styles.childPosition]}
-                    onPress={() => navigation.navigate('Frame7')}>
+                    onPress={() => navigation.navigate('AppLogin')}>
                     {/* TouchableOpacity 내부에 View를 넣어도 되지만, 예시의 간결성을 위해 생략합니다. */}
                     <Text style={[styles.appNupan1, styles.appFlexBox]}>
                         App-nupan 로그인
