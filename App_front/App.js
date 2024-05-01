@@ -23,8 +23,7 @@ import SelectPayment from "./Screens/Payment/SelectPayment";
 import PAY from "./Screens/Payment/pay";
 import ID from "./Screens/ID";
 import Certification from "./Screens/Certification";
-import TestConfig from "./Screens/testConfig";
-import firebaseConfig from "./Screens/firebaseConfig";
+
 
 
 
@@ -42,7 +41,7 @@ const App = () => {
                                     >
 
                                 <RootStack.Screen
-                                    name="Frame"
+                                    name="AppMain"
                                     component={AppMain}
                                 />
                                 {/*<RootStack.Screen*/}
@@ -54,10 +53,6 @@ const App = () => {
                                     component={Certification}
                                 />
                                 <RootStack.Screen
-                                    name="TestConfig"
-                                    component={TestConfig}
-                                />
-                                <RootStack.Screen
                                     name="QR"
                                     component={QR}
                                 />
@@ -66,11 +61,11 @@ const App = () => {
                                     component={Frame1}
                                 />
                                 <RootStack.Screen
-                                    name="Frame2"
+                                    name="OrderCheck"
                                     component={OrderCheck}
                                 />
                                 <RootStack.Screen
-                                    name="Frame3"
+                                    name="OrderList"
                                     component={OrderList}
                                 />
                                 <RootStack.Screen
@@ -78,15 +73,15 @@ const App = () => {
                                     component={StaffCall}
                                 />
                                 <RootStack.Screen
-                                    name="Frame5"
+                                    name="OrderConfirm_pay"
                                     component={OrderConfirm_pay}
                                 />
                                 <RootStack.Screen
-                                    name="Frame6"
+                                    name="OrderConfirm_cash"
                                     component={OrderConfirm_cash}
                                 />
                                 <RootStack.Screen
-                                    name="Frame7"
+                                    name="AppLogin"
                                     component={AppLogin}
                                 />
                                 <RootStack.Screen
@@ -94,7 +89,7 @@ const App = () => {
                                     component={UserPage}
                                 />
                                 <RootStack.Screen
-                                    name="Frame9"
+                                    name="UsedStore"
                                     component={UsedStore}
                                 />
                                 <RootStack.Screen
@@ -102,15 +97,15 @@ const App = () => {
                                     component={Sign_In}
                                 />
                                 <RootStack.Screen
-                                    name="Frame11"
+                                    name="EmailCheck"
                                     component={EmailCheck}
                                 />
                                 <RootStack.Screen
-                                    name="Frame12"
+                                    name="Sign_InConfirm"
                                     component={Sign_InConfirm}
                                 />
                                 <RootStack.Screen
-                                    name="Frame13"
+                                    name="MenuPage"
                                     component={MenuPage}
                                 />
                                 <RootStack.Screen
@@ -125,7 +120,6 @@ const App = () => {
                                     name="PAY"
                                     component={PAY}
                                 />
-
                             </RootStack.Navigator>
                     </NavigationContainer>
             </SafeAreaProvider>
