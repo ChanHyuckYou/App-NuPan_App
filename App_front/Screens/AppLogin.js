@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     password1: {
         top: 10,
         left: 13,
-        color: Color.colorGray,
+        color: Color.colorBlack,
         width: 245,
         fontFamily: FontFamily.interLight,
         fontStyle: "italic",
@@ -218,6 +218,7 @@ const styles = StyleSheet.create({
     password: {
         top: 311,
         alignSelf: "center",
+
     },
     id1: {
         top: 239,

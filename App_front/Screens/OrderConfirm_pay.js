@@ -1,9 +1,11 @@
 import * as React from "react";
-import {Text, StyleSheet, View, SafeAreaView} from "react-native";
+import {Text, StyleSheet, View, SafeAreaView, TouchableOpacity} from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, Color, FontSize } from "../GlobalStyles";
+import {useNavigation} from "@react-navigation/native";
 
 const OrderConfirm_pay = () => {
+    const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.view}>
             <Text style={[styles.appNupan, styles.appTypo]}>App-nupan</Text>
@@ -22,16 +24,20 @@ const OrderConfirm_pay = () => {
                     결제가 완료되었습니다.
                 </Text>
             </View>
-            <View style={[styles.view2, styles.view2Layout]}>
+            <TouchableOpacity
+                onPress={navigation.navigate("UserPage")}
+                style={[styles.view2, styles.view2Layout]}>
                 <View style={[styles.child, styles.view2Layout]} />
                 <Text style={[styles.appNupan2, styles.textFlexBox]}>
                     App-nupan 홈으로
                 </Text>
-            </View>
-            <View style={[styles.view3, styles.itemLayout]}>
+            </TouchableOpacity>
+            <TouchableOpacity
+                onPress={navigation.navigate("MenuPage")}
+                style={[styles.view3, styles.itemLayout]}>
                 <View style={[styles.item, styles.itemLayout]} />
                 <Text style={[styles.text3, styles.textFlexBox]}>메뉴화면으로</Text>
-            </View>
+            </TouchableOpacity>
         </SafeAreaView>
     );
 };

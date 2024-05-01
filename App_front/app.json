@@ -15,14 +15,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "usesAppleSignIn": true,
+      "bundleIdentifier": "ios.build.example"
     },
     "android": {
-
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.chanhyuckyou.App_front"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,12 +38,19 @@
           },
           "ios": {
             "infoPlist": {
-              "NSAppTransportSecurity": { "NSAllowsArbitraryLoads": true }
+              "NSAppTransportSecurity": {
+                "NSAllowsArbitraryLoads": true
+              }
             },
             "supportsTablet": true
           }
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "0cd271e5-cb58-4033-bada-7722e878b787"
+      }
+    }
   }
 }

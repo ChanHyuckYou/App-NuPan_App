@@ -4,14 +4,16 @@ import { FontSize, FontFamily, Color } from "../GlobalStyles";
 import { Camera } from 'expo-camera';
 import {useEffect, useState} from "react";
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import {useNavigation} from "@react-navigation/native";
 
 const QR = () => {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
+    const navigation = useNavigation(); // useNavigation Hook 사용
 
     useEffect(() => {
         (async () => {
-            const { status } = await Camera.requestCameraPermissionsAsync(); // 변경된 부분
+            const { status } = await Camera.requestCameraPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
     }, []);
@@ -19,7 +21,9 @@ const QR = () => {
     const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true);
         alert(`QR 코드가 인식되었습니다! 유형: ${type}, 데이터: ${data}`);
-        // 여기서 필요한 로직을 추가할 수 있습니다. 예를 들어, 인식된 데이터를 다루는 방법 등
+        // QR 코드 스캔 후 지정된 스크린으로 이동하는 로직을 여기에 추가
+        // 예: navigation.navigate('Frame2');
+        navigation.navigate('Frame3'); // 'Frame2' 스크린으로 이동. 'Frame2'는 스택 내에 있어야 함.
     };
 
     if (hasPermission === null) {

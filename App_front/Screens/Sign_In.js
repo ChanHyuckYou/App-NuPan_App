@@ -17,17 +17,53 @@ const Sign_In = () => {
     const [userName, setuserName] = useState('');
     const [usercontact, setuserContact] = useState('');
 
-    // const [passwordConfirm, setPasswordConfirm] = useState('');
+    const [passwordConfirm, setPasswordConfirm] = useState('');
+    // 아이디 형식 검사 (영문자와 숫자만 허용)
+    const isValidId = id => /^[A-Za-z0-9]+$/.test(id);
 
-    // const handleSignUp = () => {
-    // 비밀번호와 비밀번호 확인이 일치하는지 확인
-    // if (password !== passwordConfirm) {
-    //     Alert.alert('비밀번호 오류', '비밀번호와 비밀번호 확인이 일치하지 않습니다.');
-    //     return;
-    // }
+    const passwordRegex = /^(?=.*[0-9]).{8,}$/;
+    // 한글 이름 무결성 검사
+    const isValidKoreanName = name => /^[가-힣]+$/.test(name);
+
+
+    // 중복확인 함수
+    const checkUserId = async () => {
+        try {
+            const response = await axios.get(`http://43.201.92.62/user/checkId`, {
+                params: {
+                    userid: userEmail
+                }
+            });
+
+            // 여기서는 예시로, 서버에 따라 응답 형태가 달라질 수 있습니다.
+            // 중복된 ID가 없을 경우의 로직입니다.
+            if (response.data.isAvailable) {
+                Alert.alert("사용 가능한 ID입니다.");
+            } else {
+                // 중복된 ID가 있을 경우의 로직입니다.
+                Alert.alert("이미 사용 중인 ID입니다.");
+            }
+
+        } catch (error) {
+            console.error("Axios Error:", error);
+            Alert.alert('오류', '중복 확인 중 오류가 발생했습니다.');
+        }
+    };
 
     // 사용자 정보를 서버로 전송
     const handleSignUp = async () => {
+        if (!isValidId(userId)){
+            Alert.alert('아이디 오류', '아이디는 영문자와 숫자만 포함할 수 있습니다.');
+            return;
+        }
+        if (userPwd !== passwordConfirm) {
+            Alert.alert('비밀번호 오류', '비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+            return;
+        }
+        if (!isValidKoreanName(userName)) {
+            Alert.alert('이름 오류', '이름은 한글만 포함할 수 있습니다.');
+            return;
+        }
         try {
             const response = await axios.post('http://43.201.92.62/user/register', {
                 userid: userEmail,
@@ -41,6 +77,7 @@ const Sign_In = () => {
             navigation.navigate('TestConfig');
             Alert.alert("회원가입에 성공하였습니다.")
         } catch (error) {
+
             if (error.response) {
                 // 서버로부터 응답을 받았지만 응답 코드가 에러인 경우
                 console.error("HTTP Error:", error.response.status, error.response.data);
@@ -77,7 +114,9 @@ const Sign_In = () => {
                     <View style={[styles.child, styles.childBorder]}/>
                     <TextInput style={[styles.text4, styles.textLayoutpwd]}
                                placeholder={"비밀번호 확인"}
+                               value={passwordConfirm}
                                secureTextEntry={true}
+                               onChangeText={setPasswordConfirm}
                     ></TextInput>
                 </View>
             </View>
@@ -92,10 +131,12 @@ const Sign_In = () => {
                         onChangeText={setuserEmail}>
                     </TextInput>
                 </View>
-                <View style={[styles.id1, styles.id1Layout]}>
+                <TouchableOpacity
+                    onPress={checkUserId}
+                    style={[styles.id1, styles.id1Layout]}>
                     <View style={[styles.idChild, styles.childPosition]}/>
                     <Text style={[styles.text5, styles.textTypo]}>중복확인</Text>
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.nicknameView}>
                 <Text style={[styles.text, styles.idTypo]}>이름</Text>
