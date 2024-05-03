@@ -1,5 +1,6 @@
 /* fonts */
 import * as Font from "expo-font";
+import {fontPercentage} from "./Screens/Window";
 
 export async function FontFamily()  {
     await Font.loadAsync({
@@ -16,16 +17,16 @@ export async function FontFamily()  {
 
 /* font sizes */
 export const FontSize = {
-    size_mini: 15,
-    size_8xl: 27,
-    size_sm: 14,
-    size_5xl: 24,
-    size_11xl: 30,
-    size_4xl: 23,
-    size_xl: 20,
-    size_lg: 18,
-    size_mid: 17,
-    size_6xl: 25,
+    size_mini: fontPercentage(15),
+    size_8xl: fontPercentage(27),
+    size_sm: fontPercentage(14),
+    size_5xl: fontPercentage(24),
+    size_11xl: fontPercentage(30),
+    size_4xl: fontPercentage(23),
+    size_xl: fontPercentage(20),
+    size_lg: fontPercentage(18),
+    size_mid: fontPercentage(17),
+    size_6xl: fontPercentage(25),
 };
 /* Colors */
 export const Color = {

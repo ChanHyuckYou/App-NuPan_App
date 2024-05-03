@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
         borderColor: Color.colorOrangered,
         borderWidth: 3,
         top: topPercentage(0), // 기존에 고정값으로 사용되던 top: 50 대신
+        // top: 0,
         left: leftPercentage(0),
         backgroundColor: Color.colorWhite,
     },
