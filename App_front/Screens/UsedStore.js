@@ -1,15 +1,28 @@
 import * as React from "react";
-import {StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from "react-native";
+import {StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Platform} from "react-native";
 import { Image } from "expo-image";
 import { Color, FontSize, FontFamily } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
-import {ScrollView} from "native-base";
+import {ScrollView, StatusBar} from "native-base";
 import {useEffect, useState} from "react";
+import * as PropTypes from "prop-types";
+import { widthPercentage, heightPercentage, fontPercentage } from "./Window"
 
-const UsedStore = () => {
+function NavigationBar(props) {
+    return null;
+}
+
+
+NavigationBar.propTypes = {children: PropTypes.node};
+const UsedStore = ({route}) => {
     const [stores, setStores] = useState([]); // 서버로부터 받은 가게 목록을 저장할 상태
 
     const navigation = useNavigation();
+
+
+
+
+    // const { userEmail } = route.params;
 
     useEffect(() => {
         fetchStores();
@@ -35,7 +48,8 @@ const UsedStore = () => {
     };
 
     return (
-        <SafeAreaView style={styles.view}>
+        <View flex={1}>
+            <StatusBar barStyle="light-content" />
             <View style={styles.view1Position}>
                 <View style={[styles.child, styles.view1Position]} />
                 <Text style={styles.text}>내가 들렀던 가게</Text>
@@ -66,7 +80,7 @@ const UsedStore = () => {
                     </TouchableOpacity>
                 ))}
             </ScrollView>
-        </SafeAreaView>
+        </View>
     );
 };
 
@@ -75,17 +89,16 @@ const styles = StyleSheet.create({
         height: 70,
         width: "100%",
         left: 0,
-        top: 0,
-        position: "absolute",
+        position: "relative",
     },
     viewLayout: {
         height: 141,
         width: "100%",
         left: 0,
-        position: "absolute",
+        position: "relative",
     },
     textPosition: {
-        left: 180,
+        left: 185,
         textAlign: "left",
         fontStyle: "italic",
         color: Color.colorBlack,
@@ -184,8 +197,9 @@ const styles = StyleSheet.create({
     },
     view: {
         flex: 1,
-        width: "100%",
-        height: 800,
+        paddingTop: 50,
+        width: widthPercentage(360),
+        height: heightPercentage(800),
         overflow: "hidden",
         backgroundColor: Color.colorWhite,
     },

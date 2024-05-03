@@ -52,7 +52,7 @@ const Sign_In = () => {
 
     // 사용자 정보를 서버로 전송
     const handleSignUp = async () => {
-        if (!isValidId(userId)){
+        if (!isValidId(userEmail)){
             Alert.alert('아이디 오류', '아이디는 영문자와 숫자만 포함할 수 있습니다.');
             return;
         }
@@ -74,7 +74,7 @@ const Sign_In = () => {
             });
 
             // 성공적으로 회원가입이 완료되면, 로그인 화면이나 메인 화면으로 이동
-            navigation.navigate('TestConfig');
+            navigation.navigate('Sign_InConfrim');
             Alert.alert("회원가입에 성공하였습니다.")
         } catch (error) {
 

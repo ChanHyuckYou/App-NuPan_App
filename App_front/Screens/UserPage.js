@@ -3,9 +3,13 @@ import {Text, StyleSheet, View, TouchableOpacity, SafeAreaView} from "react-nati
 import { Image } from "expo-image";
 import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
 import {useNavigation} from "@react-navigation/native";
+import {heightPercentage, widthPercentage} from "./Window";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const UserPage = () => {
+const UserPage =  ({route}) => {
+    // const userEmail = await AsyncStorage.getItem('userEmail');
     const navigation = useNavigation();
+    const { userEmail } = route.params;
     return (
         <SafeAreaView style={styles.view}>
             <Text style={styles.appNupan}>App-nupan</Text>
@@ -27,9 +31,9 @@ const UserPage = () => {
             <Text style={[styles.text, styles.textLayout]}>
                 내가 이용했던 가게가 궁금하다면?
             </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Frame9')}>
+            <TouchableOpacity onPress={() => navigation.navigate('UsedStore')}>
                 <View style={[styles.view1, styles.view1Layout]}>
-                    <View style={[styles.child, styles.view1Layout]} />
+                    <View style={[styles.child, styles.view1Layout]}/>
                     <Image
                         style={[styles.mingcuteshopFillIcon, styles.iconLayout1]}
                         contentFit="cover"
@@ -43,7 +47,8 @@ const UserPage = () => {
                     contentFit="cover"
                     source={require("../assets/userpro.png")}
                 />
-                <Text style={[styles.userName, styles.text3Position]}>User_name</Text>
+                <Text
+                    style={[styles.userName, styles.text3Position]}>{userEmail}</Text>
                 <Text style={[styles.text2, styles.textTypo]}>님</Text>
                 <Text style={[styles.text3, styles.text3Position]}>환영합니다.</Text>
             </View>
@@ -206,9 +211,9 @@ const styles = StyleSheet.create({
     },
     view: {
         backgroundColor: Color.colorWhite,
-        flex: 1,
-        width: "100%",
-        height: 800,
+        // flex: 1,
+        width: widthPercentage(360),
+        height: heightPercentage(800),
         overflow: "hidden",
     },
 });

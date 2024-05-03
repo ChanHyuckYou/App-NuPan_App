@@ -36,7 +36,7 @@ const AppLogin = () => {
                         if (resp.data !== null && resp.data !== "") {
                             console.log("로그인 성공");
                             // 로그인 성공 후
-                            // AsyncStorage.setItem('userEmail', userEmail);
+                            AsyncStorage.setItem('userEmail', userEmail);
                             navigation.navigate('UserPage', { userEmail: userEmail });
                         } else {
                             Alert.alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
