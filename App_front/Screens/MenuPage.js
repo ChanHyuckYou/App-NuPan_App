@@ -1,18 +1,57 @@
 import * as React from "react";
-import {StyleSheet, View, Text, TouchableOpacity, SafeAreaView} from "react-native";
-import {Image} from "expo-image";
+import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, ScrollView, Image } from "react-native";
 import {Color, FontFamily, FontSize, Border} from "../GlobalStyles";
-import {useState} from "react";
-import {useNavigation} from "@react-navigation/native";
+import {useEffect, useState} from "react";
+import {useNavigation, useRoute} from "@react-navigation/native";
+import axios from "axios";
 
-const MenuPage = () => {
+const MenuPage = ({  }) => {
     const navigation = useNavigation();
-    const [showDetails, setShowDetails] = useState(false); // 상세 정보 표시 여부를 관리하는 상태
+    const route = useRoute();
+    const { storeid, tableidx } = route.params;
+    const [showDetails, setShowDetails] = useState(false);
+    const [menuItems, setMenuItems] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                console.log("ownerid : ",storeid,"테이블넘버 :", tableidx)
+                const response = await axios.post('http://43.201.92.62/order/scan', {
+                    ownerid: storeid,
+                    tablenumber: tableidx
+                });
+                console.log("서버 응답 데이터:", response.data); // 응답 데이터 확인
+                setMenuItems(response.data?.menu_items || []);
+            } catch (error) {
+                console.error("메뉴를 불러오는 중 오류가 발생했습니다!", error);
+            }
+        };
+
+        fetchData();
+    }, [storeid, tableidx]);
+
+
+    const handleItemPress = (item) => {
+        setSelectedItem(item);
+        setShowDetails(true);
+    };
+
+    const handleCancel = () => {
+        setShowDetails(false);
+        setSelectedItem(null);
+    };
+
+    const handleAddToOrder = () => {
+        navigation.navigate('OrderCheck', { item: selectedItem });
+        setShowDetails(false);
+    };
     return (
         <SafeAreaView style={styles.view}>
+
             <View style={[styles.view1, styles.viewLayout3]}>
                 <TouchableOpacity onPress={() => navigation.navigate('StaffCall')}>
-                    <View style={[styles.child, styles.itemBorder]}/>
+                    <View style={[styles.child, styles.itemBorder]} />
                     <Text style={[styles.text, styles.textTypo5]}>직원호출</Text>
                     <Image
                         style={[styles.fa6SolidbellConciergeIcon, styles.iconLayout]}
@@ -22,7 +61,7 @@ const MenuPage = () => {
                 </TouchableOpacity>
             </View>
             <View style={[styles.view2, styles.itemLayout]}>
-                <View style={[styles.item, styles.itemLayout]}/>
+                <View style={[styles.item, styles.itemLayout]} />
                 <Text style={[styles.text1, styles.textTypo6]}>주문확정</Text>
                 <Image
                     style={[styles.solarbag5BoldIcon, styles.iconLayout]}
@@ -31,8 +70,8 @@ const MenuPage = () => {
                 />
             </View>
             <View style={[styles.view3, styles.viewLayout3]}>
-                <TouchableOpacity onPress={() => navigation.navigate('Frame3')}>
-                    <View style={[styles.child, styles.itemBorder]}/>
+                <TouchableOpacity onPress={() => navigation.navigate('OrderList')}>
+                    <View style={[styles.child, styles.itemBorder]} />
                     <Image
                         style={[styles.ionreceiptIcon, styles.iconLayout]}
                         contentFit="cover"
@@ -41,21 +80,26 @@ const MenuPage = () => {
                     <Text style={[styles.text2, styles.textTypo5]}>주문현황</Text>
                 </TouchableOpacity>
             </View>
+            <View style={[styles.view18, styles.viewPosition]}>
+                <View style={[styles.child3, styles.viewPosition]}/>
+                <Text style={[styles.text15, styles.textTypo2]}>{storeid}</Text>
+                <Text style={[styles.text16, styles.textTypo2]}>{tableidx}</Text>
+            </View>
 
-            {/* 메뉴 클릭 시 상세 정보 표시를 위한 TouchableOpacity 추가 */}
-            <View style={[styles.view4, styles.viewPosition]}>
-                <TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
-                    <View style={[styles.view9, styles.viewLayout2]}>
-                        <View style={[styles.rectangleView, styles.viewLayout2]}/>
-                        <Text style={[styles.text3, styles.textTypo4]}>아메리카노</Text>
-                        <Text style={[styles.text4, styles.textTypo4]}>더보기..</Text>
-                        <Text style={[styles.text5, styles.textTypo6]}>8,000 ₩</Text>
-
-                        <Image source={require("../assets/cofffefe.png")}
-                               style={[styles.view6, styles.view6Layout]}/>
-
-                    </View>
-                </TouchableOpacity>
+            <View style={styles.menuList}>
+                <ScrollView>
+                {menuItems.map(item => (
+                    <TouchableOpacity key={item.productid} onPress={() => handleItemPress(item)} style={styles.menuItem}>
+                        <View style={styles.menuItemContent}>
+                            <Image source={{ uri: item.imageurl }} style={styles.menuItemImage} />
+                            <View style={styles.menuItemText}>
+                                <Text style={styles.menuItemTitle}>{item.productname}</Text>
+                                <Text style={styles.menuItemPrice}>{item.price} ₩</Text>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                ))}
+                </ScrollView>
             </View>
             <View style={[styles.view11, styles.viewLayout1]}>
                 <View style={[styles.view12, styles.viewLayout1]}>
@@ -71,38 +115,23 @@ const MenuPage = () => {
                     <Text style={[styles.text14, styles.textTypo3]}>추천메뉴</Text>
                 </View>
             </View>
-            <View style={[styles.view18, styles.viewPosition]}>
-                <View style={[styles.child3, styles.viewPosition]}/>
-                <Text style={[styles.text15, styles.textTypo2]}>매장이름</Text>
-                <Text style={[styles.text16, styles.textTypo2]}>(번호)</Text>
-            </View>
-            {showDetails && (
-                <View style={[styles.rectangleParent, styles.groupChildLayout]}>
-                    <View style={[styles.groupChild, styles.groupChildLayout]}/>
-                    <Text style={[styles.text17, styles.textTypo1]}>아이스 아메리카노</Text>
 
-                    <TouchableOpacity style={[styles.groupItem, styles.groupLayout]}
-                                      onPress={() => setShowDetails(false)}>
-                        <Text style={[styles.textTypo]}>취소</Text>
-                    </TouchableOpacity>
-
-
-                    <TouchableOpacity style={[styles.groupInner, styles.groupLayout]}
-                                      onPress={() => navigation.navigate('Frame2')}>
-                        <Text style={[styles.textTypo]}>담기</Text>
-                    </TouchableOpacity>
-
-                    <Image
-                        style={[styles.image1Icon, styles.view6Layout]}
-                        contentFit="cover"
-                        source={require("../assets/testcoffee.png")}
-                    />
-                    <Text style={[styles.text20, styles.textTypo1]}>
-                        “아메리카노는 에스프레소의 진한 풍미를 잘 느낄 수 있는 음료입니다. ”
-                        아메리카노는 에스프레소 샷 두 개를 추출하여 바로 컵에 붓고, 그 위에
-                        뜨거운 물을 재빠르게 부어 얇은 크레마 층이 형성되는 음료입니다.
-                    </Text>
-                    <Text style={styles.text21}>8,000₩</Text>
+            {showDetails && selectedItem && (
+                <View style={styles.detailView}>
+                    <View style={styles.detailContent}>
+                        <Image source={{ uri: selectedItem.imageurl }} style={styles.detailImage} />
+                        <Text style={styles.detailTitle}>{selectedItem.productname}</Text>
+                        <Text style={styles.detailDescription}>{selectedItem.description}</Text>
+                        <Text style={styles.detailPrice}>{selectedItem.price} ₩</Text>
+                        <View style={styles.detailButtons}>
+                            <TouchableOpacity onPress={handleCancel} style={styles.detailButton}>
+                                <Text style={styles.detailButtonText}>취소</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={handleAddToOrder} style={styles.detailButton}>
+                                <Text style={styles.detailButtonText}>담기</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
                 </View>
             )}
         </SafeAreaView>
@@ -114,21 +143,6 @@ const styles = StyleSheet.create({
         height: 73,
         position: "absolute",
         width: 118,
-    },
-    itemBorder: {
-        borderWidth: 1,
-        borderStyle: "solid",
-        top: 0,
-    },
-    textTypo5: {
-        height: 20,
-        width: 82,
-        textAlign: "center",
-        color: Color.colorBlack,
-        fontFamily: FontFamily.interBold,
-        fontWeight: "700",
-        fontSize: FontSize.size_xl,
-        position: "absolute",
     },
     iconLayout: {
         height: 30,
@@ -239,10 +253,6 @@ const styles = StyleSheet.create({
     text: {
         top: 43,
         left: 19,
-    },
-    fa6SolidbellConciergeIcon: {
-        top: 8,
-        left: 45,
     },
     view1: {
         alignSelf: "flex-end",
@@ -450,12 +460,128 @@ const styles = StyleSheet.create({
         left: 38,
         height: 409,
     },
+    menuList: {
+        flex: 1,
+        padding: 10,
+        marginTop: 100,
+    },
     view: {
         flex: 1,
         width: "100%",
-        height: 800,
+        backgroundColor: "#fff",
+    },
+    menuButton: {
+        height: 73,
+        width: 118,
+        marginBottom: 10,
+    },
+    itemBorder: {
+        borderWidth: 1,
+        borderColor: "#000",
+        backgroundColor: "#dcdcdc",
+        height: 73,
+    },
+    textTypo5: {
+        textAlign: "center",
+        color: "#000",
+        fontFamily: "Inter-Bold",
+        fontWeight: "700",
+        fontSize: 20,
+    },
+    fa6SolidbellConciergeIcon: {
+        height: 30,
+        width: 30,
         overflow: "hidden",
-        backgroundColor: Color.colorWhite,
+    },
+    menuItem: {
+        marginBottom: 15,
+    },
+    menuItemContent: {
+        flexDirection: "row",
+        borderWidth: 1,
+        borderColor: "#d3d3d3",
+        padding: 10,
+        borderRadius: 10,
+    },
+    menuItemImage: {
+        width: 80,
+        height: 80,
+        marginRight: 10,
+    },
+    menuItemText: {
+        flex: 1,
+        justifyContent: "center",
+    },
+    menuItemTitle: {
+        fontSize: 16,
+        fontWeight: "bold",
+    },
+    menuItemPrice: {
+        marginTop: 5,
+        color: "#888",
+    },
+    tabBar: {
+        height: 50,
+        flexDirection: "row",
+        justifyContent: "space-around",
+        backgroundColor: "#f5f5f5",
+        borderTopWidth: 1,
+        borderColor: "#d3d3d3",
+    },
+    tabItem: {
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    tabText: {
+        fontSize: 16,
+    },
+    detailView: {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    detailContent: {
+        width: 300,
+        backgroundColor: "#fff",
+        padding: 20,
+        borderRadius: 10,
+    },
+    detailImage: {
+        width: "100%",
+        height: 200,
+        marginBottom: 10,
+    },
+    detailTitle: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 10,
+    },
+    detailDescription: {
+        fontSize: 16,
+        color: "#666",
+        marginBottom: 10,
+    },
+    detailPrice: {
+        fontSize: 18,
+        color: "#000",
+        marginBottom: 20,
+    },
+    detailButtons: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+    },
+    detailButton: {
+        padding: 10,
+        borderRadius: 5,
+        backgroundColor: "#dcdcdc",
+    },
+    detailButtonText: {
+        fontSize: 16,
     },
 });
 

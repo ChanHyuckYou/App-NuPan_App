@@ -12,34 +12,22 @@ const OrderList = () => {
             <View style={styles.view1}>
                 <View style={[styles.child, styles.itemBorder]}/>
                 <Text style={[styles.text, styles.textTypo4]}>합계</Text>
-                <Text style={[styles.text1, styles.textTypo4]}>15,000₩</Text>
+                <Text style={[styles.text1, styles.textTypo4]}>8,000₩</Text>
             </View>
             <View style={[styles.view2, styles.viewPosition]}>
                 <View style={[styles.view3, styles.viewLayout1]}>
                     <View style={[styles.item, styles.viewLayout1]}/>
-                    <Text style={[styles.text2, styles.textTypo3]}>메뉴4 이름</Text>
-                    <Text style={[styles.text3, styles.textTypo1]}>7,000₩</Text>
+                    <Text style={[styles.text2, styles.textTypo3]}>아메리카노</Text>
+                    <Text style={[styles.text3, styles.textTypo1]}>8,000₩</Text>
                     <Text style={[styles.text13, styles.textTypo]}>결제완료</Text>
-                </View>
-                <View style={[styles.view4, styles.viewLayout1]}>
-                    <View style={[styles.item, styles.viewLayout1]}/>
-                    <Text style={[styles.text2, styles.textTypo3]}>메뉴6 이름</Text>
-                    <Text style={[styles.text5, styles.textTypo1]}>8,000₩</Text>
-                    <Text style={[styles.text14, styles.textTypo]}>추후결제</Text>
                 </View>
                 <Text style={[styles.text6, styles.textPosition]}>주문완료된 메뉴</Text>
             </View>
             <View style={[styles.view5, styles.viewPosition]}>
-                <View style={[styles.view6, styles.viewLayout]}>
-                    <View style={[styles.rectangleView, styles.viewLayout]}/>
-                    <View style={styles.child1}/>
-                    <Text style={[styles.text7, styles.textTypo2]}>메뉴2 이름</Text>
-                    <Text style={[styles.text8, styles.textTypo2]}>7,000₩</Text>
-                </View>
                 <View style={[styles.view7, styles.viewLayout]}>
                     <View style={[styles.rectangleView, styles.viewLayout]}/>
                     <View style={styles.child1}/>
-                    <Text style={[styles.text7, styles.textTypo2]}>메뉴1 이름</Text>
+                    <Text style={[styles.text7, styles.textTypo2]}>아메리카노</Text>
                     <Text style={[styles.text8, styles.textTypo2]}>8,000₩</Text>
                 </View>
                 <Text style={[styles.text11, styles.textPosition]}>선택한 메뉴</Text>

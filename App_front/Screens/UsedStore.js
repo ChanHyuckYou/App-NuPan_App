@@ -67,12 +67,12 @@ const UsedStore = ({route}) => {
                 {stores.map((store, index) => (
                     <TouchableOpacity
                         key={index}
-                        onPress={() => navigation.navigate('Frame13')}>
+                        onPress={() => navigation.navigate('MenuPage', { storename: store.storename })}>
                         <View style={[styles.view3, styles.viewLayout]}>
                             <View style={[styles.item, styles.viewLayout]} />
                             <View style={styles.view4} />
                             <Text style={[styles.text2, styles.textPosition]}>{store.storename}</Text>
-                            <Text style={[styles.text3, styles.textPosition]}>{store.storeid}</Text>
+                            <Text style={[styles.text3, styles.textPosition]}>{store.ownerid}</Text>
                             <Text
                                 style={[styles.text4, styles.textPosition]}
                             >{`가게주소 - ${store.address}`}</Text>

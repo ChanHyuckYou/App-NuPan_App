@@ -1,7 +1,7 @@
 import * as React from "react";
 import {StyleSheet, Text, View, Image, Button} from "react-native";
 import { FontSize, FontFamily, Color } from "../GlobalStyles";
-import { Camera } from 'expo-camera';
+import { Camera } from 'expo-camera/legacy';
 import {useEffect, useState} from "react";
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import {useNavigation} from "@react-navigation/native";
@@ -21,9 +21,16 @@ const QR = () => {
     const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true);
         alert(`QR 코드가 인식되었습니다! 유형: ${type}, 데이터: ${data}`);
-        // QR 코드 스캔 후 지정된 스크린으로 이동하는 로직을 여기에 추가
-        // 예: navigation.navigate('Frame2');
-        navigation.navigate('Frame3'); // 'Frame2' 스크린으로 이동. 'Frame2'는 스택 내에 있어야 함.
+        // 데이터 분리 로직 추가
+        const [storeid, tableidx] = data.split("-");
+
+        // 예시: storeid와 tableidx를 콘솔에 출력
+        console.log(`매장 ID: ${storeid}, 테이블 인덱스: ${tableidx}`);
+
+        // 필요한 로직에 따라 storeid와 tableidx 사용
+        // 예를 들어, 이 값을 상태에 저장하거나, 다른 컴포넌트로 전달할 수 있습니다.
+
+        navigation.navigate('MenuPage', { storeid, tableidx });
     };
 
     if (hasPermission === null) {

@@ -60,10 +60,10 @@ const Sign_In = () => {
             Alert.alert('비밀번호 오류', '비밀번호와 비밀번호 확인이 일치하지 않습니다.');
             return;
         }
-        if (!isValidKoreanName(userName)) {
-            Alert.alert('이름 오류', '이름은 한글만 포함할 수 있습니다.');
-            return;
-        }
+        // if (!isValidKoreanName(userName)) {
+        //     Alert.alert('이름 오류', '이름은 한글만 포함할 수 있습니다.');
+        //     return;
+        // }
         try {
             const response = await axios.post('http://43.201.92.62/user/register', {
                 userid: userEmail,

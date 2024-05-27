@@ -31,6 +31,7 @@
     },
     "plugins": [
       [
+
         "expo-build-properties",
         {
           "android": {
@@ -45,7 +46,8 @@
             "supportsTablet": true
           }
         }
-      ]
+      ],
+      "expo-font"
     ],
     "extra": {
       "eas": {
