@@ -8,7 +8,7 @@ import axios from "axios";
 const MenuPage = ({  }) => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { storeid, tableidx } = route.params;
+    const { ownerid, tableidx } = route.params;
     const [showDetails, setShowDetails] = useState(false);
     const [menuItems, setMenuItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -17,9 +17,9 @@ const MenuPage = ({  }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log("ownerid : ",storeid,"테이블넘버 :", tableidx)
+                console.log("ownerid : ",ownerid,"테이블넘버 :", tableidx)
                 const response = await axios.post('http://43.201.92.62/order/scan', {
-                    ownerid: storeid,
+                    ownerid: ownerid,
                     tablenumber: tableidx
                 });
                 setMenuItems(response.data?.menu_items || []);
@@ -29,7 +29,7 @@ const MenuPage = ({  }) => {
         };
 
         fetchData();
-    }, [storeid, tableidx]);
+    }, [ownerid, tableidx]);
 
 
     const handleItemPress = (item) => {

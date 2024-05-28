@@ -23,7 +23,8 @@ const OrderCheck = () => {
 
     // SelectPayment로 이동할 때 현재 상태를 전달
     const handleSelectPayment = () => {
-        navigation.navigate('SelectPayment', { orderList });
+        navigation.navigate('SelectPayment', { totalPrice });
+        console.log("보낸 금액: ",totalPrice)
     };
     return (
         <SafeAreaView style={styles.view}>

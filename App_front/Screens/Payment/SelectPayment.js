@@ -3,16 +3,20 @@ import {Text, StyleSheet, View, TouchableOpacity} from "react-native";
 import { Image } from "expo-image";
 import { FontSize, Color, FontFamily } from "../../GlobalStyles";
 import {useState} from "react";
-import {useNavigation} from "@react-navigation/native";
+import {useNavigation, useRoute} from "@react-navigation/native";
 
 const SelectPayment  = ({}) => {
     const [PaymentType, setPaymentType] = useState('');
+    const route = useRoute();
+    const { totalPrice } = route.params;
     const navigation = useNavigation();
     const handlePaymentType = (type) => {
         setPaymentType(type);
-        console.log(PaymentType);
-        navigation.navigate("PAY",  {payType: type}, {usercode: type});
+        console.log(type);  // PaymentType 대신 type을 출력
+        navigation.navigate("PAY", { payType: type, totalPrice: totalPrice });
+        console.log("보내는 금액 : ", totalPrice);
     };
+
     return (
         <View style={styles.view}>
             <Text style={styles.appNupan}>App-nupan</Text>

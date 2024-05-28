@@ -21,17 +21,27 @@ const QR = () => {
     const handleBarCodeScanned = ({ type, data }) => {
         setScanned(true);
         alert(`QR 코드가 인식되었습니다! 유형: ${type}, 데이터: ${data}`);
-        // 데이터 분리 로직 추가
-        const [storeid, tableidx] = data.split("-");
 
-        // 예시: storeid와 tableidx를 콘솔에 출력
-        console.log(`매장 ID: ${storeid}, 테이블 인덱스: ${tableidx}`);
+        // URL에서 필요한 부분 추출
+        const regex = /\/qr\/_([^_]+)_([^\.]+)\.png$/;
+        const match = data.match(regex);
 
-        // 필요한 로직에 따라 storeid와 tableidx 사용
-        // 예를 들어, 이 값을 상태에 저장하거나, 다른 컴포넌트로 전달할 수 있습니다.
+        if (match) {
+            const ownerid = match[1];
+            const tableidx = match[2];
 
-        navigation.navigate('MenuPage', { storeid, tableidx });
+            console.log(`매장 ID: ${ownerid}, 테이블 인덱스: ${tableidx}`);
+
+            // 필요한 로직에 따라 ownerid와 tableidx 사용
+            // 예를 들어, 이 값을 상태에 저장하거나, 다른 컴포넌트로 전달할 수 있습니다.
+
+            navigation.navigate('MenuPage', { ownerid, tableidx });
+        } else {
+            console.log("URL 형식이 올바르지 않습니다.");
+        }
     };
+
+
 
     if (hasPermission === null) {
         return null;
