@@ -12,6 +12,7 @@ const MenuPage = ({  }) => {
     const [showDetails, setShowDetails] = useState(false);
     const [menuItems, setMenuItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [orderList, setOrderList] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,7 +22,6 @@ const MenuPage = ({  }) => {
                     ownerid: storeid,
                     tablenumber: tableidx
                 });
-                console.log("서버 응답 데이터:", response.data); // 응답 데이터 확인
                 setMenuItems(response.data?.menu_items || []);
             } catch (error) {
                 console.error("메뉴를 불러오는 중 오류가 발생했습니다!", error);
@@ -43,8 +43,12 @@ const MenuPage = ({  }) => {
     };
 
     const handleAddToOrder = () => {
-        navigation.navigate('OrderCheck', { item: selectedItem });
+        setOrderList([...orderList, selectedItem]);
         setShowDetails(false);
+    };
+
+    const handleOrderCheck = () => {
+        navigation.navigate('OrderCheck', { orderList });
     };
     return (
         <SafeAreaView style={styles.view}>
@@ -82,7 +86,8 @@ const MenuPage = ({  }) => {
             </View>
             <View style={[styles.view18, styles.viewPosition]}>
                 <View style={[styles.child3, styles.viewPosition]}/>
-                <Text style={[styles.text15, styles.textTypo2]}>{storeid}</Text>
+                <Text style={[styles.text15, styles.textTypo2]}>{}</Text>
+
                 <Text style={[styles.text16, styles.textTypo2]}>{tableidx}</Text>
             </View>
 
@@ -115,6 +120,9 @@ const MenuPage = ({  }) => {
                     <Text style={[styles.text14, styles.textTypo3]}>추천메뉴</Text>
                 </View>
             </View>
+            <TouchableOpacity style={styles.orderCheckButton} onPress={handleOrderCheck}>
+                <Text style={styles.orderCheckButtonText}>주문확정</Text>
+            </TouchableOpacity>
 
             {showDetails && selectedItem && (
                 <View style={styles.detailView}>
@@ -467,8 +475,7 @@ const styles = StyleSheet.create({
     },
     view: {
         flex: 1,
-        width: "100%",
-        backgroundColor: "#fff",
+        backgroundColor: Color.colorWhite,
     },
     menuButton: {
         height: 73,
@@ -582,6 +589,17 @@ const styles = StyleSheet.create({
     },
     detailButtonText: {
         fontSize: 16,
+    },
+    orderCheckButton: {
+        padding: 10,
+        backgroundColor: '#4097e8',
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    orderCheckButtonText: {
+        color: 'white',
+        fontSize: 20,
+        fontWeight: 'bold',
     },
 });
 

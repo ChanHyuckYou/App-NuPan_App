@@ -36,10 +36,7 @@ const Payment = ({ route }) => {
                     }),
                 });
                 const data = await response.json();
-
-                // 서버로부터 응답 처리
                 console.log(data);
-
             } catch(error) {
                 console.error('결제 정보 전송 실패:', error);
             }

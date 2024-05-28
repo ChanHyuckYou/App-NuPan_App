@@ -21,7 +21,6 @@ const UsedStore = ({route}) => {
 
 
 
-
     // const { userEmail } = route.params;
 
     useEffect(() => {
