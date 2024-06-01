@@ -4,6 +4,7 @@ import {Color, FontFamily, FontSize, Border} from "../GlobalStyles";
 import {useEffect, useState} from "react";
 import {useNavigation, useRoute} from "@react-navigation/native";
 import axios from "axios";
+import {topPercentage, widthPercentage} from "./Window";
 
 const MenuPage = ({  }) => {
     const navigation = useNavigation();
@@ -55,43 +56,25 @@ const MenuPage = ({  }) => {
     };
     return (
         <SafeAreaView style={styles.view}>
-
-            <View style={[styles.view1, styles.viewLayout3]}>
-                <TouchableOpacity onPress={() => navigation.navigate('StaffCall')}>
-                    <View style={[styles.child, styles.itemBorder]} />
-                    <Text style={[styles.text, styles.textTypo5]}>직원호출</Text>
-                    <Image
-                        style={[styles.fa6SolidbellConciergeIcon, styles.iconLayout]}
-                        contentFit="cover"
-                        source={require("../assets/fa6-solid_bell-concierge.png")}
-                    />
-                </TouchableOpacity>
-            </View>
-            <View style={[styles.view2, styles.itemLayout]}>
-                <View style={[styles.item, styles.itemLayout]} />
-                <Text style={[styles.text1, styles.textTypo6]}>주문확정</Text>
-                <Image
-                    style={[styles.solarbag5BoldIcon, styles.iconLayout]}
-                    contentFit="cover"
-                    source={require("../assets/ion_receipt.png")}
-                />
-            </View>
-            <View style={[styles.view3, styles.viewLayout3]}>
-                <TouchableOpacity onPress={() => navigation.navigate('OrderList' )}>
-                    <View style={[styles.child, styles.itemBorder]} />
-                    <Image
-                        style={[styles.ionreceiptIcon, styles.iconLayout]}
-                        contentFit="cover"
-                        source={require("../assets/jumoon.png")}
-                    />
-                    <Text style={[styles.text2, styles.textTypo5]}>주문현황</Text>
-                </TouchableOpacity>
-            </View>
             <View style={[styles.view18, styles.viewPosition]}>
                 <View style={[styles.child3, styles.viewPosition]}/>
                 <Text style={[styles.text15, styles.textTypo2]}>{}</Text>
 
                 <Text style={[styles.text16, styles.textTypo2]}>{tableidx}</Text>
+            </View>
+            <View style={[styles.view11]}>
+                <View style={[styles.view16, styles.viewLayout1]}>
+                    <View style={[styles.view17, styles.viewLayout]}/>
+                    <Text style={[styles.text14, styles.textTypo3]}>추천메뉴</Text>
+                </View>
+                <View style={[styles.view14, styles.viewLayout1]}>
+                    <View style={styles.viewLayout}/>
+                    <Text style={[styles.text12, styles.textTypo3]}>주메뉴</Text>
+                </View>
+                <View style={[styles.view12, styles.viewLayout1]}>
+                    <View style={styles.viewLayout}/>
+                    <Text style={[styles.text12, styles.textTypo3]}>사이드</Text>
+                </View>
             </View>
 
             <View style={styles.menuList}>
@@ -109,20 +92,7 @@ const MenuPage = ({  }) => {
                 ))}
                 </ScrollView>
             </View>
-            <View style={[styles.view11, styles.viewLayout1]}>
-                <View style={[styles.view12, styles.viewLayout1]}>
-                    <View style={styles.viewLayout}/>
-                    <Text style={[styles.text12, styles.textTypo3]}>사이드</Text>
-                </View>
-                <View style={[styles.view14, styles.viewLayout1]}>
-                    <View style={styles.viewLayout}/>
-                    <Text style={[styles.text12, styles.textTypo3]}>주메뉴</Text>
-                </View>
-                <View style={[styles.view16, styles.viewLayout1]}>
-                    <View style={[styles.view17, styles.viewLayout]}/>
-                    <Text style={[styles.text14, styles.textTypo3]}>추천메뉴</Text>
-                </View>
-            </View>
+
             <TouchableOpacity style={styles.orderCheckButton} onPress={handleOrderCheck}>
                 <Text style={styles.orderCheckButtonText}>주문확정</Text>
             </TouchableOpacity>
@@ -145,6 +115,9 @@ const MenuPage = ({  }) => {
                     </View>
                 </View>
             )}
+            <TouchableOpacity onPress={() => navigation.navigate("StaffCall")} style={styles.callButton}>
+                <Text style={styles.callText}>직원호출</Text>
+            </TouchableOpacity>
         </SafeAreaView>
     );
 };
@@ -198,7 +171,8 @@ const styles = StyleSheet.create({
     },
     viewLayout1: {
         height: 53,
-        position: "absolute",
+        marginRight: 10,
+        position: "relative",
     },
     textTypo3: {
         height: 33,
@@ -362,12 +336,10 @@ const styles = StyleSheet.create({
         width: 93,
     },
     view12: {
-        left: 240,
         top: 0,
         width: 118,
     },
     view14: {
-        left: 120,
         top: 0,
         width: 118,
     },
@@ -382,18 +354,22 @@ const styles = StyleSheet.create({
         width: 87,
     },
     view16: {
-        left: 0,
         top: 0,
         width: 118,
     },
     view11: {
-        top: 85,
-        width: 358,
+        flexDirection: "row",
+        rowGap: 10,
+        top: topPercentage(40),
+        width: "100%",
         left: 0,
     },
     child3: {
+        borderStyle: "solid",
+        borderBottomWidth: 2,
+        borderBottomColor: Color.colorBlack,
         height: 70,
-        backgroundColor: Color.colorOrangered,
+        backgroundColor: Color.colorWhite,
         top: 0,
     },
     text15: {
@@ -604,6 +580,19 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
     },
+    callButton: {
+        alignSelf: "center",
+        padding: 10,
+        backgroundColor: '#d9d9d9',
+        alignItems: 'center',
+        marginTop: 10,
+        width: widthPercentage(300),
+    },
+    callText: {
+        color: 'black',
+        fontSize: 14,
+        fontWeight: 'bold',
+    }
 });
 
 export default MenuPage;

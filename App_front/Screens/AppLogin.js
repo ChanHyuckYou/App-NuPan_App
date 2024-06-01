@@ -57,6 +57,24 @@ const AppLogin = () => {
     return (
         <SafeAreaView style={styles.view}>
             {/*<TouchableOpacity onPress={() => navigation.navigate('UserPage')}>*/}
+            <Text style={[styles.appNupan1, styles.id3Typo]}>App-nupan</Text>
+            <View style={styles.loginContainer}>
+                <Text style={[styles.id3, styles.id3Typo]}>ID/ 비밀번호 입력</Text>
+                <View style={[styles.id1, styles.passwordLayout]}>
+                    <View style={[styles.passwordChild, styles.passwordLayout]}/>
+                    <TextInput style={styles.password1}
+                               onChangeText={(userEmail) => setuserEmail(userEmail)}
+                               placeholder={"ID"}></TextInput>
+                </View>
+                <View style={[styles.password, styles.passwordLayout]}>
+                    <View style={[styles.passwordChild, styles.passwordLayout]}/>
+                    <TextInput style={styles.password1}
+                               placeholder="Password"
+                               onChangeText={(userPwd) => setuserPwd(userPwd)}
+                               secureTextEntry={true}></TextInput>
+                </View>
+            </View>
+
             <TouchableOpacity
                 onPress={() => login()}
                 style={[styles.view1, styles.viewLayout]}>
@@ -64,40 +82,30 @@ const AppLogin = () => {
                 <Text style={[styles.text, styles.textTypo]}>로그인</Text>
             </TouchableOpacity>
             {/*</TouchableOpacity>*/}
-            <TouchableOpacity
-                onPress={() => navigation.navigate('Sign_In')}>
-                <View style={[styles.view2, styles.viewLayout]}>
-                    <View style={[styles.child, styles.childPosition]}/>
-                    <Text style={[styles.text1, styles.textTypo]}>{`회원가입`}</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('ID')}>
-                <View style={[styles.view3, styles.viewLayout]}>
-                    <View style={[styles.child, styles.childPosition]}/>
-                    <Text style={[styles.id, styles.textTypo]}>{`ID/비밀번호 찾기`}</Text>
-                </View>
-            </TouchableOpacity>
-            <View style={[styles.password, styles.passwordLayout]}>
-                <View style={[styles.passwordChild, styles.passwordLayout]}/>
-                <TextInput style={styles.password1}
-                           placeholder="Password"
-                           onChangeText={(userPwd) => setuserPwd(userPwd)}
-                           secureTextEntry={true}></TextInput>
+            <View style={styles.idFoundContainer}>
+                <Text style={[styles.text2Typo]}>
+                    계정이 기억이 안나시나요?
+                </Text>
+                <TouchableOpacity onPress={() => navigation.navigate('ID')}>
+                    <View style={[styles.view3, styles.viewLayout]}>
+                        <View style={[styles.child, styles.childPosition]}/>
+                        <Text style={[styles.id, styles.textTypo]}>{`ID/비밀번호 찾기`}</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
-            <View style={[styles.id1, styles.passwordLayout]}>
-                <View style={[styles.passwordChild, styles.passwordLayout]}/>
-                <TextInput style={styles.password1}
-                           onChangeText={(userEmail) => setuserEmail(userEmail)}
-                           placeholder={"ID"}></TextInput>
+            <View style={styles.signInContainer}>
+                <Text style={[styles.appNupan, styles.text2Typo]}>
+                    App-nupan 계정이 없으신가요?
+                </Text>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Sign_In')}>
+                    <View style={[styles.view2, styles.viewLayout]}>
+                        <View style={[styles.child, styles.childPosition]}/>
+                        <Text style={[styles.text1, styles.textTypo]}>{`회원가입`}</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
-            <Text style={[styles.appNupan, styles.text2Typo]}>
-                App-nupan 계정이 없으신가요?
-            </Text>
-            <Text style={[styles.text2, styles.text2Typo]}>
-                계정이 기억이 안나시나요?
-            </Text>
-            <Text style={[styles.appNupan1, styles.id3Typo]}>App-nupan</Text>
-            <Text style={[styles.id3, styles.id3Typo]}>ID/ 비밀번호 입력</Text>
+
         </SafeAreaView>
     );
 };
@@ -113,8 +121,6 @@ const styles = StyleSheet.create({
         left: leftPercentage(0),
     },
     textTypo: {
-        height: heightPercentage(23),
-        width: widthPercentage(400),
         textAlign: "left",
         color: Color.colorWhite,
         fontSize: FontSize.size_xl,
@@ -129,21 +135,18 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     text2Typo: {
-        width: widthPercentage(268),
-        height: heightPercentage(18),
         fontSize: FontSize.size_mini,
-        alignSelf: "center",
         color: Color.colorBlack,
         fontFamily: FontFamily.interLight,
         fontStyle: "italic",
         textAlign: "left",
-        position: "absolute",
+        position: "relative",
     },
     id3Typo: {
         color: Color.colorBlack,
         fontStyle: "italic",
         textAlign: "left",
-        position: "absolute",
+        position: "relative",
     },
     child: {
         backgroundColor: Color.colorOrangered,
@@ -153,11 +156,9 @@ const styles = StyleSheet.create({
     },
     text: {
         left: leftPercentage(105),
-        width: widthPercentage(56),
     },
     view1: {
-
-        top: topPercentage(425),
+        top: topPercentage(405),
         alignSelf: "center",
     },
     text1: {
@@ -166,16 +167,14 @@ const styles = StyleSheet.create({
 
     },
     view2: {
-        top: topPercentage(605),
+        top: 10,
         alignSelf: "center",
     },
     id: {
         left: leftPercentage(65),
-        width: widthPercentage(147),
-
     },
     view3: {
-        top: topPercentage(507),
+        top: 10,
         alignSelf: "center",
     },
     passwordChild: {
@@ -200,43 +199,51 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     password: {
-        top: topPercentage(311), // 기존에 고정값으로 사용되던 top: 50 대신
+        top: 115,
         alignSelf: "center",
 
     },
     id1: {
-        top: topPercentage(239), // 기존에 고정값으로 사용되던 top: 50 대신
+        top: 40,
         alignSelf: "center",
     },
     appNupan: {
-        top: topPercentage(571),
-    },
-    text2: {
-        top: topPercentage(479),
+        alignSelf: "flex-start",
     },
     appNupan1: {
-        top: topPercentage(35),
+        top: topPercentage(5),
         alignSelf: "center",
         fontSize: FontSize.size_5xl,
-        width: widthPercentage(136),
-        height: heightPercentage(29),
         fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
         color: Color.colorBlack,
     },
     id3: {
-        top: topPercentage(200),
         fontSize: FontSize.size_mid,
-        width: widthPercentage(130),
-        height: heightPercentage(21),
         fontFamily: FontFamily.interLight,
-        left: leftPercentage(60),
+        alignSelf: "flex-start",
     },
     view: {
         flex: 1,
         overflow: "hidden",
         backgroundColor: Color.colorWhite,
     },
+    loginContainer: {
+        top: topPercentage(115),
+        alignSelf: "center",
+        width: widthPercentage(267),
+    },
+    idFoundContainer: {
+        width: widthPercentage(267),
+        top: topPercentage(400),
+        alignSelf: "center",
+    },
+    signInContainer: {
+        width: widthPercentage(267),
+        top: topPercentage(480),
+        alignSelf: "center",
+    }
+
 });
 
 export default AppLogin;

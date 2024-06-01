@@ -4,6 +4,7 @@ import { Image } from "expo-image";
 import { FontSize, Color, FontFamily, Border } from "../GlobalStyles";
 import { useNavigation } from '@react-navigation/native';
 import {Dimensions} from "react-native";
+import {topPercentage} from "./Window";
 
 // 기기의 너비와 높이를 가져옵니다.
 
@@ -18,7 +19,15 @@ const AppMain = ({userEmail}) => {
         <SafeAreaView style={styles.view}>
         {/*<View style={styles.view}>*/}
             <Text style={styles.appNupan}>App-nupan</Text>
-            <View style={styles.view1} />
+            <View style={styles.iconContainer}>
+                <Image style={styles.view1}
+                       contentFit="cover"
+                       source={require("../assets/IconSample.png")}/>
+                <Text style={[styles.appNupan2, styles.appFlexBox]}>
+                    App-nupan으로 손쉽게 메뉴를 주문해보세요!
+                </Text>
+            </View>
+
             <View style={[styles.view2, styles.view2Layout]}>
                 <TouchableOpacity
                     style={[styles.child, styles.childPosition]}
@@ -28,27 +37,7 @@ const AppMain = ({userEmail}) => {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('QR', { userEmail: userEmail })}>
-                <View style={[styles.qr, styles.qrLayout]}>
-                    <Image
-                        style={[styles.qrChild, styles.qrLayout]}
-                        contentFit="cover"
-                        source={require("../assets/qrback.png")}
-                    />
-                    <Image
-                        style={[styles.riqrScan2LineIcon, styles.qr1Position]}
-                        contentFit="cover"
-                        source={require("../assets/ri_qr-scan-2-line.png")}
-                    />
-                    <Text style={[styles.qr1, styles.qr1Position]}>{`QR 코드스캔 `}</Text>
-                </View>
-            </TouchableOpacity>
-            <Text style={[styles.text, styles.appFlexBox]}>
-                로그인을 통해 좀 더 다양한 기능을 체험하세요.
-            </Text>
-            <Text style={[styles.appNupan2, styles.appFlexBox]}>
-                App-nupan으로 손쉽게 메뉴를 주문해보세요!
-            </Text>
+
         {/*</View>*/}
         </SafeAreaView>
     );
@@ -56,8 +45,8 @@ const AppMain = ({userEmail}) => {
 
 const styles = StyleSheet.create({
     view2Layout: {
-        height: 40,
-        width: 156,
+        height: 60,
+        width: 180,
         position: "absolute",
     },
     childPosition: {
@@ -79,47 +68,40 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     appNupan: {
-        top: 35,
+        top: topPercentage(5),
         alignSelf: "center",
         fontSize: FontSize.size_5xl,
-        width: 150,
-        height: 29,
-        textAlign: "left",
-        color: Color.colorBlack,
         fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
+        color: Color.colorBlack,
         fontStyle: "italic",
-        position: "absolute",
+        textAlign: "left",
+        position: "relative",
     },
     view1: {
-        top: 155,
         alignSelf: "center",
-        borderRadius: 33,
-        backgroundColor: Color.colorGainsboro,
-        width: 246,
-        height: 216,
+        width: 250,
+        height: 250,
         position: "absolute",
     },
     child: {
         backgroundColor: Color.colorOrangered,
-        height: 40,
-        width: 156,
+        height: 60,
+        width: 180,
         position: "absolute",
     },
     appNupan1: {
-        top: 11,
+        top: 16,
         left: 16,
-        fontSize: 12,
-        width: 125,
-        height: 21,
+        fontSize: 18,
         color: Color.colorWhite,
         fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
         fontStyle: "italic",
     },
     view2: {
-        top: 690,
-        alignSelf: "center"
+        top: topPercentage(580),
+        alignSelf: "center",
     },
     qrChild: {
         borderRadius: Border.br_4xl,
@@ -145,24 +127,12 @@ const styles = StyleSheet.create({
         top: 460,
         alignSelf: "center",
     },
-    text: {
-        top: 660,
-        alignSelf: "center",
-        fontSize: 12,
-        fontWeight: "100",
-        fontFamily: FontFamily.interThin,
-        width: 250,
-        height: 23,
-        color: Color.colorBlack,
-    },
     appNupan2: {
-        top: 440,
+        top: 270,
         alignSelf: "center",
         fontSize: FontSize.size_mini,
         fontWeight: "500",
         fontFamily: FontFamily.interMedium,
-        width: 296,
-        height: 35,
         color: Color.colorBlack,
     },
     view: {
@@ -183,6 +153,10 @@ const styles = StyleSheet.create({
             justifyContent: 'center',
             backgroundColor: Color.colorWhite,
         },
+    iconContainer: {
+        top: topPercentage(100),
+    },
+
 });
 
 export default AppMain;

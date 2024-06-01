@@ -73,7 +73,7 @@ const QR = () => {
 const styles = StyleSheet.create({
     biqrCodeScanIcon: {
         top: 167,
-        left: 67,
+        alignSelf: "center",
         width: 225,
         height: 215,
         position: "absolute",
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
 
     qr1: {
         top: 519,
-        left: 55,
+        alignSelf: "center",
         fontSize: FontSize.size_11xl,
         fontWeight: "500",
         fontFamily: FontFamily.interMedium,
