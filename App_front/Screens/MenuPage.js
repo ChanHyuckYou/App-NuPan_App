@@ -8,7 +8,7 @@ import axios from "axios";
 const MenuPage = ({  }) => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { ownerid, tableidx } = route.params;
+    const { ownerid, tableidx, userEmail } = route.params;
     const [showDetails, setShowDetails] = useState(false);
     const [menuItems, setMenuItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -48,7 +48,7 @@ const MenuPage = ({  }) => {
     };
 
     const handleOrderCheck = () => {
-        navigation.navigate('OrderCheck', { orderList });
+        navigation.navigate('OrderCheck', { orderList, userEmail});
     };
     return (
         <SafeAreaView style={styles.view}>
@@ -74,7 +74,7 @@ const MenuPage = ({  }) => {
                 />
             </View>
             <View style={[styles.view3, styles.viewLayout3]}>
-                <TouchableOpacity onPress={() => navigation.navigate('OrderList')}>
+                <TouchableOpacity onPress={() => navigation.navigate('OrderList' )}>
                     <View style={[styles.child, styles.itemBorder]} />
                     <Image
                         style={[styles.ionreceiptIcon, styles.iconLayout]}

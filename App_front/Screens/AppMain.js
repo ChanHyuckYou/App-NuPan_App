@@ -8,7 +8,7 @@ import {Dimensions} from "react-native";
 // 기기의 너비와 높이를 가져옵니다.
 
 const {width, height} = Dimensions.get("window");
-const AppMain = () => {
+const AppMain = ({userEmail}) => {
     const navigation = useNavigation();
 
     return (
@@ -19,14 +19,13 @@ const AppMain = () => {
             <View style={[styles.view2, styles.view2Layout]}>
                 <TouchableOpacity
                     style={[styles.child, styles.childPosition]}
-                    onPress={() => navigation.navigate('AppLogin')}>
-                    {/* TouchableOpacity 내부에 View를 넣어도 되지만, 예시의 간결성을 위해 생략합니다. */}
+                    onPress={() => navigation.navigate('AppLogin', { userEmail: userEmail })}>
                     <Text style={[styles.appNupan1, styles.appFlexBox]}>
                         App-nupan 로그인
                     </Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('QR')}>
+            <TouchableOpacity onPress={() => navigation.navigate('QR', { userEmail: userEmail })}>
                 <View style={[styles.qr, styles.qrLayout]}>
                     <Image
                         style={[styles.qrChild, styles.qrLayout]}

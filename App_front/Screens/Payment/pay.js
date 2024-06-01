@@ -10,48 +10,50 @@ const userCode = 'imp42271774'; // 아임포트 관리자 페이지에서 발급
 const Payment = ({  }) => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { payType, totalPrice } = route.params;
+    const { payType, totalPrice, userEmail } = route.params;
 
     useEffect(() => {
         console.log("결제 유형:", payType);
         console.log("총 금액:", totalPrice);
+        console.log("결제한 userid : ", userEmail)
     }, [payType, totalPrice]);
 
 
     // 결제 후 콜백 함수
     const onPaymentResult = async (response) => {
-        // console.log("받은금액 :", totalPrice)
+        console.log("받은금액 :", totalPrice)
         // 결제 성공 여부 확인
-        // if (response.success) {
-        //     try {
-        //         // 서버로 결제 정보 전송
-        //         const response = await fetch('"http://43.201.92.62/user/payments"', {
-        //             method: 'POST',
-        //             headers: {
-        //                 'Content-Type': 'application/json',
-        //             },
-        //             body: JSON.stringify({
-        //                 // 서버에 전송할 결제 정보. 필요에 따라 수정하세요.
-        //                 merchant_uid: response.merchant_uid,
-        //                 amount: response.amount,
-        //                 buyer_email: response.buyer_email,
-        //                 buyer_name: response.buyer_name,
-        //                 buyer_tel: response.buyer_tel,
-        //                 buyer_addr: response.buyer_addr,
-        //                 buyer_postcode: response.buyer_postcode,
-        //                 pay_method: response.pay_method,
-        //                 pg: response.pg,
-        //             }),
-        //         });
-        //         const data = await response.json();
-        //         console.log(data);
-        //     } catch(error) {
-        //         console.error('결제 정보 전송 실패:', error);
-        //     }
-        // } else {
-        //     // 결제 실패 처리
-        //     console.log('결제 실패:', response.error_msg);
-        // }
+        if (response.success) {
+            try {
+                // 서버로 결제 정보 전송
+                const response = await fetch('"http://43.201.92.62/order/complete_payment"', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        // 서버에 전송할 결제 정보. 필요에 따라 수정하세요.
+                        userid: userEmail,
+                        merchant_uid: response.merchant_uid,
+                        amount: response.amount,
+                        buyer_email: response.buyer_email,
+                        buyer_name: response.buyer_name,
+                        buyer_tel: response.buyer_tel,
+                        buyer_addr: response.buyer_addr,
+                        buyer_postcode: response.buyer_postcode,
+                        pay_method: response.pay_method,
+                        pg: response.pg,
+                    }),
+                });
+                const data = await response.json();
+                console.log(data);
+            } catch(error) {
+                console.error('결제 정보 전송 실패:', error);
+            }
+        } else {
+            // 결제 실패 처리
+            console.log('결제 실패:', response.error_msg);
+        }
 
         // 결제 프로세스 완료 후 다음 화면으로 네비게이션
         navigation.navigate("AppMain");

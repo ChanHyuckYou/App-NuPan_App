@@ -8,13 +8,14 @@ import {useNavigation, useRoute} from "@react-navigation/native";
 const SelectPayment  = ({}) => {
     const [PaymentType, setPaymentType] = useState('');
     const route = useRoute();
-    const { totalPrice } = route.params;
+    const { totalPrice, userEmail } = route.params;
     const navigation = useNavigation();
     const handlePaymentType = (type) => {
+        const sanitizedTotalPrice = totalPrice.replace(/,/g, '');
         setPaymentType(type);
         console.log(type);  // PaymentType 대신 type을 출력
-        navigation.navigate("PAY", { payType: type, totalPrice: totalPrice });
-        console.log("보내는 금액 : ", totalPrice);
+        navigation.navigate("PAY", { payType: type, totalPrice: sanitizedTotalPrice });
+        console.log("보내는 금액 : ", sanitizedTotalPrice);
     };
 
     return (

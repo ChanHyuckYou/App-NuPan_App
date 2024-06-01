@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import {useNavigation} from "@react-navigation/native";
 
-const QR = () => {
+const QR = ({userEmail}) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
     const navigation = useNavigation(); // useNavigation Hook 사용
@@ -35,7 +35,7 @@ const QR = () => {
             // 필요한 로직에 따라 ownerid와 tableidx 사용
             // 예를 들어, 이 값을 상태에 저장하거나, 다른 컴포넌트로 전달할 수 있습니다.
 
-            navigation.navigate('MenuPage', { ownerid, tableidx });
+            navigation.navigate('MenuPage', { ownerid, tableidx, userEmail });
         } else {
             console.log("URL 형식이 올바르지 않습니다.");
         }
