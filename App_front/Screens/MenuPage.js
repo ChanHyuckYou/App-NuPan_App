@@ -570,10 +570,11 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     orderCheckButton: {
-        padding: 10,
+        paddingTop: 15,
         backgroundColor: '#4097e8',
         alignItems: 'center',
         marginTop: 20,
+        height: 50,
     },
     orderCheckButtonText: {
         color: 'white',

@@ -103,10 +103,12 @@ const styles = StyleSheet.create({
     },
     sectionTitle: {
         marginTop: 20,
+        marginLeft: 20,
         fontSize: FontSize.size_xl,
         fontFamily: FontFamily.interRegular,
         textAlign: 'center',
         color: Color.colorBlack,
+        alignSelf: "flex-start",
     },
     menuList: {
         flex: 1,

@@ -1,10 +1,12 @@
 import * as React from "react";
-import {Text, StyleSheet, View, TouchableOpacity} from "react-native";
+import {Text, StyleSheet, View, TouchableOpacity, Dimensions} from "react-native";
 import { Image } from "expo-image";
 import { FontSize, Color, FontFamily } from "../../GlobalStyles";
 import {useState} from "react";
 import {useNavigation, useRoute} from "@react-navigation/native";
+import {heightPercentage, topPercentage} from "../Window";
 
+const {width, height} = Dimensions.get("window");
 const SelectPayment  = ({}) => {
     const [PaymentType, setPaymentType] = useState('');
     const route = useRoute();
@@ -19,31 +21,14 @@ const SelectPayment  = ({}) => {
 
     return (
         <View style={styles.view}>
-            <Text style={styles.appNupan}>App-nupan</Text>
-            <View style={[styles.gobackBt, styles.gobackLayout]}>
-                <View style={[styles.gobackBtChild, styles.gobackLayout]} />
-                <Text style={[styles.goback, styles.textTypo]}>이전화면</Text>
-                <Image
-                    style={styles.epbackIcon}
-                    contentFit="cover"
-                    source={require("../../assets/ep_back.png")}
-                />
-            </View>
             <Text style={[styles.text, styles.textTypo]}>
-                결제수단을 선택해 주세요
+                결제수단을 선택해 주세요.
             </Text>
             <TouchableOpacity onPress={() => handlePaymentType("tosspay")}>
                 <Image
                     style={[styles.tosspayBtIcon, styles.iconLayout]}
                     contentFit="cover"
                     source={require("../../assets/TossPay-bt.png")}
-                />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => handlePaymentType("naverpay")}>
-                <Image
-                    style={[styles.naverpayBtIcon, styles.iconLayout]}
-                    contentFit="cover"
-                    source={require("../../assets/NaverPay-bt.png")}
                 />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => handlePaymentType("kakaopay")}>
@@ -53,6 +38,15 @@ const SelectPayment  = ({}) => {
                     source={require("../../assets/KakaoPay-bt.png")}
                 />
             </TouchableOpacity>
+            <View style={[styles.gobackBt, styles.gobackLayout]}>
+                <View style={[styles.gobackBtChild, styles.gobackLayout]} />
+                <Text style={[styles.goback, styles.textTypo]}>이전화면</Text>
+                <Image
+                    style={styles.epbackIcon}
+                    contentFit="cover"
+                    source={require("../../assets/ep_back.png")}
+                />
+            </View>
         </View>
     );
 };
@@ -77,11 +71,9 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     appNupan: {
-        top: 35,
+        top: topPercentage(50),
         alignSelf: "center",
         fontSize: 24,
-        width: 136,
-        height: 29,
         textAlign: "left",
         color: Color.colorBlack,
         fontStyle: "italic",
@@ -111,30 +103,26 @@ const styles = StyleSheet.create({
         overflow: "hidden",
     },
     gobackBt: {
-        top: 637,
+        top: topPercentage(637),
         alignSelf: "center",
     },
     text: {
-        top: 189,
+        top: topPercentage(154),
         alignSelf: "center",
         fontWeight: "500",
         fontFamily: FontFamily.interMedium,
     },
     tosspayBtIcon: {
-        top: 464,
-
-    },
-    naverpayBtIcon: {
-        top: 353,
+        top: topPercentage(370),
     },
     kakaopayBtIcon: {
-        top: 245,
+        top: topPercentage(245),
     },
     view: {
         backgroundColor: Color.colorWhite,
         flex: 1,
         width: "100%",
-        height: 800,
+        height: height,
         overflow: "hidden",
     },
 });
