@@ -10,12 +10,12 @@ const userCode = 'imp42271774'; // 아임포트 관리자 페이지에서 발급
 const Payment = ({  }) => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { payType, totalPrice, userEmail } = route.params;
+    const { payType, totalPrice, userid } = route.params;
 
     useEffect(() => {
         console.log("결제 유형:", payType);
         console.log("총 금액:", totalPrice);
-        console.log("결제한 userid : ", userEmail)
+        console.log("결제한 userid : ", userid)
     }, [payType, totalPrice]);
 
 
@@ -33,7 +33,7 @@ const Payment = ({  }) => {
                     },
                     body: JSON.stringify({
                         // 서버에 전송할 결제 정보. 필요에 따라 수정하세요.
-                        userid: userEmail,
+                        userid: userid,
                         merchant_uid: response.merchant_uid,
                         amount: response.amount,
                         buyer_email: response.buyer_email,

@@ -14,6 +14,9 @@ const MenuPage = ({  }) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [orderList, setOrderList] = useState([]);
 
+    const numberWithCommas = (number) => {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -99,7 +102,7 @@ const MenuPage = ({  }) => {
                             <Image source={{ uri: item.imageurl }} style={styles.menuItemImage} />
                             <View style={styles.menuItemText}>
                                 <Text style={styles.menuItemTitle}>{item.productname}</Text>
-                                <Text style={styles.menuItemPrice}>{item.price} ₩</Text>
+                                <Text style={styles.menuItemPrice}>{numberWithCommas(item.price)} ₩</Text>
                             </View>
                         </View>
                     </TouchableOpacity>

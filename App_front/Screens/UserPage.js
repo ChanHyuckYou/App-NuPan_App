@@ -2,18 +2,19 @@ import * as React from "react";
 import {Text, StyleSheet, View, TouchableOpacity, SafeAreaView} from "react-native";
 import { Image } from "expo-image";
 import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
-import {useNavigation} from "@react-navigation/native";
+import {useNavigation, useRoute} from "@react-navigation/native";
 import {heightPercentage, widthPercentage} from "./Window";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const UserPage =  ({route}) => {
+const UserPage =  () => {
     // const userEmail = await AsyncStorage.getItem('userEmail');
     const navigation = useNavigation();
+    const route = useRoute();
     const { userEmail } = route.params;
     return (
         <SafeAreaView style={styles.view}>
             <Text style={styles.appNupan}>App-nupan</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('QR')}>
+            <TouchableOpacity onPress={() => navigation.navigate('QR', userEmail)}>
                 <View style={[styles.qr, styles.qrLayout]}>
                     <Image
                         style={[styles.qrChild, styles.childPosition]}

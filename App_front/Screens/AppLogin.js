@@ -34,7 +34,7 @@ const AppLogin = () => {
                         console.log(resp.data);
 
                         if (resp.data !== null && resp.data !== "") {
-                            console.log("로그인 성공");
+                            console.log("로그인 성공", userEmail);
                             // 로그인 성공 후
                             AsyncStorage.setItem('userEmail', userEmail);
                             navigation.navigate('UserPage', { userEmail: userEmail });

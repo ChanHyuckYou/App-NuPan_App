@@ -11,11 +11,10 @@ const SelectPayment  = ({}) => {
     const { totalPrice, userEmail } = route.params;
     const navigation = useNavigation();
     const handlePaymentType = (type) => {
-        const sanitizedTotalPrice = totalPrice.replace(/,/g, '');
         setPaymentType(type);
         console.log(type);  // PaymentType 대신 type을 출력
-        navigation.navigate("PAY", { payType: type, totalPrice: sanitizedTotalPrice });
-        console.log("보내는 금액 : ", sanitizedTotalPrice);
+        navigation.navigate("PAY", { payType: type, totalPrice: totalPrice, userid: userEmail });
+        console.log("보내는 금액 : ", totalPrice);
     };
 
     return (

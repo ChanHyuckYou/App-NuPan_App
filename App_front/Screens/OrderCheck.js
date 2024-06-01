@@ -9,9 +9,13 @@ const OrderCheck = () => {
     const initialOrderList = route.params?.orderList || []; // route.params.orderList가 존재하지 않을 경우 빈 배열을 초기값으로 설정
     const { userEmail } = route.params;
     const [orderList, setOrderList] = useState(initialOrderList); // orderList를 상태로 관리
-
     // 총 결제 금액 계산
-    const totalPrice = orderList.reduce((total, item) => total + item.price, 0);
+    const totalPrice = orderList.reduce((total, item) => total + parseInt(item.price, 10), 0);
+
+    const numberWithCommas = (number) => {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+    const formattedTotalPrice = numberWithCommas(totalPrice);
 
     // 항목 삭제 함수
     const handleDelete = (index) => {
@@ -55,7 +59,7 @@ const OrderCheck = () => {
             </ScrollView>
             <View style={styles.totalContainer}>
                 <Text style={styles.totalText}>총 결제금액</Text>
-                <Text style={styles.totalPrice}>{totalPrice}₩</Text>
+                <Text style={styles.totalPrice}>{formattedTotalPrice}₩</Text>
             </View>
             <TouchableOpacity style={styles.paymentButton} onPress={handleSelectPayment}>
                 <Text style={styles.paymentButtonText}>즉시 결제</Text>

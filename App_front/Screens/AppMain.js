@@ -11,6 +11,9 @@ const {width, height} = Dimensions.get("window");
 const AppMain = ({userEmail}) => {
     const navigation = useNavigation();
 
+    function userLog() {
+        console.log("UserID MainPage", userEmail)
+    }
     return (
         <SafeAreaView style={styles.view}>
         {/*<View style={styles.view}>*/}
