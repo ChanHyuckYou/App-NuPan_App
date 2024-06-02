@@ -332,8 +332,7 @@ const styles = StyleSheet.create({
         height: 426,
     },
     text12: {
-        left: 12,
-        width: 93,
+        alignSelf: "center",
     },
     view12: {
         top: 0,
@@ -350,8 +349,7 @@ const styles = StyleSheet.create({
         borderRadius: Border.br_xl,
     },
     text14: {
-        left: 15,
-        width: 87,
+        alignSelf: "center",
     },
     view16: {
         top: 0,
@@ -573,12 +571,14 @@ const styles = StyleSheet.create({
         paddingTop: 15,
         backgroundColor: '#4097e8',
         alignItems: 'center',
+        alignSelf: 'center',
         marginTop: 20,
         height: 50,
+        width: widthPercentage(340),
     },
     orderCheckButtonText: {
         color: 'white',
-        fontSize: 20,
+        fontSize: 24,
         fontWeight: 'bold',
     },
     callButton: {
@@ -591,7 +591,7 @@ const styles = StyleSheet.create({
     },
     callText: {
         color: 'black',
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 'bold',
     }
 });

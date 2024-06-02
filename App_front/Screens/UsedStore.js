@@ -104,14 +104,17 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     child: {
-        backgroundColor: Color.colorOrangered,
+        borderStyle: "solid",
+        borderBottomWidth: 2,
+        borderBottomColor: Color.colorBlack,
+        height: 70,
+        backgroundColor: Color.colorWhite,
+        top: 0,
     },
     text: {
-        left: 74,
+        alignSelf: "center",
         fontSize: FontSize.size_11xl,
         textAlign: "center",
-        width: 211,
-        height: 36,
         color: Color.colorBlack,
         top: 17,
         fontFamily: FontFamily.interSemiBold,
@@ -205,6 +208,7 @@ const styles = StyleSheet.create({
     backBtLayout: {
         width: 40,
         height: 80,
+        position: "absolute",
     },
 });
 

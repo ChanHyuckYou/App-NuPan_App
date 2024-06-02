@@ -38,7 +38,8 @@ const SelectPayment  = ({}) => {
                     source={require("../../assets/KakaoPay-bt.png")}
                 />
             </TouchableOpacity>
-            <View style={[styles.gobackBt, styles.gobackLayout]}>
+            <TouchableOpacity style={[styles.gobackBt, styles.gobackLayout]}
+                              onPress={() => navigation.goBack()}>
                 <View style={[styles.gobackBtChild, styles.gobackLayout]} />
                 <Text style={[styles.goback, styles.textTypo]}>이전화면</Text>
                 <Image
@@ -46,7 +47,7 @@ const SelectPayment  = ({}) => {
                     contentFit="cover"
                     source={require("../../assets/ep_back.png")}
                 />
-            </View>
+            </TouchableOpacity>
         </View>
     );
 };
