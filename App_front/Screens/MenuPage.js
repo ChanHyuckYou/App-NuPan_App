@@ -1,12 +1,12 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, ScrollView, Image } from "react-native";
-import {Color, FontFamily, FontSize, Border} from "../GlobalStyles";
-import {useEffect, useState} from "react";
-import {useNavigation, useRoute} from "@react-navigation/native";
+import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Platform } from "react-native";
+import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import { useEffect, useState } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import axios from "axios";
-import {topPercentage, widthPercentage} from "./Window";
+import { topPercentage, widthPercentage } from "./Window";
 
-const MenuPage = ({  }) => {
+const MenuPage = ({ }) => {
     const navigation = useNavigation();
     const route = useRoute();
     const { ownerid, tableidx, userEmail } = route.params;
@@ -18,23 +18,26 @@ const MenuPage = ({  }) => {
     const numberWithCommas = (number) => {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log("ownerid : ",ownerid,"테이블넘버 :", tableidx)
+                console.log("ownerid :", ownerid, "테이블넘버 :", tableidx);
                 const response = await axios.post('http://43.201.92.62/order/scan', {
                     ownerid: ownerid,
-                    tablenumber: tableidx
+                    tablenumber: tableidx,
+                    userid: userEmail,
                 });
+                console.log("Response data: ", response.data); // 응답 데이터 로그 출력
                 setMenuItems(response.data?.menu_items || []);
             } catch (error) {
                 console.error("메뉴를 불러오는 중 오류가 발생했습니다!", error);
+                Alert.alert("오류", "메뉴를 불러오는 중 오류가 발생했습니다.");
             }
         };
 
         fetchData();
     }, [ownerid, tableidx]);
-
 
     const handleItemPress = (item) => {
         setSelectedItem(item);
@@ -52,77 +55,86 @@ const MenuPage = ({  }) => {
     };
 
     const handleOrderCheck = () => {
-        navigation.navigate('OrderCheck', { orderList, userEmail});
+        navigation.navigate('OrderCheck', { orderList, userEmail });
     };
+
     return (
-        <SafeAreaView style={styles.view}>
-            <View style={[styles.view18, styles.viewPosition]}>
-                <View style={[styles.child3, styles.viewPosition]}/>
-                <Text style={[styles.text15, styles.textTypo2]}>{}</Text>
-
-                <Text style={[styles.text16, styles.textTypo2]}>{tableidx}</Text>
-            </View>
-            <View style={[styles.view11]}>
-                <View style={[styles.view16, styles.viewLayout1]}>
-                    <View style={[styles.view17, styles.viewLayout]}/>
-                    <Text style={[styles.text14, styles.textTypo3]}>추천메뉴</Text>
+        <SafeAreaView style={styles.safeAreaView}>
+            <View style={styles.container}>
+                <View style={[styles.view18, styles.viewPosition]}>
+                    <View style={[styles.child3, styles.viewPosition]} />
+                    <Text style={[styles.text16, styles.textTypo2]}>Table Number : {tableidx}</Text>
                 </View>
-                <View style={[styles.view14, styles.viewLayout1]}>
-                    <View style={styles.viewLayout}/>
-                    <Text style={[styles.text12, styles.textTypo3]}>주메뉴</Text>
-                </View>
-                <View style={[styles.view12, styles.viewLayout1]}>
-                    <View style={styles.viewLayout}/>
-                    <Text style={[styles.text12, styles.textTypo3]}>사이드</Text>
-                </View>
-            </View>
-
-            <View style={styles.menuList}>
-                <ScrollView>
-                {menuItems.map(item => (
-                    <TouchableOpacity key={item.productid} onPress={() => handleItemPress(item)} style={styles.menuItem}>
-                        <View style={styles.menuItemContent}>
-                            <Image source={{ uri: item.imageurl }} style={styles.menuItemImage} />
-                            <View style={styles.menuItemText}>
-                                <Text style={styles.menuItemTitle}>{item.productname}</Text>
-                                <Text style={styles.menuItemPrice}>{numberWithCommas(item.price)} ₩</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                ))}
-                </ScrollView>
-            </View>
-
-            <TouchableOpacity style={styles.orderCheckButton} onPress={handleOrderCheck}>
-                <Text style={styles.orderCheckButtonText}>주문확정</Text>
-            </TouchableOpacity>
-
-            {showDetails && selectedItem && (
-                <View style={styles.detailView}>
-                    <View style={styles.detailContent}>
-                        <Image source={{ uri: selectedItem.imageurl }} style={styles.detailImage} />
-                        <Text style={styles.detailTitle}>{selectedItem.productname}</Text>
-                        <Text style={styles.detailDescription}>{selectedItem.description}</Text>
-                        <Text style={styles.detailPrice}>{selectedItem.price} ₩</Text>
-                        <View style={styles.detailButtons}>
-                            <TouchableOpacity onPress={handleCancel} style={styles.detailButton}>
-                                <Text style={styles.detailButtonText}>취소</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={handleAddToOrder} style={styles.detailButton}>
-                                <Text style={styles.detailButtonText}>담기</Text>
-                            </TouchableOpacity>
-                        </View>
+                <View style={[styles.view11]}>
+                    <View style={[styles.view16, styles.viewLayout1]}>
+                        <View style={[styles.view17, styles.viewLayout]} />
+                        <Text style={[styles.text14, styles.textTypo3]}>추천메뉴</Text>
+                    </View>
+                    <View style={[styles.view14, styles.viewLayout1]}>
+                        <View style={styles.viewLayout} />
+                        <Text style={[styles.text12, styles.textTypo3]}>주메뉴</Text>
+                    </View>
+                    <View style={[styles.view12, styles.viewLayout1]}>
+                        <View style={styles.viewLayout} />
+                        <Text style={[styles.text12, styles.textTypo3]}>사이드</Text>
                     </View>
                 </View>
-            )}
-            <TouchableOpacity onPress={() => navigation.navigate("StaffCall")} style={styles.callButton}>
-                <Text style={styles.callText}>직원호출</Text>
-            </TouchableOpacity>
+
+                <View style={styles.menuList}>
+                    <ScrollView>
+                        {menuItems.map(item => (
+                            <TouchableOpacity key={item.productid} onPress={() => handleItemPress(item)} style={styles.menuItem}>
+                                <View style={styles.menuItemContent}>
+                                    <Image source={{ uri: item.imageurl }} style={styles.menuItemImage} />
+                                    <View style={styles.menuItemText}>
+                                        <Text style={styles.menuItemTitle}>{item.productname}</Text>
+                                        <Text style={styles.menuItemPrice}>{numberWithCommas(item.price)} ₩</Text>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        ))}
+                    </ScrollView>
+                </View>
+
+                <TouchableOpacity style={styles.orderCheckButton} onPress={handleOrderCheck}>
+                    <Text style={styles.orderCheckButtonText}>주문확정</Text>
+                </TouchableOpacity>
+
+                {showDetails && selectedItem && (
+                    <View style={styles.detailView}>
+                        <View style={styles.detailContent}>
+                            <Image source={{ uri: selectedItem.imageurl }} style={styles.detailImage} />
+                            <Text style={styles.detailTitle}>{selectedItem.productname}</Text>
+                            <Text style={styles.detailDescription}>{selectedItem.description}</Text>
+                            <Text style={styles.detailPrice}>{numberWithCommas(selectedItem.price)} ₩</Text>
+                            <View style={styles.detailButtons}>
+                                <TouchableOpacity onPress={handleCancel} style={styles.detailButton}>
+                                    <Text style={styles.detailButtonText}>취소</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={handleAddToOrder} style={styles.detailButton}>
+                                    <Text style={styles.detailButtonText}>담기</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                )}
+                <TouchableOpacity onPress={() => navigation.navigate("StaffCall")} style={styles.callButton}>
+                    <Text style={styles.callText}>직원호출</Text>
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
+    safeAreaView: {
+        flex: 1,
+        backgroundColor: Color.colorWhite,
+    },
+    container: {
+        flex: 1,
+        paddingTop: Platform.OS === 'ios' ? 20 : 0, // iOS에서 상단 네비게이션바와 겹치지 않도록 여백 추가
+    },
     viewLayout3: {
         height: 73,
         position: "absolute",
@@ -358,7 +370,7 @@ const styles = StyleSheet.create({
     view11: {
         flexDirection: "row",
         rowGap: 10,
-        top: topPercentage(40),
+        top: topPercentage(60),
         width: "100%",
         left: 0,
     },
@@ -379,15 +391,11 @@ const styles = StyleSheet.create({
         alignSelf: "center",
     },
     text16: {
-        top: 15,
+        top: 10,
         alignSelf: "flex-end",
-        fontWeight: "500",
         fontFamily: FontFamily.interMedium,
-        height: 56,
-        width: 82,
     },
     view18: {
-        height: 72,
         top: 0,
     },
     groupChild: {
@@ -448,7 +456,7 @@ const styles = StyleSheet.create({
     menuList: {
         flex: 1,
         padding: 10,
-        marginTop: 100,
+        marginTop: topPercentage(55)
     },
     view: {
         flex: 1,

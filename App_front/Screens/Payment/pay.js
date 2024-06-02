@@ -33,7 +33,6 @@ const Payment = ({  }) => {
                     },
                     body: JSON.stringify({
                         // 서버에 전송할 결제 정보. 필요에 따라 수정하세요.
-                        userid: userid,
                         merchant_uid: response.merchant_uid,
                         amount: response.amount,
                         buyer_email: response.buyer_email,
@@ -56,7 +55,7 @@ const Payment = ({  }) => {
         }
 
         // 결제 프로세스 완료 후 다음 화면으로 네비게이션
-        navigation.navigate("AppMain");
+        navigation.navigate("OrderConfirm_pay");
     };
     return (
         <SafeAreaView style={{ flex: 1 }}>

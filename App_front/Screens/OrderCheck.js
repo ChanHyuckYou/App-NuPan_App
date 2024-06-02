@@ -49,7 +49,7 @@ const OrderCheck = () => {
                         <Image source={{ uri: item.imageurl }} style={styles.menuImage} />
                         <View style={styles.menuDetails}>
                             <Text style={styles.menuName}>{item.productname}</Text>
-                            <Text style={styles.menuPrice}>{item.price}₩</Text>
+                            <Text style={styles.menuPrice}>{numberWithCommas(item.price)}₩</Text>
                         </View>
                         <TouchableOpacity onPress={() => handleDelete(index)} style={styles.deleteButton}>
                             <Text style={styles.deleteButtonText}>삭제</Text>
