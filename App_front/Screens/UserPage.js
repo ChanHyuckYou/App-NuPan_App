@@ -1,16 +1,15 @@
 import * as React from "react";
-import {Text, StyleSheet, View, TouchableOpacity, SafeAreaView} from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity, SafeAreaView } from "react-native";
 import { Image } from "expo-image";
 import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
-import {useNavigation, useRoute} from "@react-navigation/native";
-import {heightPercentage, topPercentage, widthPercentage} from "./Window";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { heightPercentage, topPercentage, widthPercentage } from "./Window";
 
-const UserPage =  () => {
-    // const userEmail = await AsyncStorage.getItem('userEmail');
+const UserPage = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { userEmail } = route.params;
+    const userid = route.params?.userid ?? "Guest"; // 기본값 설정
+
     return (
         <SafeAreaView style={styles.view}>
             <Text style={styles.appNupan}>App-nupan</Text>
@@ -20,12 +19,11 @@ const UserPage =  () => {
                     contentFit="cover"
                     source={require("../assets/userpro.png")}
                 />
-                <Text
-                    style={[styles.userName, styles.text3Position]}>{userEmail}</Text>
+                <Text style={[styles.userName, styles.text3Position]}>{userid}</Text>
                 <Text style={[styles.text2, styles.textTypo]}>님</Text>
                 <Text style={[styles.text3, styles.text3Position]}>환영합니다.</Text>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('QR', userEmail)}>
+            <TouchableOpacity onPress={() => navigation.navigate('QR', userid )}>
                 <View style={[styles.qr, styles.qrLayout]}>
                     <Image
                         style={[styles.qrChild, styles.childPosition]}
@@ -44,22 +42,22 @@ const UserPage =  () => {
                 <Text style={[styles.text, styles.textLayout]}>
                     내가 이용했던 가게가 궁금하다면?
                 </Text>
-                <TouchableOpacity onPress={() => navigation.navigate('UsedStore')}>
+                <TouchableOpacity onPress={() => navigation.navigate('UsedStore', { userid })}>
                     <View style={[styles.view1, styles.view1Layout]}>
-                        <View style={[styles.child, styles.view1Layout]}/>
+                        <View style={[styles.child, styles.view1Layout]} />
                         <Image
                             style={[styles.mingcuteshopFillIcon, styles.iconLayout1]}
                             contentFit="cover"
-                            source={require("../assets/mingcute_shop-fill.png")}/>
+                            source={require("../assets/mingcute_shop-fill.png")} />
                         <Text style={[styles.text1, styles.textTypo]}>내가 들렀던 가게</Text>
                     </View>
                 </TouchableOpacity>
             </View>
-
         </SafeAreaView>
     );
 };
 
+// 스타일 정의
 const styles = StyleSheet.create({
     qrLayout: {
         height: 81,
@@ -199,7 +197,6 @@ const styles = StyleSheet.create({
     },
     view: {
         backgroundColor: Color.colorWhite,
-        // flex: 1,
         width: widthPercentage(360),
         height: heightPercentage(800),
         overflow: "hidden",

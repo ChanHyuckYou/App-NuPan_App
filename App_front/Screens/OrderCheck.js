@@ -7,7 +7,7 @@ const OrderCheck = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const initialOrderList = route.params?.orderList || []; // route.params.orderList가 존재하지 않을 경우 빈 배열을 초기값으로 설정
-    const { userEmail } = route.params;
+    const userid = route.params?.userid;
     const [orderList, setOrderList] = useState(initialOrderList); // orderList를 상태로 관리
     // 총 결제 금액 계산
     const totalPrice = orderList.reduce((total, item) => total + parseInt(item.price, 10), 0);
@@ -28,7 +28,7 @@ const OrderCheck = () => {
 
     // SelectPayment로 이동할 때 현재 상태를 전달
     const handleSelectPayment = () => {
-        navigation.navigate('SelectPayment', { totalPrice, userEmail});
+        navigation.navigate('SelectPayment', { orderList, totalPrice, userid});
         console.log("보낸 금액: ",totalPrice)
     };
     return (

@@ -9,7 +9,7 @@ import { topPercentage, widthPercentage } from "./Window";
 const MenuPage = ({ }) => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { ownerid, tableidx, userEmail } = route.params;
+    const { ownerid, tableidx, userid } = route.params;
     const [showDetails, setShowDetails] = useState(false);
     const [menuItems, setMenuItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -22,11 +22,11 @@ const MenuPage = ({ }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log("ownerid :", ownerid, "테이블넘버 :", tableidx);
+                console.log("ownerid :", ownerid, "테이블넘버 :", tableidx, "userid : ",userid);
                 const response = await axios.post('http://43.201.92.62/order/scan', {
                     ownerid: ownerid,
                     tablenumber: tableidx,
-                    userid: userEmail,
+                    userid: userid,
                 });
                 console.log("Response data: ", response.data); // 응답 데이터 로그 출력
                 setMenuItems(response.data?.menu_items || []);
@@ -55,7 +55,7 @@ const MenuPage = ({ }) => {
     };
 
     const handleOrderCheck = () => {
-        navigation.navigate('OrderCheck', { orderList, userEmail });
+        navigation.navigate('OrderCheck', { orderList, userid });
     };
 
     return (

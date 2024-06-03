@@ -9,7 +9,7 @@ import {useNavigation, useRoute} from "@react-navigation/native";
 const QR = () => {
     const [hasPermission, setHasPermission] = useState(null);
     const route = useRoute();
-    const userEmail = route.params;
+    const userid = route.params;
     const [scanned, setScanned] = useState(false);
     const navigation = useNavigation(); // useNavigation Hook 사용
 
@@ -37,8 +37,8 @@ const QR = () => {
             // 필요한 로직에 따라 ownerid와 tableidx 사용
             // 예를 들어, 이 값을 상태에 저장하거나, 다른 컴포넌트로 전달할 수 있습니다.
 
-            console.log("QR route userEmail : ", userEmail)
-            navigation.navigate('MenuPage', { ownerid, tableidx, userEmail });
+            console.log("QR route userEmail : ", userid)
+            navigation.navigate('MenuPage', { ownerid, tableidx, userid });
         } else {
             console.log("URL 형식이 올바르지 않습니다.");
         }

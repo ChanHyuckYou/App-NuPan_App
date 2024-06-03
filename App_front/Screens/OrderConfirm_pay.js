@@ -1,14 +1,16 @@
 import * as React from "react";
-import {Text, StyleSheet, View, SafeAreaView, TouchableOpacity} from "react-native";
+import { Text, StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
 import { Image } from "expo-image";
 import { FontFamily, Color, FontSize } from "../GlobalStyles";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 const OrderConfirm_pay = () => {
+    const route = useRoute();
+    const { userEmail } = route.params || {}; // userEmail 기본값을 설정합니다.
     const navigation = useNavigation();
+
     return (
         <SafeAreaView style={styles.view}>
-            <Text style={[styles.appNupan, styles.appTypo]}>App-nupan</Text>
             <Text style={[styles.appNupan, styles.appTypo]}>App-nupan</Text>
             <Text style={[styles.text, styles.textFlexBox]}>
                 주문하신 음식이 곧 나옵니다.
@@ -25,7 +27,7 @@ const OrderConfirm_pay = () => {
                 </Text>
             </View>
             <TouchableOpacity
-                onPress={navigation.navigate("UserPage")}
+                onPress={() => navigation.navigate("UserPage", { userEmail })}
                 style={[styles.view2, styles.view2Layout]}>
                 <View style={[styles.child, styles.view2Layout]} />
                 <Text style={[styles.appNupan2, styles.textFlexBox]}>
@@ -33,7 +35,7 @@ const OrderConfirm_pay = () => {
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity
-                onPress={navigation.navigate("MenuPage")}
+                onPress={() => navigation.navigate("MenuPage", { userEmail })}
                 style={[styles.view3, styles.itemLayout]}>
                 <View style={[styles.item, styles.itemLayout]} />
                 <Text style={[styles.text3, styles.textFlexBox]}>메뉴화면으로</Text>

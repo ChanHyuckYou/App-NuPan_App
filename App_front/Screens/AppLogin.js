@@ -10,37 +10,37 @@ import {heightPercentage, leftPercentage, topPercentage, widthPercentage} from "
 
 const AppLogin = () => {
     const navigation = useNavigation();
-    const [userEmail, setuserEmail] = useState("");
+    const [userid, setuserid] = useState("");
     const [userPwd, setuserPwd] = useState("");
     // 로그인 성공 후
 
 
     function login() {
-        if (userEmail.trim() === "") {
+        if (userid.trim() === "") {
             Alert.alert("아이디 입력 확인", "아이디가 입력되지 않았습니다.");
         } else if (userPwd.trim() === "") {
             Alert.alert("비밀번호 입력 확인", "비밀번호가 입력되지 않았습니다.");
         } else {
             // admin과 1234로 바로 로그인 처리
-            if (userEmail === "admin" && userPwd === "1234") {
+            if (userid === "admin" && userPwd === "1234") {
                 console.log("관리자로 로그인 성공");
-                navigation.navigate('UserPage', { userEmail: userEmail });
+                navigation.navigate('UserPage', { userid: userid });
             } else {
                 axios.post("http://43.201.92.62/user/login", {
-                    userid: userEmail,
+                    userid: userid,
                     password: userPwd
                 })
                     .then(function (resp) {
                         console.log(resp.data);
 
                         if (resp.data !== null && resp.data !== "") {
-                            console.log("로그인 성공", userEmail);
+                            console.log("로그인 성공", userid);
                             // 로그인 성공 후
-                            AsyncStorage.setItem('userEmail', userEmail);
-                            navigation.navigate('UserPage', { userEmail: userEmail });
+
+                            navigation.navigate('UserPage', { userid: userid });
                         } else {
                             Alert.alert("로그인 실패", "아이디나 비밀번호를 확인하세요.");
-                            setuserEmail("");
+                            setuserid("");
                             setuserPwd("");
                         }
                     })
@@ -63,7 +63,7 @@ const AppLogin = () => {
                 <View style={[styles.id1, styles.passwordLayout]}>
                     <View style={[styles.passwordChild, styles.passwordLayout]}/>
                     <TextInput style={styles.password1}
-                               onChangeText={(userEmail) => setuserEmail(userEmail)}
+                               onChangeText={(userid) => setuserid(userid)}
                                placeholder={"ID"}></TextInput>
                 </View>
                 <View style={[styles.password, styles.passwordLayout]}>

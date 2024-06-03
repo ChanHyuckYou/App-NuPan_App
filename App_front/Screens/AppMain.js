@@ -9,12 +9,9 @@ import {topPercentage} from "./Window";
 // 기기의 너비와 높이를 가져옵니다.
 
 const {width, height} = Dimensions.get("window");
-const AppMain = ({userEmail}) => {
+const AppMain = ({}) => {
     const navigation = useNavigation();
 
-    function userLog() {
-        console.log("UserID MainPage", userEmail)
-    }
     return (
         <SafeAreaView style={styles.view}>
         {/*<View style={styles.view}>*/}
@@ -31,7 +28,7 @@ const AppMain = ({userEmail}) => {
             <View style={[styles.view2, styles.view2Layout]}>
                 <TouchableOpacity
                     style={[styles.child, styles.childPosition]}
-                    onPress={() => navigation.navigate('AppLogin', { userEmail: userEmail })}>
+                    onPress={() => navigation.navigate('AppLogin')}>
                     <Text style={[styles.appNupan1, styles.appFlexBox]}>
                         App-nupan 로그인
                     </Text>

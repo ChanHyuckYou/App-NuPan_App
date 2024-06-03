@@ -5,17 +5,20 @@ import { FontSize, Color, FontFamily } from "../../GlobalStyles";
 import {useState} from "react";
 import {useNavigation, useRoute} from "@react-navigation/native";
 import {heightPercentage, topPercentage} from "../Window";
+import orderList from "../OrderList";
 
 const {width, height} = Dimensions.get("window");
 const SelectPayment  = ({}) => {
     const [PaymentType, setPaymentType] = useState('');
     const route = useRoute();
-    const { totalPrice, userEmail } = route.params;
+    const { totalPrice, userid } = route.params;
+    const orderList = route.params?.orderList;
     const navigation = useNavigation();
     const handlePaymentType = (type) => {
         setPaymentType(type);
         console.log(type);  // PaymentType 대신 type을 출력
-        navigation.navigate("PAY", { payType: type, totalPrice: totalPrice, userid: userEmail });
+        console.log("결제하는 유저아이디 :",userid)
+        navigation.navigate("PAY", { payType: type, totalPrice: totalPrice, userid: userid ,orderList});
         console.log("보내는 금액 : ", totalPrice);
     };
 

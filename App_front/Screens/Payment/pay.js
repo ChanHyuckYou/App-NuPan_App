@@ -26,7 +26,7 @@ const Payment = ({  }) => {
         if (response.success) {
             try {
                 // 서버로 결제 정보 전송
-                const response = await fetch('"http://43.201.92.62/order/complete_payment"', {
+                const response = await fetch('"http://43.201.92.62/order/payments"', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -36,12 +36,9 @@ const Payment = ({  }) => {
                         merchant_uid: response.merchant_uid,
                         amount: response.amount,
                         buyer_email: response.buyer_email,
-                        buyer_name: response.buyer_name,
-                        buyer_tel: response.buyer_tel,
-                        buyer_addr: response.buyer_addr,
-                        buyer_postcode: response.buyer_postcode,
-                        pay_method: response.pay_method,
+                        userid: response.userid,
                         pg: response.pg,
+
                     }),
                 });
                 const data = await response.json();
@@ -54,8 +51,9 @@ const Payment = ({  }) => {
             console.log('결제 실패:', response.error_msg);
         }
 
+        console.log("결제 성공 userid :",userid)
         // 결제 프로세스 완료 후 다음 화면으로 네비게이션
-        navigation.navigate("OrderConfirm_pay");
+        navigation.navigate("OrderConfirm_pay", userid);
     };
     return (
         <SafeAreaView style={{ flex: 1 }}>
