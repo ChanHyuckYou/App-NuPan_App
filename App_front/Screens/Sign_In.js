@@ -7,6 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useState} from "react";
 import axios from "axios";
 import checkboxWeb from "native-base/src/components/primitives/Checkbox/Checkbox.web";
+import {topPercentage} from "./Window";
 
 const Sign_In = () => {
     const navigation = useNavigation();
@@ -175,9 +176,7 @@ const Sign_In = () => {
 
 const styles = StyleSheet.create({
     idTypo: {
-        width: 47,
         fontFamily: FontFamily.interLight,
-        height: 21,
         fontSize: FontSize.size_mid,
         textAlign: "left",
         color: Color.colorBlack,
@@ -185,7 +184,6 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     textTypo3: {
-        height: 21,
         fontFamily: FontFamily.interLight,
         fontSize: FontSize.size_mid,
         textAlign: "left",
@@ -217,7 +215,7 @@ const styles = StyleSheet.create({
         top: 10,
     },
     id1Layout: {
-        width: 73,
+        width: 85,
         height: 41,
         position: "absolute",
     },
@@ -227,7 +225,6 @@ const styles = StyleSheet.create({
         top: 0,
     },
     textTypo: {
-        width: 65,
         color: Color.colorWhite,
         fontSize: FontSize.size_mid,
         textAlign: "left",
@@ -250,36 +247,30 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     appNupan: {
-        top: 35,
+        top: topPercentage(5),
         alignSelf: "center",
-        width: 150,
-        height: 29,
-        textAlign: "left",
-        color: Color.colorBlack,
+        fontSize: FontSize.size_5xl,
         fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
+        color: Color.colorBlack,
         fontStyle: "italic",
-        fontSize: FontSize.size_5xl,
-        position: "absolute",
+        textAlign: "left",
+        position: "relative",
     },
     text: {
         top: 0,
         left: 0,
-        height: 21,
     },
     text1: {
         top: 0,
         left: 0,
-        width: 66,
     },
     text2: {
         top: 0,
-        width: 102,
     },
     id: {
         top: 0,
         left: 1,
-        height: 21,
     },
     child: {
         height: 41,
@@ -319,15 +310,13 @@ const styles = StyleSheet.create({
         left: 0,
     },
     idChild: {
-        width: 73,
+        width: 85,
         height: 41,
         position: "absolute",
     },
     text5: {
         left: 7,
-        height: 23,
         top: 12,
-        width: 65,
         color: Color.colorWhite,
     },
     id1: {
@@ -363,10 +352,8 @@ const styles = StyleSheet.create({
         left: 0,
     },
     text7: {
-        top: 130,
+        top: topPercentage(130),
         left: 60,
-        width: 98,
-        height: 29,
         textAlign: "left",
         color: Color.colorBlack,
         fontFamily: FontFamily.interSemiBold,
@@ -390,8 +377,6 @@ const styles = StyleSheet.create({
     text8: {
         left: 28,
         textAlign: "center",
-        width: 64,
-        height: 21,
         fontSize: FontSize.size_mid,
         top: 8,
         color: Color.colorBlack,
@@ -410,7 +395,6 @@ const styles = StyleSheet.create({
     text9: {
         top: 8,
         left: 20,
-        height: 21,
     },
     view5: {
         alignSelf: "flex-end",
@@ -430,7 +414,7 @@ const styles = StyleSheet.create({
     idView: {
         top: 210,
         left: 60,
-        width: 270
+        width: 280,
     },
     passwdView: {
         left: 60,

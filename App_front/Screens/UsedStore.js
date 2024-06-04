@@ -1,95 +1,214 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
-import axios from 'axios';
-import {useRoute} from "@react-navigation/native";
+import * as React from "react";
+import {StyleSheet, View, Text, TouchableOpacity, SafeAreaView, Platform} from "react-native";
+import { Image } from "expo-image";
+import { Color, FontSize, FontFamily } from "../GlobalStyles";
+import {useNavigation} from "@react-navigation/native";
+import {ScrollView, StatusBar} from "native-base";
+import {useEffect, useState} from "react";
+import * as PropTypes from "prop-types";
+import { widthPercentage, heightPercentage, fontPercentage } from "./Window"
 
-const UsedStore = ({ }) => {
-    const [orderHistory, setOrderHistory] = useState([]);
-    const route = useRoute()
-    const { userid } = route.params;
+function NavigationBar(props) {
+    return null;
+}
+
+
+NavigationBar.propTypes = {children: PropTypes.node};
+const UsedStore = ({route}) => {
+    const [stores, setStores] = useState([]); // 서버로부터 받은 가게 목록을 저장할 상태
+
+    const navigation = useNavigation();
+
+
+
+    // const { userEmail } = route.params;
 
     useEffect(() => {
-        // 서버에서 주문 내역 데이터 가져오기
-        const fetchOrderHistory = async () => {
-            try {
-                const response = await axios.post('http://43.201.92.62/user/history', {
-                    userid: userid
-                });
-                setOrderHistory(response.data);
-            } catch (error) {
-                console.error("주문 내역을 불러오는 중 오류가 발생했습니다!", error);
+        fetchStores();
+    }, []);
+
+    const fetchStores = async () => {
+        try {
+            const response = await fetch('http://43.201.92.62/store/11111');
+            if (!response.ok) {
+                throw new Error('서버 응답 오류');
             }
-        };
-
-        fetchOrderHistory();
-    }, [userid]);
-
-    const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.orderItem}>
-            <Text style={styles.orderId}>가게 이름: {item.storename}</Text>
-            <Text style={styles.orderTime}>주문 시간: {new Date(item.ordertime).toLocaleString()}</Text>
-            <Text style={styles.totalPrice}>총 금액: {item.total_price.toLocaleString()}₩</Text>
-            <Text style={styles.itemsTitle}>주문 항목:</Text>
-            {item.items.map((detail, index) => (
-                <View key={index} style={styles.itemDetail}>
-                    <Text>{detail.menu_name} x {detail.quantity}</Text>
-                </View>
-            ))}
-        </TouchableOpacity>
-    );
+            const text = await response.text(); // 먼저 텍스트로 응답을 받습니다.
+            try {
+                const data = JSON.parse(text); // 응답을 JSON으로 파싱합니다.
+                setStores(data); // 파싱이 성공하면 상태에 저장
+            } catch (error) {
+                console.error("JSON 파싱 오류:", error);
+                // 이 경우 text는 JSON이 아님. 오류 처리 로직을 추가할 수 있습니다.
+            }
+        } catch (error) {
+            console.error("네트워크 오류:", error);
+        }
+    };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <FlatList
-                data={orderHistory}
-                renderItem={renderItem}
-                keyExtractor={item => item.orderid}
-                ListEmptyComponent={<Text>주문 내역이 없습니다.</Text>}
-            />
-        </SafeAreaView>
+        <View flex={1}>
+            <StatusBar barStyle="light-content" />
+            <View style={styles.view1Position}>
+                <View style={[styles.child, styles.view1Position]} />
+                <Text style={styles.text}>내가 들렀던 가게</Text>
+                <TouchableOpacity style={styles.backBtLayout}
+                onPress={() => navigation.goBack()}>
+                <Image
+                    style={styles.epbackIcon}
+                    contentFit="cover"
+                    source={require("../assets/ep_back.png")}
+                />
+                </TouchableOpacity>
+            </View>
+            <Text style={styles.text1}>정렬기준은 최근 순입니다.</Text>
+            <ScrollView style={styles.view2}>
+                {stores.map((store, index) => (
+                    <TouchableOpacity
+                        key={index}
+                        onPress={() => navigation.navigate('MenuPage', { storename: store.storename })}>
+                        <View style={[styles.view3, styles.viewLayout]}>
+                            <View style={[styles.item, styles.viewLayout]} />
+                            <View style={styles.view4} />
+                            <Text style={[styles.text2, styles.textPosition]}>{store.storename}</Text>
+                            <Text style={[styles.text3, styles.textPosition]}>{store.ownerid}</Text>
+                            <Text
+                                style={[styles.text4, styles.textPosition]}
+                            >{`가게주소 - ${store.address}`}</Text>
+                        </View>
+                    </TouchableOpacity>
+                ))}
+            </ScrollView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    view1Position: {
+        height: 70,
+        width: "100%",
+        left: 0,
+        position: "relative",
+    },
+    viewLayout: {
+        height: 141,
+        width: "100%",
+        left: 0,
+        position: "relative",
+    },
+    textPosition: {
+        left: 185,
+        textAlign: "left",
+        fontStyle: "italic",
+        color: Color.colorBlack,
+        position: "absolute",
+    },
+    child: {
+        borderStyle: "solid",
+        borderBottomWidth: 2,
+        borderBottomColor: Color.colorBlack,
+        height: 70,
+        backgroundColor: Color.colorWhite,
+        top: 0,
+    },
+    text: {
+        alignSelf: "center",
+        fontSize: FontSize.size_11xl,
+        textAlign: "center",
+        color: Color.colorBlack,
+        top: 17,
+        fontFamily: FontFamily.interSemiBold,
+        fontWeight: "600",
+        position: "absolute",
+    },
+    epbackIcon: {
+        top: 24,
+        left: 23,
+        width: 30,
+        height: 30,
+        position: "absolute",
+        overflow: "hidden",
+    },
+    text1: {
+        top: 154,
+        fontSize: FontSize.size_mid,
+        width: 193,
+        height: 25,
+        textAlign: "left",
+        fontStyle: "italic",
+        fontFamily: FontFamily.interLight,
+        left: 13,
+        color: Color.colorBlack,
+        position: "absolute",
+    },
+    item: {
+        borderStyle: "solid",
+        borderColor: Color.colorBlack,
+        borderWidth: 1,
+        top: 0,
+        height: 141,
+        backgroundColor: Color.colorWhite,
+    },
+
+    view4: {
+        backgroundColor: Color.colorGainsboro,
+        width: 143,
+        height: 107,
+        left: 13,
+        top: 17,
+        position: "absolute",
+    },
+    text2: {
+        top: 29,
+        fontSize: FontSize.size_5xl,
+        width: 118,
+        height: 29,
+        left: 180,
+        fontFamily: FontFamily.interSemiBold,
+        fontWeight: "600",
+    },
+    text3: {
+        top: 64,
+        fontSize: FontSize.size_xl,
+        left: 180,
+        fontFamily: FontFamily.interSemiBold,
+        fontWeight: "600",
+    },
+    text4: {
+        top: 94,
+        fontSize: FontSize.size_sm,
+        fontFamily: FontFamily.interLight,
+        left: 180,
+    },
+    view3: {
+        top: 10,
+        height: 141,
+    },
+    view5: {
+        top: 141,
+    },
+    view7: {
+        top: 282,
+    },
+    view2: {
+        top: 185,
+        height: 700,
+        width: "100%",
+        left: 0,
+        position: "absolute",
+    },
+    view: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
-        paddingHorizontal: 10,
-        paddingTop: 10,
+        paddingTop: 50,
+        width: widthPercentage(360),
+        height: heightPercentage(800),
+        overflow: "hidden",
+        backgroundColor: Color.colorWhite,
     },
-    orderItem: {
-        backgroundColor: '#fff',
-        padding: 15,
-        marginBottom: 10,
-        borderRadius: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
-        elevation: 2,
-    },
-    orderId: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    orderTime: {
-        fontSize: 14,
-        color: '#888',
-    },
-    totalPrice: {
-        fontSize: 14,
-        color: '#000',
-        marginTop: 5,
-    },
-    itemsTitle: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        marginTop: 10,
-    },
-    itemDetail: {
-        fontSize: 14,
-        color: '#000',
-        marginTop: 5,
+    backBtLayout: {
+        width: 40,
+        height: 80,
+        position: "absolute",
     },
 });
 
