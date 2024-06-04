@@ -30,7 +30,7 @@ const Sign_In = () => {
     // 중복확인 함수
     const checkUserId = async () => {
         try {
-            const response = await axios.get(`http://43.201.92.62/user/checkId`, {
+            const response = await axios.get(`http://43.201.92.62/user/check`, {
                 params: {
                     userid: userEmail
                 }
@@ -75,7 +75,7 @@ const Sign_In = () => {
             });
 
             // 성공적으로 회원가입이 완료되면, 로그인 화면이나 메인 화면으로 이동
-            navigation.navigate('Sign_InConfrim');
+            navigation.navigate('AppLogin');
             Alert.alert("회원가입에 성공하였습니다.")
         } catch (error) {
 
