@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import {View, Text, FlatList, StyleSheet, TouchableOpacity, SafeAreaView, Image} from 'react-native';
 import axios from 'axios';
-import {useRoute} from "@react-navigation/native";
+import {useNavigation,useRoute} from "@react-navigation/native";
+import {Color, FontFamily, FontSize} from "../GlobalStyles";
+
 
 const UsedStore = ({ }) => {
     const [orderHistory, setOrderHistory] = useState([]);
     const route = useRoute()
     const { userid } = route.params;
+    const navigation = useNavigation();
 
     useEffect(() => {
         // 서버에서 주문 내역 데이터 가져오기
@@ -40,6 +43,17 @@ const UsedStore = ({ }) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.headerContainer}>
+                <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+                    <Image
+                        style={styles.backIcon}
+                        source={require("../assets/ep_back.png")}
+                    />
+                </TouchableOpacity>
+                <Text style={styles.orderHistory}>
+                    주문내역
+                </Text>
+            </View>
             <FlatList
                 data={orderHistory}
                 renderItem={renderItem}
@@ -53,7 +67,7 @@ const UsedStore = ({ }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#fff',
         paddingHorizontal: 10,
         paddingTop: 10,
     },
@@ -67,6 +81,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 2,
         elevation: 2,
+        borderStyle: "solid",
+        borderColor: "#000",
+        borderWidth: 1,
     },
     orderId: {
         fontSize: 16,
@@ -90,6 +107,37 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#000',
         marginTop: 5,
+    },
+    headerContainer: {
+        width: "100%",
+        left: 0,
+        position: "relative",
+        borderStyle: "solid",
+        borderBottomWidth: 2,
+        borderBottomColor: "#000000",
+        height: 70,
+        backgroundColor: "#ffffff",
+        marginBottom: 40,
+        justifyContent: "center",
+    },
+    orderHistory: {
+        fontFamily: FontFamily.interMedium,
+        fontSize: FontSize.size_11xl,
+        textAlign: "center",
+        color: Color.colorBlack,
+        position:"absolute",
+        alignSelf: "center",
+    },
+    backButton: {
+        position: 'absolute',
+        left: 20,
+        width: 30,
+        height: 30,
+        top: 20,
+    },
+    backIcon: {
+        width: 30,
+        height: 30,
     },
 });
 
