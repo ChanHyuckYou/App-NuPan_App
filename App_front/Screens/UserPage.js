@@ -8,7 +8,7 @@ import { heightPercentage, topPercentage, widthPercentage } from "./Window";
 const UserPage = () => {
     const navigation = useNavigation();
     const route = useRoute();
-    const userid = route.params?.userid ?? "Guest"; // 기본값 설정
+    const userid = route.params?.userid; // 기본값 설정
 
     return (
         <SafeAreaView style={styles.view}>

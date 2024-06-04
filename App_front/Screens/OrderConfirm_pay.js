@@ -7,7 +7,7 @@ import {topPercentage} from "./Window";
 
 const OrderConfirm_pay = () => {
     const route = useRoute();
-    const { userEmail } = route.params || {}; // userEmail 기본값을 설정합니다.
+    const userid  = route.params?.userid; // userEmail 기본값을 설정합니다.
     const navigation = useNavigation();
 
     return (
@@ -27,7 +27,7 @@ const OrderConfirm_pay = () => {
                 </Text>
             </View>
             <TouchableOpacity
-                onPress={() => navigation.navigate("UserPage", { userEmail })}
+                onPress={() => navigation.navigate("UserPage", { userid })}
                 style={[styles.view2, styles.view2Layout]}>
                 <View style={[styles.child, styles.view2Layout]} />
                 <Text style={[styles.appNupan2, styles.textFlexBox]}>
