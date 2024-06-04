@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-na
 import { Image } from "expo-image";
 import { FontFamily, Color, FontSize } from "../GlobalStyles";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import {topPercentage} from "./Window";
 
 const OrderConfirm_pay = () => {
     const route = useRoute();
@@ -15,7 +16,6 @@ const OrderConfirm_pay = () => {
             <Text style={[styles.text, styles.textFlexBox]}>
                 주문하신 음식이 곧 나옵니다.
             </Text>
-            <Text style={[styles.text1, styles.textFlexBox]}>추가주문을 원하면?</Text>
             <View style={[styles.view1, styles.view1Layout]}>
                 <Image
                     style={styles.materialSymbolsfoodBankRouIcon}
@@ -34,19 +34,12 @@ const OrderConfirm_pay = () => {
                     App-nupan 홈으로
                 </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => navigation.navigate("MenuPage", { userEmail })}
-                style={[styles.view3, styles.itemLayout]}>
-                <View style={[styles.item, styles.itemLayout]} />
-                <Text style={[styles.text3, styles.textFlexBox]}>메뉴화면으로</Text>
-            </TouchableOpacity>
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
     appTypo: {
-        height: 29,
         fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
         fontStyle: "italic",
@@ -56,7 +49,6 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     view1Layout: {
-        width: 304,
         position: "absolute",
     },
     view2Layout: {
@@ -70,22 +62,22 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     appNupan: {
-        top: 35,
+        top: topPercentage(5),
         alignSelf: "center",
-        width: 150,
-        textAlign: "left",
-        color: Color.colorBlack,
         fontSize: FontSize.size_5xl,
-        position: "absolute",
+        fontFamily: FontFamily.interSemiBold,
+        fontWeight: "600",
+        color: Color.colorBlack,
+        fontStyle: "italic",
+        textAlign: "left",
+        position: "relative",
     },
     text: {
-        top: 527,
+        top: topPercentage(540),
         alignSelf: "center",
         fontSize: FontSize.size_lg,
         fontWeight: "500",
         fontFamily: FontFamily.interMedium,
-        width: 230,
-        height: 22,
         color: Color.colorBlack,
         textAlign: "center",
     },
@@ -101,7 +93,7 @@ const styles = StyleSheet.create({
         fontStyle: "italic",
     },
     materialSymbolsfoodBankRouIcon: {
-        left: 47,
+        alignSelf: "center",
         width: 200,
         height: 200,
         top: 0,
@@ -111,8 +103,7 @@ const styles = StyleSheet.create({
     text2: {
         top: 221,
         fontSize: FontSize.size_11xl,
-        height: 36,
-        left: 14,
+        alignSelf: "center",
         textAlign: "left",
         color: Color.colorBlack,
         fontFamily: FontFamily.interSemiBold,
@@ -131,17 +122,15 @@ const styles = StyleSheet.create({
     },
     appNupan2: {
         top: 14,
-        left: 16,
+        alignSelf: "center",
         fontSize: FontSize.size_6xl,
         color: Color.colorWhite,
-        width: 222,
-        height: 29,
         fontFamily: FontFamily.interSemiBold,
         fontWeight: "600",
         fontStyle: "italic",
     },
     view2: {
-        top: 559,
+        top: topPercentage(580),
         alignSelf: "center",
     },
     item: {
