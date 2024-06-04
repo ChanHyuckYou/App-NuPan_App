@@ -49,7 +49,7 @@ const UserPage = () => {
                             style={[styles.mingcuteshopFillIcon, styles.iconLayout1]}
                             contentFit="cover"
                             source={require("../assets/mingcute_shop-fill.png")} />
-                        <Text style={[styles.text1, styles.textTypo]} allowFontScaling={false}>내가 들렀던 가게</Text>
+                        <Text style={[styles.text1, styles.textTypo]} allowFontScaling={false}>   주문내역</Text>
                     </View>
                 </TouchableOpacity>
             </View>
