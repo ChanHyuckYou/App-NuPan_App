@@ -72,7 +72,7 @@ const MenuPage = ({ }) => {
             <View style={styles.container}>
                 <View style={[styles.view18, styles.viewPosition]}>
                     <View style={[styles.child3, styles.viewPosition]} />
-                    <Text style={[styles.text16, styles.textTypo2]}>{tableidx} 번 테이블</Text>
+                    <Text style={[styles.text16, styles.textTypo2]}>{tableidx}번 테이블</Text>
                 </View>
                 <View style={[styles.view11]}>
                     <View style={[styles.view16, styles.viewLayout1]}>
