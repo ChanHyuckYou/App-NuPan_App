@@ -40,7 +40,7 @@ const UserPage = () => {
             </TouchableOpacity>
             <View style={styles.usedStoreContainer}>
                 <Text style={[styles.text, styles.textLayout]}>
-                    내가 이용했던 가게가 궁금하다면?
+                    나의 주문 내역이 궁금하다면?
                 </Text>
                 <TouchableOpacity onPress={() => navigation.navigate('UsedStore', { userid })}>
                     <View style={[styles.view1, styles.view1Layout]}>
@@ -49,7 +49,7 @@ const UserPage = () => {
                             style={[styles.mingcuteshopFillIcon, styles.iconLayout1]}
                             contentFit="cover"
                             source={require("../assets/mingcute_shop-fill.png")} />
-                        <Text style={[styles.text1, styles.textTypo]} allowFontScaling={false}>내가 들렀던 가게</Text>
+                        <Text style={[styles.text1, styles.textTypo]} allowFontScaling={false}>주문내역</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     },
     text1: {
         top: 12,
-        left: 54,
+        alignSelf: "center",
         fontSize: FontSize.size_lg,
         color: Color.colorWhite,
     },

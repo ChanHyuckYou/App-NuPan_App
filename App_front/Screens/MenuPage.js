@@ -466,6 +466,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         marginTop: topPercentage(75),
+
     },
     view: {
         flex: 1,

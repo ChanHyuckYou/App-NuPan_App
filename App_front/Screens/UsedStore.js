@@ -47,11 +47,11 @@ const UsedStore = ({route}) => {
     };
 
     return (
-        <View flex={1}>
+        <View flex={1} style={{backgroundColor: "#fff"}}>
             <StatusBar barStyle="light-content" />
             <View style={styles.view1Position}>
                 <View style={[styles.child, styles.view1Position]} />
-                <Text style={styles.text}>내가 들렀던 가게</Text>
+                <Text style={styles.text}>주문내역</Text>
                 <TouchableOpacity style={styles.backBtLayout}
                 onPress={() => navigation.goBack()}>
                 <Image
@@ -85,6 +85,7 @@ const UsedStore = ({route}) => {
 
 const styles = StyleSheet.create({
     view1Position: {
+        marginTop: Platform.OS === 'ios' ? 20 : 0,
         height: 70,
         width: "100%",
         left: 0,
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
         top: 0,
     },
     text: {
+        marginTop: Platform.OS === 'ios' ? 20 : 0,
         alignSelf: "center",
         fontSize: FontSize.size_11xl,
         textAlign: "center",
@@ -206,6 +208,7 @@ const styles = StyleSheet.create({
         backgroundColor: Color.colorWhite,
     },
     backBtLayout: {
+        marginTop: Platform.OS === 'ios' ? 20 : 0,
         width: 40,
         height: 80,
         position: "absolute",
