@@ -17,17 +17,17 @@ const StaffCall = () => {
             </View>
             <View style={[styles.view2, styles.viewLayout]}>
                 <View style={[styles.item, styles.viewLayout]} />
-                <Text style={[styles.text1, styles.textTypo1]}>컵이 필요해요.</Text>
+                <Text style={[styles.text1, styles.textTypo1]} allowFontScaling={false}>컵이 필요해요.</Text>
             </View>
             <View style={[styles.view3, styles.viewLayout]}>
                 <View style={[styles.item, styles.viewLayout]} />
-                <Text style={[styles.text2, styles.textTypo1]}>물이 필요해요.</Text>
+                <Text style={[styles.text2, styles.textTypo1]} allowFontScaling={false}>물이 필요해요.</Text>
             </View>
             <View style={[styles.view4, styles.viewLayout]}>
                 <View style={[styles.item, styles.viewLayout]} />
-                <Text style={[styles.text3, styles.textTypo1]}>접시가 필요해요.</Text>
+                <Text style={[styles.text3, styles.textTypo1]} allowFontScaling={false}>접시가 필요해요.</Text>
             </View>
-            <Text style={[styles.text4, styles.textTypo1]}>간편 호출</Text>
+            <Text style={[styles.text4, styles.textTypo1]} allowFontScaling={false}>간편 호출</Text>
             <View style={[styles.view5, styles.view5Layout]}>
                 <View style={[styles.child1, styles.view5Layout]} />
                 <Image
@@ -35,9 +35,9 @@ const StaffCall = () => {
                     contentFit="cover"
                     source={require("../assets/fa6-solid_bell-concierge.png")}
                 />
-                <Text style={[styles.text5, styles.textTypo]}>직원호출하기</Text>
+                <Text style={[styles.text5, styles.textTypo]} allowFontScaling={false}>직원호출하기</Text>
             </View>
-            <Text style={[styles.text6, styles.textTypo]}>
+            <Text style={[styles.text6, styles.textTypo]} allowFontScaling={false}>
                 간편 호출에 원하시는 옵션이 없다면?
             </Text>
         </SafeAreaView>

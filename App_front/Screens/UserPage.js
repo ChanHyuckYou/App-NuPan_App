@@ -12,16 +12,16 @@ const UserPage = () => {
 
     return (
         <SafeAreaView style={styles.view}>
-            <Text style={styles.appNupan}>App-nupan</Text>
+            <Text style={styles.appNupan} allowFontScaling={false}>App-nupan</Text>
             <View style={[styles.view2, styles.iconLayout]}>
                 <Image
                     style={[styles.icon, styles.iconLayout]}
                     contentFit="cover"
                     source={require("../assets/userpro.png")}
                 />
-                <Text style={[styles.userName, styles.text3Position]}>{userid}</Text>
-                <Text style={[styles.text2, styles.textTypo]}>님</Text>
-                <Text style={[styles.text3, styles.text3Position]}>환영합니다.</Text>
+                <Text style={[styles.userName, styles.text3Position]} allowFontScaling={false}>{userid}</Text>
+                <Text style={[styles.text2, styles.textTypo]} allowFontScaling={false}>님</Text>
+                <Text style={[styles.text3, styles.text3Position]} allowFontScaling={false}>환영합니다.</Text>
             </View>
             <TouchableOpacity onPress={() => navigation.navigate('QR', userid )}>
                 <View style={[styles.qr, styles.qrLayout]}>
@@ -49,7 +49,7 @@ const UserPage = () => {
                             style={[styles.mingcuteshopFillIcon, styles.iconLayout1]}
                             contentFit="cover"
                             source={require("../assets/mingcute_shop-fill.png")} />
-                        <Text style={[styles.text1, styles.textTypo]}>내가 들렀던 가게</Text>
+                        <Text style={[styles.text1, styles.textTypo]} allowFontScaling={false}>내가 들렀던 가게</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         fontSize: FontSize.size_5xl,
         fontFamily: FontFamily.interSemiBold,
-        fontWeight: "600",
+
         color: Color.colorBlack,
         fontStyle: "italic",
         textAlign: "left",

@@ -1,9 +1,8 @@
-import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Platform } from "react-native";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert, Platform } from 'react-native';
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
-import { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import axios from "axios";
+import axios from 'axios';
 import { topPercentage, widthPercentage } from "./Window";
 
 const MenuPage = ({ }) => {
@@ -14,6 +13,7 @@ const MenuPage = ({ }) => {
     const [menuItems, setMenuItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [orderList, setOrderList] = useState([]);
+    const [orderId, setOrderId] = useState(null);
 
     const numberWithCommas = (number) => {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -22,7 +22,7 @@ const MenuPage = ({ }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log("ownerid :", ownerid, "테이블넘버 :", tableidx, "userid : ",userid);
+                console.log("ownerid :", ownerid, "테이블넘버 :", tableidx, "userid : ", userid);
                 const response = await axios.post('http://43.201.92.62/order/scan', {
                     ownerid: ownerid,
                     tablenumber: tableidx,
@@ -30,6 +30,8 @@ const MenuPage = ({ }) => {
                 });
                 console.log("Response data: ", response.data); // 응답 데이터 로그 출력
                 setMenuItems(response.data?.menu_items || []);
+                setOrderId(response.data?.orderid); // Order ID 설정
+                console.log(orderId)
             } catch (error) {
                 console.error("메뉴를 불러오는 중 오류가 발생했습니다!", error);
                 Alert.alert("오류", "메뉴를 불러오는 중 오류가 발생했습니다.");
@@ -37,7 +39,7 @@ const MenuPage = ({ }) => {
         };
 
         fetchData();
-    }, [ownerid, tableidx]);
+    }, [ownerid, tableidx, userid]);
 
     const handleItemPress = (item) => {
         setSelectedItem(item);
@@ -50,12 +52,19 @@ const MenuPage = ({ }) => {
     };
 
     const handleAddToOrder = () => {
-        setOrderList([...orderList, selectedItem]);
-        setShowDetails(false);
+        if (selectedItem) {
+            setOrderList([...orderList, { ...selectedItem }]);
+            setShowDetails(false);
+        }
     };
 
     const handleOrderCheck = () => {
-        navigation.navigate('OrderCheck', { orderList, userid });
+        const orderDetails = {
+            storeid: ownerid,
+            tablenumber: tableidx,
+            menu_items: orderList
+        };
+        navigation.navigate('OrderCheck', { orderList, userid, orderid: orderId, storeid: ownerid, tablenumber: tableidx });
     };
 
     return (

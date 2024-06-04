@@ -1,62 +1,78 @@
-import React, {useEffect, useState} from 'react';
-import { SafeAreaView } from 'react-native';
-import { WebView } from 'react-native-webview';
+import React, { useEffect } from 'react';
+import { Alert, SafeAreaView } from 'react-native';
 import IMP from 'iamport-react-native';
-import {useNavigation, useRoute} from "@react-navigation/native";
-
+import { useNavigation, useRoute } from '@react-navigation/native';
+import {string} from "prop-types";
 
 const userCode = 'imp42271774'; // 아임포트 관리자 페이지에서 발급받은 가맹점 식별코드를 입력하세요.
 
-const Payment = ({  }) => {
+const Payment = ({ }) => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { payType, totalPrice, userid } = route.params;
+    const {payType, totalPrice, userid, orderList, orderid, storeid, tablenumber} = route.params;
 
     useEffect(() => {
-        console.log("결제 유형:", payType);
-        console.log("총 금액:", totalPrice);
-        console.log("결제한 userid : ", userid)
-    }, [payType, totalPrice]);
+        console.log("orderid : ", orderid, "\nstoreid : ", storeid, "\ntablenumber", tablenumber);
+        console.log("orderList:", orderList); // orderList 데이터 확인
+    }, [orderList]);
 
-
-    // 결제 후 콜백 함수
     const onPaymentResult = async (response) => {
-        console.log("받은금액 :", totalPrice)
+        console.log('결제 응답:', response); // 응답 데이터 확인
+
         // 결제 성공 여부 확인
-        if (response.success) {
+        if (response.imp_success === 'true') {
             try {
+                // 서버로 전송할 결제 정보 구성
+                const paymentData = {
+                    userid: userid,
+                    orderid: orderid, // orderid 추가
+                    order_details: {
+                        storeid: storeid,
+                        tablenumber: tablenumber,
+                        amount: totalPrice,
+                        menu_items: orderList.map(item => ({
+                            productname: item.productname,
+                            price: item.price,
+                            quantity: '1',
+                        })),
+                    },
+                };
+
+                // 전송할 데이터를 콘솔에 출력
+                console.log("서버로 전송할 데이터:", JSON.stringify(paymentData, null, 2));
+
                 // 서버로 결제 정보 전송
-                const response = await fetch('"http://43.201.92.62/order/payments"', {
+                const serverResponse = await fetch("http://43.201.92.62/order/payments", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        // 서버에 전송할 결제 정보. 필요에 따라 수정하세요.
-                        merchant_uid: response.merchant_uid,
-                        amount: response.amount,
-                        buyer_email: response.buyer_email,
-                        userid: response.userid,
-                        pg: response.pg,
-
-                    }),
+                    body: JSON.stringify(paymentData),
                 });
-                const data = await response.json();
-                console.log(data);
-            } catch(error) {
+
+                const data = await serverResponse.json();
+                console.log('서버 응답 데이터:', data); // 서버 응답 데이터 확인
+                if (data.message) {
+                    // 결제 프로세스 완료 후 다음 화면으로 네비게이션
+                    navigation.navigate("OrderConfirm_pay", {userid});
+                } else {
+                    throw new Error(data.error || '결제 정보 전송 실패');
+                }
+            } catch (error) {
                 console.error('결제 정보 전송 실패:', error);
+                Alert.alert('결제 실패', error.message);
+                navigation.goBack();
             }
         } else {
             // 결제 실패 처리
-            console.log('결제 실패:', response.error_msg);
+            console.log('결제 실패:', response.error_msg || response);
+            Alert.alert('결제 실패', response.error_msg || '알 수 없는 오류가 발생했습니다.');
+            navigation.goBack();
         }
-
-        console.log("결제 성공 userid :",userid)
-        // 결제 프로세스 완료 후 다음 화면으로 네비게이션
-        navigation.navigate("OrderConfirm_pay", userid);
     };
+
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{flex: 1}}>
             <IMP.Payment
                 userCode={userCode}
                 data={{
@@ -76,6 +92,6 @@ const Payment = ({  }) => {
             />
         </SafeAreaView>
     );
-};
+}
 
-export default Payment;
+    export default Payment;

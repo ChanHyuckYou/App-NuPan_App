@@ -13,12 +13,15 @@ const SelectPayment  = ({}) => {
     const route = useRoute();
     const { totalPrice, userid } = route.params;
     const orderList = route.params?.orderList;
+    const orderid = route.params?.orderid;
+    const storeid = route.params?.storeid;
+    const tablenumber = route.params?.tablenumber;
     const navigation = useNavigation();
     const handlePaymentType = (type) => {
         setPaymentType(type);
         console.log(type);  // PaymentType 대신 type을 출력
         console.log("결제하는 유저아이디 :",userid)
-        navigation.navigate("PAY", { payType: type, totalPrice: totalPrice, userid: userid ,orderList});
+        navigation.navigate("PAY", { payType: type, totalPrice: totalPrice, userid: userid ,orderList,orderid, storeid, tablenumber});
         console.log("보내는 금액 : ", totalPrice);
     };
 
