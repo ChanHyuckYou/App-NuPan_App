@@ -72,7 +72,7 @@ const MenuPage = ({ }) => {
             <View style={styles.container}>
                 <View style={[styles.view18, styles.viewPosition]}>
                     <View style={[styles.child3, styles.viewPosition]} />
-                    <Text style={[styles.text16, styles.textTypo2]}>Table Number : {tableidx}</Text>
+                    <Text style={[styles.text16, styles.textTypo2]}>{tableidx} 번 테이블</Text>
                 </View>
                 <View style={[styles.view11]}>
                     <View style={[styles.view16, styles.viewLayout1]}>
@@ -386,10 +386,10 @@ const styles = StyleSheet.create({
     child3: {
         borderStyle: "solid",
         borderBottomWidth: 2,
-        borderBottomColor: Color.colorBlack,
+        borderBottomColor: "#000000",
         height: 70,
-        backgroundColor: Color.colorWhite,
         top: 0,
+        backgroundColor: "#ffffff",
     },
     text15: {
         top: 16,
@@ -401,7 +401,7 @@ const styles = StyleSheet.create({
     },
     text16: {
         top: 10,
-        alignSelf: "flex-end",
+        alignSelf: "center",
         fontFamily: FontFamily.interMedium,
     },
     view18: {
@@ -465,7 +465,7 @@ const styles = StyleSheet.create({
     menuList: {
         flex: 1,
         padding: 10,
-        marginTop: topPercentage(55)
+        marginTop: topPercentage(75),
     },
     view: {
         flex: 1,
@@ -500,7 +500,7 @@ const styles = StyleSheet.create({
     menuItemContent: {
         flexDirection: "row",
         borderWidth: 1,
-        borderColor: "#d3d3d3",
+        borderColor: "#A5A5A5",
         padding: 10,
         borderRadius: 10,
     },
