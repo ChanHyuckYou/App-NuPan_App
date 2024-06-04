@@ -5,15 +5,17 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import axios from 'axios';
 import { topPercentage, widthPercentage } from "./Window";
 
+
 const MenuPage = ({ }) => {
     const navigation = useNavigation();
     const route = useRoute();
-    const { ownerid, tableidx, userid } = route.params;
+    const { tableidx, userid } = route.params;
+    const [ownerid, setOwnerid] = useState(route.params?.ownerid || null);
     const [showDetails, setShowDetails] = useState(false);
     const [menuItems, setMenuItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
-    const [orderList, setOrderList] = useState([]);
-    const [orderId, setOrderId] = useState(null);
+    const [orderList, setOrderList] = useState(route.params?.orderList || []);
+    const [orderId, setOrderId] = useState(route.params?.orderId || null);
 
     const numberWithCommas = (number) => {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -22,24 +24,30 @@ const MenuPage = ({ }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log("ownerid :", ownerid, "테이블넘버 :", tableidx, "userid : ", userid);
-                const response = await axios.post('http://43.201.92.62/order/scan', {
+                const payload = {
                     ownerid: ownerid,
                     tablenumber: tableidx,
                     userid: userid,
-                });
+                };
+                console.log("Request payload:", payload); // Debugging log
+                const response = await axios.post('http://43.201.92.62/order/scan', payload);
                 console.log("Response data: ", response.data); // 응답 데이터 로그 출력
                 setMenuItems(response.data?.menu_items || []);
                 setOrderId(response.data?.orderid); // Order ID 설정
-                console.log(orderId)
+                console.log(orderId);
             } catch (error) {
                 console.error("메뉴를 불러오는 중 오류가 발생했습니다!", error);
                 Alert.alert("오류", "메뉴를 불러오는 중 오류가 발생했습니다.");
             }
         };
-
         fetchData();
     }, [ownerid, tableidx, userid]);
+
+    useEffect(() => {
+        if (route.params?.orderList) {
+            setOrderList(route.params.orderList);
+        }
+    }, [route.params?.orderList]);
 
     const handleItemPress = (item) => {
         setSelectedItem(item);
@@ -53,7 +61,14 @@ const MenuPage = ({ }) => {
 
     const handleAddToOrder = () => {
         if (selectedItem) {
-            setOrderList([...orderList, { ...selectedItem }]);
+            const existingItemIndex = orderList.findIndex(orderItem => orderItem.productid === selectedItem.productid);
+            if (existingItemIndex !== -1) {
+                const updatedOrderList = [...orderList];
+                updatedOrderList[existingItemIndex].quantity += 1;
+                setOrderList(updatedOrderList);
+            } else {
+                setOrderList([...orderList, { ...selectedItem, quantity: 1 }]);
+            }
             setShowDetails(false);
         }
     };

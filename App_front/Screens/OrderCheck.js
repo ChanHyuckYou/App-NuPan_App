@@ -7,13 +7,14 @@ const OrderCheck = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const initialOrderList = route.params?.orderList || []; // route.params.orderList가 존재하지 않을 경우 빈 배열을 초기값으로 설정
+    const ownerid = route.params?.ownerid;
     const userid = route.params?.userid;
     const orderid = route.params?.orderid;
     const storeid = route.params?.storeid;
     const tablenumber = route.params?.tablenumber;
     const [orderList, setOrderList] = useState(initialOrderList); // orderList를 상태로 관리
     // 총 결제 금액 계산
-    const totalPrice = orderList.reduce((total, item) => total + parseInt(item.price, 10), 0);
+    const totalPrice = orderList.reduce((total, item) => total + parseInt(item.price, 10) * item.quantity, 0);
 
     const numberWithCommas = (number) => {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -24,16 +25,20 @@ const OrderCheck = () => {
     const handleDelete = (index) => {
         const newOrderList = orderList.filter((_, i) => i !== index);
         setOrderList(newOrderList);
+        navigation.setParams({ orderList: newOrderList }); // 업데이트된 orderList를 route params에 설정
     };
+
     const handleMenuPage = () => {
-        navigation.navigate('MenuPage', { orderList });
+        navigation.navigate('MenuPage', { orderList, totalPrice,tableidx: tablenumber, userid, orderid, storeid, ownerid });
+        // navigation.goBack();
     };
 
     // SelectPayment로 이동할 때 현재 상태를 전달
     const handleSelectPayment = () => {
-        navigation.navigate('SelectPayment', { orderList, totalPrice, userid, orderid, storeid, tablenumber});
-        console.log("보낸 금액: ",totalPrice)
+        navigation.navigate('SelectPayment', { orderList, totalPrice, userid, orderid, storeid, tablenumber });
+        console.log("보낸 금액: ", totalPrice);
     };
+
     return (
         <SafeAreaView style={styles.view}>
             <View style={[styles.header, styles.viewLayout]}>
@@ -53,6 +58,7 @@ const OrderCheck = () => {
                         <View style={styles.menuDetails}>
                             <Text style={styles.menuName}>{item.productname}</Text>
                             <Text style={styles.menuPrice}>{numberWithCommas(item.price)}₩</Text>
+                            <Text style={styles.menuQuantity}>수량: {item.quantity}</Text>
                         </View>
                         <TouchableOpacity onPress={() => handleDelete(index)} style={styles.deleteButton}>
                             <Text style={styles.deleteButtonText}>삭제</Text>
@@ -153,6 +159,12 @@ const styles = StyleSheet.create({
         fontSize: FontSize.size_lg,
         color: Color.colorBlack,
         fontFamily: FontFamily.interSemiBold,
+    },
+    menuQuantity: {
+        marginTop: 4,
+        fontSize: FontSize.size_md,
+        color: Color.colorBlack,
+        fontFamily: FontFamily.interRegular,
     },
     deleteButton: {
         backgroundColor: 'red',
