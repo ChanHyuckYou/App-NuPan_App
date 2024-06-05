@@ -82,6 +82,20 @@ const MenuPage = ({ }) => {
         navigation.navigate('OrderCheck', { orderList, userid, orderid: orderId, storeid: ownerid, tablenumber: tableidx });
     };
 
+    // Function to group items by category
+    const groupItemsByCategory = (items) => {
+        return items.reduce((acc, item) => {
+            const category = item.category || 'Uncategorized';
+            if (!acc[category]) {
+                acc[category] = [];
+            }
+            acc[category].push(item);
+            return acc;
+        }, {});
+    };
+
+    const groupedItems = groupItemsByCategory(menuItems);
+
     return (
         <SafeAreaView style={styles.safeAreaView}>
             <View style={styles.container}>
@@ -89,33 +103,24 @@ const MenuPage = ({ }) => {
                     <View style={[styles.child3, styles.viewPosition]} />
                     <Text style={[styles.text16, styles.textTypo2]}>{tableidx} 번 테이블</Text>
                 </View>
-                <View style={[styles.view11]}>
-                    <View style={[styles.view16, styles.viewLayout1]}>
-                        <View style={[styles.view17, styles.viewLayout]} />
-                        <Text style={[styles.text14, styles.textTypo3]}>추천메뉴</Text>
-                    </View>
-                    <View style={[styles.view14, styles.viewLayout1]}>
-                        <View style={styles.viewLayout} />
-                        <Text style={[styles.text12, styles.textTypo3]}>주메뉴</Text>
-                    </View>
-                    <View style={[styles.view12, styles.viewLayout1]}>
-                        <View style={styles.viewLayout} />
-                        <Text style={[styles.text12, styles.textTypo3]}>사이드</Text>
-                    </View>
-                </View>
 
                 <View style={styles.menuList}>
                     <ScrollView>
-                        {menuItems.map(item => (
-                            <TouchableOpacity key={item.productid} onPress={() => handleItemPress(item)} style={styles.menuItem}>
-                                <View style={styles.menuItemContent}>
-                                    <Image source={{ uri: item.imageurl }} style={styles.menuItemImage} />
-                                    <View style={styles.menuItemText}>
-                                        <Text style={styles.menuItemTitle}>{item.productname}</Text>
-                                        <Text style={styles.menuItemPrice}>{numberWithCommas(item.price)} ₩</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
+                        {Object.keys(groupedItems).map((category) => (
+                            <View key={category}>
+                                <Text style={styles.categoryTitle}>{category}</Text>
+                                {groupedItems[category].map(item => (
+                                    <TouchableOpacity key={item.productid} onPress={() => handleItemPress(item)} style={styles.menuItem}>
+                                        <View style={styles.menuItemContent}>
+                                            <Image source={{ uri: item.imageurl }} style={styles.menuItemImage} />
+                                            <View style={styles.menuItemText}>
+                                                <Text style={styles.menuItemTitle}>{item.productname}</Text>
+                                                <Text style={styles.menuItemPrice}>{numberWithCommas(item.price)} ₩</Text>
+                                            </View>
+                                        </View>
+                                    </TouchableOpacity>
+                                ))}
+                            </View>
                         ))}
                     </ScrollView>
                 </View>
@@ -481,34 +486,12 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         marginTop: topPercentage(75),
-
     },
-    view: {
-        flex: 1,
-        backgroundColor: Color.colorWhite,
-    },
-    menuButton: {
-        height: 73,
-        width: 118,
+    categoryTitle: {
+        fontSize: FontSize.size_3xl,
+        fontFamily: FontFamily.interSemiBold,
+        color: Color.colorBlack,
         marginBottom: 10,
-    },
-    itemBorder: {
-        borderWidth: 1,
-        borderColor: "#000",
-        backgroundColor: "#dcdcdc",
-        height: 73,
-    },
-    textTypo5: {
-        textAlign: "center",
-        color: "#000",
-        fontFamily: "Inter-Bold",
-        fontWeight: "700",
-        fontSize: 20,
-    },
-    fa6SolidbellConciergeIcon: {
-        height: 30,
-        width: 30,
-        overflow: "hidden",
     },
     menuItem: {
         marginBottom: 15,

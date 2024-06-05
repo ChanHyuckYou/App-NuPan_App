@@ -30,7 +30,7 @@ const UsedStore = ({ }) => {
     const renderItem = ({ item }) => (
         <TouchableOpacity style={styles.orderItem}>
             <Text style={styles.orderId}>가게 이름: {item.storename}</Text>
-            <Text style={styles.orderTime}>주문 시간: {new Date(item.ordertime).toLocaleString()}</Text>
+            <Text style={styles.orderTime}>주문 시간: {new Date(item.ordertime).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}</Text>
             <Text style={styles.totalPrice}>총 금액: {item.total_price.toLocaleString()}₩</Text>
             <Text style={styles.itemsTitle}>주문 항목:</Text>
             {item.items.map((detail, index) => (
