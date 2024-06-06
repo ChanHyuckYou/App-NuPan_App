@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Color, FontFamily, FontSize } from "../GlobalStyles";
 
-const UsedStore = ({ }) => {
+const UsedStore = () => {
     const [orderHistory, setOrderHistory] = useState([]);
     const route = useRoute();
     const { userid } = route.params;
@@ -28,32 +28,30 @@ const UsedStore = ({ }) => {
         fetchOrderHistory();
     }, [userid]);
 
-    const formatOrderTime = (ordertime) => {
-        const date = new Date(ordertime);
-        // UTC 시간을 KST로 변환 (UTC+9)
-        const kstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
-        const year = kstDate.getFullYear();
-        const month = String(kstDate.getMonth() + 1).padStart(2, '0');
-        const day = String(kstDate.getDate()).padStart(2, '0');
-        const hours = String(kstDate.getHours()).padStart(2, '0');
-        const minutes = String(kstDate.getMinutes()).padStart(2, '0');
-        const seconds = String(kstDate.getSeconds()).padStart(2, '0');
-        return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
+
+
+    const renderItem = ({ item }) => {
+        // ordertime을 Date 객체로 변환
+        const orderDate = new Date(item.ordertime);
+
+        // 원하는 형식으로 변환
+        const formattedOrderTime = orderDate.toISOString().slice(0, 19).replace('T', ' ');
+
+        return (
+            <TouchableOpacity style={styles.orderItem}>
+                <Text style={styles.orderId}>가게 이름: {item.storename}</Text>
+                <Text style={styles.orderTime}>주문 시간: {formattedOrderTime}</Text>
+                <Text style={styles.totalPrice}>총 금액: {item.total_price}₩</Text>
+                <Text style={styles.itemsTitle}>주문 항목:</Text>
+                {item.items.map((detail, index) => (
+                    <View key={index} style={styles.itemDetail}>
+                        <Text>{detail.menu_name} x {detail.quantity}</Text>
+                    </View>
+                ))}
+            </TouchableOpacity>
+        );
     };
 
-    const renderItem = ({ item }) => (
-        <TouchableOpacity style={styles.orderItem}>
-            <Text style={styles.orderId}>가게 이름: {item.storename}</Text>
-            <Text style={styles.orderTime}>주문 시간: {formatOrderTime(item.ordertime)}</Text>
-            <Text style={styles.totalPrice}>총 금액: {item.total_price}₩</Text>
-            <Text style={styles.itemsTitle}>주문 항목:</Text>
-            {item.items.map((detail, index) => (
-                <View key={index} style={styles.itemDetail}>
-                    <Text>{detail.menu_name} x {detail.quantity}</Text>
-                </View>
-            ))}
-        </TouchableOpacity>
-    );
 
     return (
         <SafeAreaView style={styles.container}>

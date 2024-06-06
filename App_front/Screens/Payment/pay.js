@@ -5,7 +5,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 const userCode = 'imp42271774'; // 아임포트 관리자 페이지에서 발급받은 가맹점 식별코드를 입력하세요.
 
-const Payment = ({ }) => {
+const Payment = () => {
     const navigation = useNavigation();
     const route = useRoute();
     const { payType, totalPrice, userid, orderList, orderid, storeid, tablenumber } = route.params;
@@ -34,7 +34,7 @@ const Payment = ({ }) => {
                     userid: userid,
                     orderid: orderid, // orderid 추가
                     pg: payType,
-                    merchant_uid: currentOrderTime, // 한국 현재 시간을 주문번호로 사용
+                    merchant_uid: currentOrderTime,
                     order_details: {
                         storeid: storeid,
                         tablenumber: tablenumber,
@@ -42,7 +42,7 @@ const Payment = ({ }) => {
                         menu_items: orderList.map(item => ({
                             productname: item.productname,
                             price: item.price,
-                            quantity: '1',
+                            quantity: item.quantity,
                         })),
                     },
                 };
@@ -88,7 +88,7 @@ const Payment = ({ }) => {
                     pg: payType, // PG사
                     pay_method: 'card', // 결제수단
                     name: '주문명:결제테스트', // 주문명
-                    merchant_uid: getCurrentTime(), // 주문번호를 현재 시간으로 설정
+                    merchant_uid: `mid_${new Date().getTime()}`, // 고유한 주문번호 설정
                     amount: totalPrice, // 결제금액
                     buyer_email: 'iamport@siot.do', // 구매자 이메일
                     buyer_name: '구매자이름', // 구매자 이름
