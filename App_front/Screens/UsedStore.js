@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import {View, Text, FlatList, StyleSheet, TouchableOpacity, SafeAreaView, Image} from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 import axios from 'axios';
-import {useNavigation,useRoute} from "@react-navigation/native";
-import {Color, FontFamily, FontSize} from "../GlobalStyles";
-
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { Color, FontFamily, FontSize } from "../GlobalStyles";
 
 const UsedStore = ({ }) => {
     const [orderHistory, setOrderHistory] = useState([]);
-    const route = useRoute()
+    const route = useRoute();
     const { userid } = route.params;
     const navigation = useNavigation();
 
@@ -18,7 +17,9 @@ const UsedStore = ({ }) => {
                 const response = await axios.post('http://43.201.92.62/user/history', {
                     userid: userid
                 });
-                setOrderHistory(response.data);
+                // 주문 내역을 시간별로 정렬 (최근 주문이 먼저)
+                const sortedHistory = response.data.sort((a, b) => new Date(b.ordertime) - new Date(a.ordertime));
+                setOrderHistory(sortedHistory);
             } catch (error) {
                 console.error("주문 내역을 불러오는 중 오류가 발생했습니다!", error);
             }
@@ -27,11 +28,24 @@ const UsedStore = ({ }) => {
         fetchOrderHistory();
     }, [userid]);
 
+    const formatOrderTime = (ordertime) => {
+        const date = new Date(ordertime);
+        // UTC 시간을 KST로 변환 (UTC+9)
+        const kstDate = new Date(date.getTime() + 9 * 60 * 60 * 1000);
+        const year = kstDate.getFullYear();
+        const month = String(kstDate.getMonth() + 1).padStart(2, '0');
+        const day = String(kstDate.getDate()).padStart(2, '0');
+        const hours = String(kstDate.getHours()).padStart(2, '0');
+        const minutes = String(kstDate.getMinutes()).padStart(2, '0');
+        const seconds = String(kstDate.getSeconds()).padStart(2, '0');
+        return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
+    };
+
     const renderItem = ({ item }) => (
         <TouchableOpacity style={styles.orderItem}>
             <Text style={styles.orderId}>가게 이름: {item.storename}</Text>
-            <Text style={styles.orderTime}>주문 시간: {new Date(item.ordertime).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}</Text>
-            <Text style={styles.totalPrice}>총 금액: {item.total_price.toLocaleString()}₩</Text>
+            <Text style={styles.orderTime}>주문 시간: {formatOrderTime(item.ordertime)}</Text>
+            <Text style={styles.totalPrice}>총 금액: {item.total_price}₩</Text>
             <Text style={styles.itemsTitle}>주문 항목:</Text>
             {item.items.map((detail, index) => (
                 <View key={index} style={styles.itemDetail}>
@@ -125,7 +139,7 @@ const styles = StyleSheet.create({
         fontSize: FontSize.size_11xl,
         textAlign: "center",
         color: Color.colorBlack,
-        position:"absolute",
+        position: "absolute",
         alignSelf: "center",
     },
     backButton: {

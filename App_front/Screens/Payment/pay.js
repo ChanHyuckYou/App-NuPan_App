@@ -2,19 +2,24 @@ import React, { useEffect } from 'react';
 import { Alert, SafeAreaView } from 'react-native';
 import IMP from 'iamport-react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import {string} from "prop-types";
 
 const userCode = 'imp42271774'; // 아임포트 관리자 페이지에서 발급받은 가맹점 식별코드를 입력하세요.
 
 const Payment = ({ }) => {
     const navigation = useNavigation();
     const route = useRoute();
-    const {payType, totalPrice, userid, orderList, orderid, storeid, tablenumber} = route.params;
+    const { payType, totalPrice, userid, orderList, orderid, storeid, tablenumber } = route.params;
 
     useEffect(() => {
         console.log("orderid : ", orderid, "\nstoreid : ", storeid, "\ntablenumber", tablenumber);
         console.log("orderList:", orderList); // orderList 데이터 확인
     }, [orderList]);
+
+    const getCurrentTime = () => {
+        const currentDateTime = new Date();
+        const koreaTime = new Date(currentDateTime.getTime() + 9 * 60 * 60 * 1000); // UTC+9
+        return koreaTime.toISOString();
+    };
 
     const onPaymentResult = async (response) => {
         console.log('결제 응답:', response); // 응답 데이터 확인
@@ -22,10 +27,14 @@ const Payment = ({ }) => {
         // 결제 성공 여부 확인
         if (response.imp_success === 'true') {
             try {
+                const currentOrderTime = getCurrentTime(); // 한국 현재 시간
+
                 // 서버로 전송할 결제 정보 구성
                 const paymentData = {
                     userid: userid,
                     orderid: orderid, // orderid 추가
+                    pg: payType,
+                    merchant_uid: currentOrderTime, // 한국 현재 시간을 주문번호로 사용
                     order_details: {
                         storeid: storeid,
                         tablenumber: tablenumber,
@@ -54,7 +63,7 @@ const Payment = ({ }) => {
                 console.log('서버 응답 데이터:', data); // 서버 응답 데이터 확인
                 if (data.message) {
                     // 결제 프로세스 완료 후 다음 화면으로 네비게이션
-                    navigation.navigate("OrderConfirm_pay", {userid});
+                    navigation.navigate("OrderConfirm_pay", { userid });
                 } else {
                     throw new Error(data.error || '결제 정보 전송 실패');
                 }
@@ -72,14 +81,14 @@ const Payment = ({ }) => {
     };
 
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={{ flex: 1 }}>
             <IMP.Payment
                 userCode={userCode}
                 data={{
                     pg: payType, // PG사
                     pay_method: 'card', // 결제수단
                     name: '주문명:결제테스트', // 주문명
-                    merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
+                    merchant_uid: getCurrentTime(), // 주문번호를 현재 시간으로 설정
                     amount: totalPrice, // 결제금액
                     buyer_email: 'iamport@siot.do', // 구매자 이메일
                     buyer_name: '구매자이름', // 구매자 이름
@@ -94,4 +103,4 @@ const Payment = ({ }) => {
     );
 }
 
-    export default Payment;
+export default Payment;
