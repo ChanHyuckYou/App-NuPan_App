@@ -12,7 +12,7 @@ const UserPage = () => {
 
     return (
         <SafeAreaView style={styles.view}>
-            <Text style={styles.appNupan} allowFontScaling={false}>App-nupan</Text>
+            <Text style={styles.appNupan}>App-nupan</Text>
             <View style={[styles.view2, styles.iconLayout]}>
                 <Image
                     style={[styles.icon, styles.iconLayout]}
@@ -40,7 +40,7 @@ const UserPage = () => {
             </TouchableOpacity>
             <View style={styles.usedStoreContainer}>
                 <Text style={[styles.text, styles.textLayout]}>
-                    내가 이용했던 가게가 궁금하다면?
+                    내가 주문했던 내역이 궁금하다면?
                 </Text>
                 <TouchableOpacity onPress={() => navigation.navigate('UsedStore', { userid })}>
                     <View style={[styles.view1, styles.view1Layout]}>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         fontSize: FontSize.size_5xl,
         fontFamily: FontFamily.interSemiBold,
-
+        fontWeight: "600",
         color: Color.colorBlack,
         fontStyle: "italic",
         textAlign: "left",

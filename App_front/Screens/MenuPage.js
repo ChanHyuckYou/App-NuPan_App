@@ -488,10 +488,11 @@ const styles = StyleSheet.create({
         marginTop: topPercentage(75),
     },
     categoryTitle: {
-        fontSize: FontSize.size_3xl,
+        fontSize: FontSize.size_xl,
         fontFamily: FontFamily.interSemiBold,
         color: Color.colorBlack,
-        marginBottom: 10,
+        marginBottom: 15,
+        marginLeft: 10,
     },
     menuItem: {
         marginBottom: 15,
